@@ -6,7 +6,7 @@ colorTo: blue
 sdk: static
 pinned: false
 license: cc-by-4.0
-short_description: Round-trip word translation benchmark for Gemini across African languages
+short_description: Round-trip word MT benchmark for Gemini, African languages
 ---
 
 # Gemini × African Languages — Word-Level MT Benchmark
