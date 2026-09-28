@@ -1,0 +1,4418 @@
+{
+  "source": "https://www.bu.edu/200word",
+  "source_description": "BU 200 Word Project - specialized, picturable words in 16 categories, developed by the BU African Language Program and the Geddes Language Center. English side extracted from all 9 published language editions and cross-checked across them.",
+  "frequency_source": "https://raw.githubusercontent.com/GhanaNLP/GhanaNouns/main/data/ghana-nouns.csv",
+  "n_words": 204,
+  "n_with_frequency": 134,
+  "n_categories": 16,
+  "min_reference_languages": 2,
+  "categories": [
+    {
+      "category": "body parts",
+      "n_words": 30,
+      "words": [
+        "Ankle",
+        "Arm",
+        "Beard",
+        "Buttocks",
+        "Chest",
+        "Chin",
+        "Ear",
+        "Elbow",
+        "Eye",
+        "Face",
+        "Finger",
+        "Foot",
+        "Hair",
+        "Hand",
+        "Head",
+        "Heel",
+        "Knee",
+        "Legs",
+        "Lip",
+        "Mouth",
+        "Nail",
+        "Neck",
+        "Nose",
+        "Shoulder",
+        "Stomach",
+        "Teeth",
+        "Toe",
+        "Tongue",
+        "Tooth",
+        "Wrist"
+      ]
+    },
+    {
+      "category": "food and drink",
+      "n_words": 24,
+      "words": [
+        "Apple",
+        "Banana",
+        "Beans",
+        "Beer",
+        "Bread",
+        "Corn",
+        "Egg",
+        "Fish",
+        "Food",
+        "Grape",
+        "Guava",
+        "Lemon",
+        "Mango",
+        "Meat",
+        "Milk",
+        "Millet",
+        "Onion",
+        "Orange",
+        "Peach",
+        "Pineapple",
+        "Plantain",
+        "Rice",
+        "Water",
+        "Watermelon"
+      ]
+    },
+    {
+      "category": "clothing",
+      "n_words": 19,
+      "words": [
+        "Bracelet",
+        "Coat",
+        "Dress",
+        "Earring",
+        "Hat",
+        "Headscarf",
+        "Jacket",
+        "Necklace",
+        "Necktie",
+        "Pants",
+        "Scarf",
+        "Shirt",
+        "Shoe",
+        "Shorts",
+        "Skirt",
+        "Socks",
+        "Sweater",
+        "Tie",
+        "Vest"
+      ]
+    },
+    {
+      "category": "numbers",
+      "n_words": 15,
+      "words": [
+        "Billion",
+        "Eight",
+        "Five",
+        "Four",
+        "Hundred",
+        "Million",
+        "Nine",
+        "One",
+        "Seven",
+        "Six",
+        "Ten",
+        "Thousand",
+        "Three",
+        "Two",
+        "Zero"
+      ]
+    },
+    {
+      "category": "animals",
+      "n_words": 14,
+      "words": [
+        "Bird",
+        "Cat",
+        "Chicken",
+        "Cow",
+        "Dog",
+        "Donkey",
+        "Duck",
+        "Goat",
+        "Horse",
+        "Lion",
+        "Pig",
+        "Sheep",
+        "Snake",
+        "Tiger"
+      ]
+    },
+    {
+      "category": "cooking",
+      "n_words": 12,
+      "words": [
+        "Bowl",
+        "Cup",
+        "Dish",
+        "Fire",
+        "Fork",
+        "Kitchen",
+        "Knife",
+        "Ladle",
+        "Plate",
+        "Pot",
+        "Spoon",
+        "Stove"
+      ]
+    },
+    {
+      "category": "natural world",
+      "n_words": 12,
+      "words": [
+        "Cloud",
+        "Lake",
+        "Land",
+        "Moon",
+        "Mountain",
+        "Ocean",
+        "Rain",
+        "River",
+        "Sea",
+        "Star",
+        "Sun",
+        "Tree"
+      ]
+    },
+    {
+      "category": "people",
+      "n_words": 11,
+      "words": [
+        "Boy",
+        "Brother",
+        "Child",
+        "Father",
+        "Girl",
+        "Man",
+        "Mother",
+        "Parent",
+        "Sibling",
+        "Sister",
+        "Woman"
+      ]
+    },
+    {
+      "category": "colors",
+      "n_words": 10,
+      "words": [
+        "Black",
+        "Blue",
+        "Brown",
+        "Green",
+        "Grey",
+        "Pink",
+        "Purple",
+        "Red",
+        "White",
+        "Yellow"
+      ]
+    },
+    {
+      "category": "school",
+      "n_words": 10,
+      "words": [
+        "Blackboard",
+        "Book",
+        "Box",
+        "Chalk",
+        "Clock",
+        "Eraser",
+        "Key",
+        "Paper",
+        "Pen",
+        "Pencil"
+      ]
+    },
+    {
+      "category": "farm",
+      "n_words": 10,
+      "words": [
+        "Bucket",
+        "Corral",
+        "Field",
+        "Garden",
+        "Hoe",
+        "Path",
+        "Plough",
+        "Plow",
+        "Road",
+        "Seed"
+      ]
+    },
+    {
+      "category": "house",
+      "n_words": 9,
+      "words": [
+        "Bathroom",
+        "Bed",
+        "Chair",
+        "Door",
+        "Doorway",
+        "Room",
+        "Table",
+        "Telephone",
+        "Window"
+      ]
+    },
+    {
+      "category": "transportation",
+      "n_words": 7,
+      "words": [
+        "Airplane",
+        "Bicycle",
+        "Boat",
+        "Bus",
+        "Car",
+        "Motorcycle",
+        "Train"
+      ]
+    },
+    {
+      "category": "places",
+      "n_words": 7,
+      "words": [
+        "Church",
+        "City",
+        "Market",
+        "Mosque",
+        "Street",
+        "Synagogue",
+        "Village"
+      ]
+    },
+    {
+      "category": "professions",
+      "n_words": 7,
+      "words": [
+        "Doctor",
+        "Nurse",
+        "Pastor",
+        "Police",
+        "Student",
+        "Teacher",
+        "Work"
+      ]
+    },
+    {
+      "category": "days of the week",
+      "n_words": 7,
+      "words": [
+        "Friday",
+        "Monday",
+        "Saturday",
+        "Sunday",
+        "Thursday",
+        "Tuesday",
+        "Wednesday"
+      ]
+    }
+  ],
+  "frequency_band_sizes": {
+    "1": 27,
+    "2": 27,
+    "3": 27,
+    "4": 27,
+    "5": 26
+  },
+  "words": [
+    {
+      "english": "Airplane",
+      "english_lower": "airplane",
+      "category": "transportation",
+      "reference_translations": {
+        "Amharic": "አይሮፕላን",
+        "Igbo": "Ụgbọ elu",
+        "Akan Twi": "Wiemuhyɛn"
+      },
+      "n_reference_languages": 3,
+      "site_spellings": [
+        "Airplane"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Ankle",
+      "english_lower": "ankle",
+      "category": "body parts",
+      "reference_translations": {
+        "isiXhosa": "Iqatha",
+        "isiZulu": "Iqakala",
+        "Hausa": "Idon ƙafa"
+      },
+      "n_reference_languages": 3,
+      "site_spellings": [
+        "Ankle"
+      ],
+      "ghana_nouns_total": 4.0,
+      "frequency_band": 4
+    },
+    {
+      "english": "Apple",
+      "english_lower": "apple",
+      "category": "food and drink",
+      "reference_translations": {
+        "isiXhosa": "I-apile",
+        "isiZulu": "Ihhabhula",
+        "Amharic": "ፖም",
+        "Wolof": "Pom",
+        "Hausa": "Tuffa",
+        "kiSwahili": "Tufaha/Epo",
+        "Mandinka": "Pomoo"
+      },
+      "n_reference_languages": 7,
+      "site_spellings": [
+        "Apple"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Arm",
+      "english_lower": "arm",
+      "category": "body parts",
+      "reference_translations": {
+        "isiXhosa": "Ingalo",
+        "isiZulu": "Ingalo",
+        "Amharic": "ክንድ",
+        "Wolof": "Loxo",
+        "kiSwahili": "Mkono",
+        "Igbo": "Ogwe aka",
+        "Mandinka": "Bulukaloo/Buloo"
+      },
+      "n_reference_languages": 7,
+      "site_spellings": [
+        "Arm"
+      ],
+      "ghana_nouns_total": 4.0,
+      "frequency_band": 4
+    },
+    {
+      "english": "Banana",
+      "english_lower": "banana",
+      "category": "food and drink",
+      "reference_translations": {
+        "isiXhosa": "Ibhanana",
+        "isiZulu": "Ubhanana",
+        "Amharic": "ሙዝ",
+        "Wolof": "Banaana",
+        "Hausa": "Ayaba",
+        "kiSwahili": "Ndizi",
+        "Igbo": "Unere",
+        "Akan Twi": "Kwadu",
+        "Mandinka": "Banaanoo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Banana"
+      ],
+      "ghana_nouns_total": 2.0,
+      "frequency_band": 4
+    },
+    {
+      "english": "Bathroom",
+      "english_lower": "bathroom",
+      "category": "house",
+      "reference_translations": {
+        "Wolof": "Wanag/Duus",
+        "kiSwahili": "Choo",
+        "Igbo": "Ụlọ ịsa ahụ",
+        "Akan Twi": "Adwareɛ",
+        "Mandinka": "Jonkoŋo/Duusoo/Kuudulaa"
+      },
+      "n_reference_languages": 5,
+      "site_spellings": [
+        "Bathroom"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Beans",
+      "english_lower": "beans",
+      "category": "food and drink",
+      "reference_translations": {
+        "Hausa": "Wake",
+        "Igbo": "Agwa",
+        "Akan Twi": "Adua"
+      },
+      "n_reference_languages": 3,
+      "site_spellings": [
+        "Beans"
+      ],
+      "ghana_nouns_total": 26.0,
+      "frequency_band": 3
+    },
+    {
+      "english": "Beard",
+      "english_lower": "beard",
+      "category": "body parts",
+      "reference_translations": {
+        "isiXhosa": "Intshebe",
+        "isiZulu": "Intshebe",
+        "Amharic": "ጺም",
+        "Wolof": "Sikim",
+        "Hausa": "Geme",
+        "kiSwahili": "Ndevu",
+        "Mandinka": "Booraa"
+      },
+      "n_reference_languages": 7,
+      "site_spellings": [
+        "Beard"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Bed",
+      "english_lower": "bed",
+      "category": "house",
+      "reference_translations": {
+        "isiXhosa": "Ibhedi",
+        "isiZulu": "Umbhede",
+        "Amharic": "አልጋ",
+        "Wolof": "Lal",
+        "Hausa": "Gado",
+        "kiSwahili": "Kitanda",
+        "Igbo": "Akwa",
+        "Akan Twi": "Mpa",
+        "Mandinka": "Laaraŋo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Bed"
+      ],
+      "ghana_nouns_total": 1.0,
+      "frequency_band": 4
+    },
+    {
+      "english": "Beer",
+      "english_lower": "beer",
+      "category": "food and drink",
+      "reference_translations": {
+        "isiXhosa": "Ibhiya/Utywala",
+        "isiZulu": "Ubhiya/Utshwala",
+        "Amharic": "ቢራ",
+        "Wolof": "Sàngara",
+        "Hausa": "Giya",
+        "kiSwahili": "Bia",
+        "Igbo": "Mmanya",
+        "Akan Twi": "Bia",
+        "Mandinka": "Biyeeroo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Beer"
+      ],
+      "ghana_nouns_total": 562.0,
+      "frequency_band": 2
+    },
+    {
+      "english": "Bicycle",
+      "english_lower": "bicycle",
+      "category": "transportation",
+      "reference_translations": {
+        "isiXhosa": "Ibhayisekile",
+        "isiZulu": "Ibhayisikili",
+        "Amharic": "ብስክሌት",
+        "Wolof": "Welo",
+        "Hausa": "Keke",
+        "kiSwahili": "Baiskeli",
+        "Igbo": "Ịnyịnya igwe",
+        "Akan Twi": "Basekre",
+        "Mandinka": "Weloo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Bicycle"
+      ],
+      "ghana_nouns_total": 369.0,
+      "frequency_band": 3
+    },
+    {
+      "english": "Billion",
+      "english_lower": "billion",
+      "category": "numbers",
+      "reference_translations": {
+        "Igbo": "Ijeri",
+        "Akan Twi": "Ɔpepepem"
+      },
+      "n_reference_languages": 2,
+      "site_spellings": [
+        "Billion"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Bird",
+      "english_lower": "bird",
+      "category": "animals",
+      "reference_translations": {
+        "isiXhosa": "Intaka",
+        "isiZulu": "Inyoni",
+        "Amharic": "ወፍ",
+        "Wolof": "Picc",
+        "Hausa": "Tsuntsu",
+        "kiSwahili": "Ndege",
+        "Igbo": "Nnụnụ",
+        "Akan Twi": "Anomaa",
+        "Mandinka": "Kuwoo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Bird"
+      ],
+      "ghana_nouns_total": 1.0,
+      "frequency_band": 4
+    },
+    {
+      "english": "Black",
+      "english_lower": "black",
+      "category": "colors",
+      "reference_translations": {
+        "isiXhosa": "Mnyama",
+        "isiZulu": "Mnyama",
+        "Amharic": "ጥቁር",
+        "Wolof": "Ñuul",
+        "Hausa": "Baƙi",
+        "kiSwahili": "Nyeusi",
+        "Igbo": "Oji",
+        "Akan Twi": "Tuntum",
+        "Mandinka": "Fimmaa/Fiŋo/Findiŋo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Black"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Blackboard",
+      "english_lower": "blackboard",
+      "category": "school",
+      "reference_translations": {
+        "isiXhosa": "Ibhodi",
+        "isiZulu": "Iblekhibhodi/Ibhodi",
+        "Amharic": "ጥቁር ሰሌዳ",
+        "Wolof": "Tablo",
+        "Hausa": "Allo",
+        "kiSwahili": "Ubao",
+        "Igbo": "Blakịbọdụ",
+        "Akan Twi": "Twerɛ pono",
+        "Mandinka": "Tabuloo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Blackboard"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Blue",
+      "english_lower": "blue",
+      "category": "colors",
+      "reference_translations": {
+        "isiXhosa": "Luhlaza/Bhlowu",
+        "isiZulu": "Luhlaza/Okwesibhakabhaka",
+        "Amharic": "ሰማያዊ",
+        "Wolof": "Bulo",
+        "Hausa": "Shuɗi",
+        "kiSwahili": "Rangi ya bahari",
+        "Igbo": "Buluu",
+        "Akan Twi": "Bruu",
+        "Mandinka": "Buluuriŋo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Blue"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Boat",
+      "english_lower": "boat",
+      "category": "transportation",
+      "reference_translations": {
+        "isiXhosa": "Isikhephe",
+        "isiZulu": "Isikebhe",
+        "Amharic": "ጀልባ",
+        "Wolof": "Gaal",
+        "Hausa": "Jirgin Ruwa",
+        "kiSwahili": "Meli",
+        "Igbo": "Ụgbọ mmiri",
+        "Akan Twi": "Bonto",
+        "Mandinka": "Batoo/Kulun"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Boat"
+      ],
+      "ghana_nouns_total": 1735.0,
+      "frequency_band": 2
+    },
+    {
+      "english": "Book",
+      "english_lower": "book",
+      "category": "school",
+      "reference_translations": {
+        "isiXhosa": "Incwadi",
+        "isiZulu": "Incwadi/Ibhuku",
+        "Amharic": "መጽሐፍ",
+        "Wolof": "Téére",
+        "Hausa": "Littafi",
+        "kiSwahili": "Kitabu",
+        "Igbo": "Akwụkwọ",
+        "Mandinka": "Kitaaboo"
+      },
+      "n_reference_languages": 8,
+      "site_spellings": [
+        "Book"
+      ],
+      "ghana_nouns_total": 7943.0,
+      "frequency_band": 1
+    },
+    {
+      "english": "Bowl",
+      "english_lower": "bowl",
+      "category": "cooking",
+      "reference_translations": {
+        "Amharic": "ጎድጓዳ ሰሃን",
+        "kiSwahili": "Bakuli",
+        "Igbo": "Efere dị okpukpu"
+      },
+      "n_reference_languages": 3,
+      "site_spellings": [
+        "Bowl"
+      ],
+      "ghana_nouns_total": 3.0,
+      "frequency_band": 4
+    },
+    {
+      "english": "Box",
+      "english_lower": "box",
+      "category": "school",
+      "reference_translations": {
+        "isiXhosa": "Ibhokisi",
+        "isiZulu": "Ibhokisi",
+        "Amharic": "ሣጥን",
+        "Wolof": "Kees",
+        "Hausa": "Akwati",
+        "kiSwahili": "Boksi",
+        "Igbo": "Akpata/Igbe",
+        "Akan Twi": "Adaka",
+        "Mandinka": "Buwaatoo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Box",
+        "Box/Chest"
+      ],
+      "ghana_nouns_total": 1.0,
+      "frequency_band": 4
+    },
+    {
+      "english": "Boy",
+      "english_lower": "boy",
+      "category": "people",
+      "reference_translations": {
+        "isiXhosa": "Inkwenkwe",
+        "isiZulu": "Umfana",
+        "Amharic": "ወንድ ልጅ",
+        "Wolof": "Xale Bu Góór",
+        "Hausa": "Yaro",
+        "kiSwahili": "Mvulana",
+        "Igbo": "Nwata nwoke",
+        "Akan Twi": "Abarimaa",
+        "Mandinka": "Kambaanoo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Boy",
+        "boy"
+      ],
+      "ghana_nouns_total": 2.0,
+      "frequency_band": 4
+    },
+    {
+      "english": "Bracelet",
+      "english_lower": "bracelet",
+      "category": "clothing",
+      "reference_translations": {
+        "isiXhosa": "Isacholo/Ibhengile",
+        "isiZulu": "Ibhengeli",
+        "Amharic": "አንባር",
+        "Hausa": "Munduwa",
+        "kiSwahili": "Ushanga/Bangili",
+        "Igbo": "Ọla aka"
+      },
+      "n_reference_languages": 6,
+      "site_spellings": [
+        "Bracelet"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Bread",
+      "english_lower": "bread",
+      "category": "food and drink",
+      "reference_translations": {
+        "isiXhosa": "Isonka",
+        "isiZulu": "Isinkwa",
+        "Amharic": "ዳቦ",
+        "Wolof": "Mburu",
+        "Hausa": "Burodi",
+        "kiSwahili": "Mkate",
+        "Igbo": "Achịcha",
+        "Akan Twi": "Paanoo",
+        "Mandinka": "Mbuuroo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Bread"
+      ],
+      "ghana_nouns_total": 1303.0,
+      "frequency_band": 2
+    },
+    {
+      "english": "Brother",
+      "english_lower": "brother",
+      "category": "people",
+      "reference_translations": {
+        "isiXhosa": "Ubhuti/Umnakwethu",
+        "isiZulu": "Umfowethu/Ubhuti",
+        "Hausa": "Wa",
+        "Akan Twi": "Nua barima"
+      },
+      "n_reference_languages": 4,
+      "site_spellings": [
+        "Brother"
+      ],
+      "ghana_nouns_total": 8122.0,
+      "frequency_band": 1
+    },
+    {
+      "english": "Brown",
+      "english_lower": "brown",
+      "category": "colors",
+      "reference_translations": {
+        "isiXhosa": "Mdaka/Ntsundu",
+        "isiZulu": "Nsundu",
+        "Amharic": "ቡኒ/ቡናማ",
+        "Wolof": "Sokola",
+        "Hausa": "Mai Ruwan Ƙasa",
+        "kiSwahili": "Kahawia/Rangi ya udongo",
+        "Igbo": "Uhie",
+        "Akan Twi": "Akokɔ bin",
+        "Mandinka": "Sokolaariŋo/Heereriŋo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Brown"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Bucket",
+      "english_lower": "bucket",
+      "category": "farm",
+      "reference_translations": {
+        "isiXhosa": "Ibhakethi/I-emele",
+        "isiZulu": "Ibhakede",
+        "Amharic": "ባልዲ",
+        "Wolof": "Siwo",
+        "Hausa": "Bokiti",
+        "kiSwahili": "Ndoo",
+        "Igbo": "Bọketị",
+        "Akan Twi": "Bokiti",
+        "Mandinka": "Siyoo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Bucket"
+      ],
+      "ghana_nouns_total": 462.0,
+      "frequency_band": 3
+    },
+    {
+      "english": "Bus",
+      "english_lower": "bus",
+      "category": "transportation",
+      "reference_translations": {
+        "isiXhosa": "Ibhasi",
+        "isiZulu": "Ibhasi",
+        "Wolof": "Kaar",
+        "Hausa": "Bas",
+        "kiSwahili": "Basi",
+        "Igbo": "Bọsụ",
+        "Mandinka": "Biisoo"
+      },
+      "n_reference_languages": 7,
+      "site_spellings": [
+        "Bus"
+      ],
+      "ghana_nouns_total": 2422.0,
+      "frequency_band": 2
+    },
+    {
+      "english": "Buttocks",
+      "english_lower": "buttocks",
+      "category": "body parts",
+      "reference_translations": {
+        "isiXhosa": "Iimpundu",
+        "isiZulu": "Izinqe",
+        "Wolof": "Ginnaaw/Taat",
+        "Hausa": "Gindi",
+        "kiSwahili": "Matako",
+        "Igbo": "Ike",
+        "Mandinka": "Koomoo/Juuteleŋo"
+      },
+      "n_reference_languages": 7,
+      "site_spellings": [
+        "Buttocks"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Car",
+      "english_lower": "car",
+      "category": "transportation",
+      "reference_translations": {
+        "isiXhosa": "Imoto",
+        "isiZulu": "Imoto",
+        "Amharic": "መኪና",
+        "Wolof": "Oto/Danaar",
+        "Hausa": "Mota",
+        "kiSwahili": "Gari",
+        "Igbo": "Ụgbọ ala",
+        "Akan Twi": "Teaseɛnam",
+        "Mandinka": "Wooto"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Car"
+      ],
+      "ghana_nouns_total": 8693.0,
+      "frequency_band": 1
+    },
+    {
+      "english": "Cat",
+      "english_lower": "cat",
+      "category": "animals",
+      "reference_translations": {
+        "isiXhosa": "Ikati",
+        "isiZulu": "Ikati",
+        "Amharic": "ድመት",
+        "Wolof": "Muus",
+        "Hausa": "Mage",
+        "kiSwahili": "Paka",
+        "Igbo": "Nwa mba",
+        "Akan Twi": "Ɔkra",
+        "Mandinka": "Ñankumoo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Cat"
+      ],
+      "ghana_nouns_total": 2.0,
+      "frequency_band": 4
+    },
+    {
+      "english": "Chair",
+      "english_lower": "chair",
+      "category": "house",
+      "reference_translations": {
+        "isiXhosa": "Isitulo",
+        "isiZulu": "Isitulo/Isihlalo",
+        "Amharic": "ወንበር",
+        "Wolof": "Siis/Toogu",
+        "Hausa": "Kujera",
+        "kiSwahili": "Kiti",
+        "Igbo": "Oche",
+        "Akan Twi": "Akonnwa",
+        "Mandinka": "Siiraŋo/Seesoo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Chair"
+      ],
+      "ghana_nouns_total": 3313.0,
+      "frequency_band": 2
+    },
+    {
+      "english": "Chalk",
+      "english_lower": "chalk",
+      "category": "school",
+      "reference_translations": {
+        "isiXhosa": "Itshokhwe",
+        "isiZulu": "Ushogi",
+        "Amharic": "ጠመኔ/ቾክ",
+        "Wolof": "Kere",
+        "kiSwahili": "Choki",
+        "Igbo": "Nzu",
+        "Mandinka": "Laakeree"
+      },
+      "n_reference_languages": 7,
+      "site_spellings": [
+        "Chalk"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Chest",
+      "english_lower": "chest",
+      "category": "body parts",
+      "reference_translations": {
+        "isiXhosa": "Isifuba",
+        "isiZulu": "Isifuba",
+        "Amharic": "ደረት",
+        "Wolof": "Dënn",
+        "Hausa": "ƙirji",
+        "kiSwahili": "Kifua",
+        "Igbo": "Obi",
+        "Mandinka": "Sisoo"
+      },
+      "n_reference_languages": 8,
+      "site_spellings": [
+        "Chest"
+      ],
+      "ghana_nouns_total": 1169.0,
+      "frequency_band": 2
+    },
+    {
+      "english": "Chicken",
+      "english_lower": "chicken",
+      "category": "animals",
+      "reference_translations": {
+        "isiXhosa": "Inkukhu",
+        "isiZulu": "Inkukhu",
+        "Amharic": "ዶሮ",
+        "Wolof": "Ginaar",
+        "Hausa": "Kaza",
+        "kiSwahili": "Kuku",
+        "Igbo": "Ọkụkọ",
+        "Akan Twi": "Akokɔ",
+        "Mandinka": "Siisee/Suusee"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Chicken"
+      ],
+      "ghana_nouns_total": 814.0,
+      "frequency_band": 2
+    },
+    {
+      "english": "Child",
+      "english_lower": "child",
+      "category": "people",
+      "reference_translations": {
+        "isiXhosa": "Umntwana",
+        "isiZulu": "Umntwana/Ingane",
+        "Amharic": "ልጅ",
+        "Wolof": "Doom Walla Xale Walla Gune",
+        "kiSwahili": "Mtoto",
+        "Igbo": "Nwa",
+        "Akan Twi": "Ɔba",
+        "Mandinka": "Diŋo/Dindiŋo"
+      },
+      "n_reference_languages": 8,
+      "site_spellings": [
+        "Child",
+        "child"
+      ],
+      "ghana_nouns_total": 16866.0,
+      "frequency_band": 1
+    },
+    {
+      "english": "Chin",
+      "english_lower": "chin",
+      "category": "body parts",
+      "reference_translations": {
+        "isiXhosa": "Isilevu",
+        "isiZulu": "Isilevu",
+        "Amharic": "አገጭ",
+        "Hausa": "Haɓa",
+        "kiSwahili": "Kidevu",
+        "Igbo": "Agba"
+      },
+      "n_reference_languages": 6,
+      "site_spellings": [
+        "Chin"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Church",
+      "english_lower": "church",
+      "category": "places",
+      "reference_translations": {
+        "isiXhosa": "Icawe",
+        "isiZulu": "Isonto",
+        "Amharic": "ቤተ ክርስቲያን",
+        "Wolof": "Egliis",
+        "Hausa": "Gidan Almasihu",
+        "kiSwahili": "Kanisa",
+        "Igbo": "Ụlọ ụka",
+        "Akan Twi": "Asɔredan",
+        "Mandinka": "Engiliisoo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Church"
+      ],
+      "ghana_nouns_total": 12977.0,
+      "frequency_band": 1
+    },
+    {
+      "english": "City",
+      "english_lower": "city",
+      "category": "places",
+      "reference_translations": {
+        "isiXhosa": "Idolophu",
+        "isiZulu": "Idolobha",
+        "Amharic": "ከተማ",
+        "Wolof": "Dëkku Taax",
+        "Hausa": "Gari",
+        "kiSwahili": "Mji",
+        "Igbo": "Nnukwu obodo",
+        "Akan Twi": "Kuro Keseɛ",
+        "Mandinka": "Saatee"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "City",
+        "City/Town/Village"
+      ],
+      "ghana_nouns_total": 15110.0,
+      "frequency_band": 1
+    },
+    {
+      "english": "Clock",
+      "english_lower": "clock",
+      "category": "school",
+      "reference_translations": {
+        "isiXhosa": "Iwotshi",
+        "isiZulu": "Iwashi",
+        "Amharic": "ሰዓት",
+        "Hausa": "Agogo",
+        "kiSwahili": "Saa",
+        "Igbo": "Elekere"
+      },
+      "n_reference_languages": 6,
+      "site_spellings": [
+        "Clock"
+      ],
+      "ghana_nouns_total": 1453.0,
+      "frequency_band": 2
+    },
+    {
+      "english": "Cloud",
+      "english_lower": "cloud",
+      "category": "natural world",
+      "reference_translations": {
+        "isiXhosa": "Amafu",
+        "isiZulu": "Amafu",
+        "Amharic": "ደመና",
+        "Wolof": "Niir",
+        "Hausa": "Gajimari",
+        "kiSwahili": "Mawingu",
+        "Igbo": "Urukpuru",
+        "Akan Twi": "Mmununkum",
+        "Mandinka": "Minaayoo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Cloud",
+        "Clouds"
+      ],
+      "ghana_nouns_total": 1.0,
+      "frequency_band": 4
+    },
+    {
+      "english": "Coat",
+      "english_lower": "coat",
+      "category": "clothing",
+      "reference_translations": {
+        "isiXhosa": "Idyasi",
+        "isiZulu": "Ijazi",
+        "Amharic": "ኮት",
+        "Wolof": "Manto",
+        "Hausa": "Rigan Sanyi",
+        "kiSwahili": "Koti",
+        "Igbo": "Kotu",
+        "Mandinka": "Kootoo"
+      },
+      "n_reference_languages": 8,
+      "site_spellings": [
+        "Coat"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Corn",
+      "english_lower": "corn",
+      "category": "food and drink",
+      "reference_translations": {
+        "isiXhosa": "Umbona",
+        "isiZulu": "Ummbila",
+        "Amharic": "በቆሎ",
+        "Wolof": "Mboq",
+        "Hausa": "Masara",
+        "kiSwahili": "Mahindi",
+        "Igbo": "Ọka",
+        "Akan Twi": "Aburoo",
+        "Mandinka": "Tubaañoo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Corn"
+      ],
+      "ghana_nouns_total": 2.0,
+      "frequency_band": 4
+    },
+    {
+      "english": "Corral",
+      "english_lower": "corral",
+      "category": "farm",
+      "reference_translations": {
+        "isiXhosa": "Ubuhlanti",
+        "isiZulu": "Isibaya",
+        "Igbo": "Agbụgbọ"
+      },
+      "n_reference_languages": 3,
+      "site_spellings": [
+        "Corral"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Cow",
+      "english_lower": "cow",
+      "category": "animals",
+      "reference_translations": {
+        "isiXhosa": "Inkomo",
+        "isiZulu": "Inkomazi/Inkomo",
+        "Amharic": "ላም",
+        "Wolof": "Nag",
+        "Hausa": "Saniya",
+        "kiSwahili": "Ng’ombe",
+        "Igbo": "Ehi",
+        "Akan Twi": "Nantwie",
+        "Mandinka": "Ninsoo/Niisoo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Cow"
+      ],
+      "ghana_nouns_total": 351.0,
+      "frequency_band": 3
+    },
+    {
+      "english": "Cup",
+      "english_lower": "cup",
+      "category": "cooking",
+      "reference_translations": {
+        "isiXhosa": "Ikomityi",
+        "isiZulu": "Inkomishi",
+        "Amharic": "ኩባያ/ሲኒ/ዋንጫ",
+        "Wolof": "Kopp",
+        "kiSwahili": "Kikombe",
+        "Igbo": "Iko",
+        "Akan Twi": "Kuruwa",
+        "Mandinka": "Koppoo"
+      },
+      "n_reference_languages": 8,
+      "site_spellings": [
+        "Cup"
+      ],
+      "ghana_nouns_total": 1021.0,
+      "frequency_band": 2
+    },
+    {
+      "english": "Dish",
+      "english_lower": "dish",
+      "category": "cooking",
+      "reference_translations": {
+        "isiXhosa": "Isitya/Ipleyiti",
+        "isiZulu": "Isitsha/Ipuleti",
+        "Amharic": "ሰሃን",
+        "Wolof": "Ndab/Bool/Palaat",
+        "Hausa": "Kwano",
+        "kiSwahili": "Sahani",
+        "Igbo": "Efere",
+        "Mandinka": "Palaa/Booloo/Palatoo"
+      },
+      "n_reference_languages": 8,
+      "site_spellings": [
+        "Dish",
+        "Dish/Bowl/Plate",
+        "Dish/Plate"
+      ],
+      "ghana_nouns_total": 339.0,
+      "frequency_band": 3
+    },
+    {
+      "english": "Doctor",
+      "english_lower": "doctor",
+      "category": "professions",
+      "reference_translations": {
+        "isiXhosa": "Ugqirha",
+        "isiZulu": "Udokotela",
+        "Amharic": "ሀኪም",
+        "Wolof": "Fajkat/Doktoor",
+        "Hausa": "Likita",
+        "kiSwahili": "Mganga/Daktari",
+        "Igbo": "Onye ọgwọ ọrịa",
+        "Akan Twi": "Ɔyaresafoɔ",
+        "Mandinka": "Jaararlaa/Doktooroo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Doctor"
+      ],
+      "ghana_nouns_total": 4205.0,
+      "frequency_band": 1
+    },
+    {
+      "english": "Dog",
+      "english_lower": "dog",
+      "category": "animals",
+      "reference_translations": {
+        "isiXhosa": "Inja",
+        "isiZulu": "Inja",
+        "Amharic": "ውሻ",
+        "Wolof": "Xaj",
+        "Hausa": "Kare",
+        "kiSwahili": "Mbwa",
+        "Igbo": "Nkịta",
+        "Akan Twi": "Ɔkraman",
+        "Mandinka": "Wuloo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Dog"
+      ],
+      "ghana_nouns_total": 3.0,
+      "frequency_band": 4
+    },
+    {
+      "english": "Donkey",
+      "english_lower": "donkey",
+      "category": "animals",
+      "reference_translations": {
+        "isiXhosa": "Imbongolo/Idonki",
+        "isiZulu": "Imbongolo",
+        "Amharic": "አህያ",
+        "Wolof": "Mbaam Sëf",
+        "Hausa": "Jaki",
+        "kiSwahili": "Punda",
+        "Igbo": "Ịnyịnya ịbu",
+        "Akan Twi": "Afunumu",
+        "Mandinka": "Faloo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Donkey"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Door",
+      "english_lower": "door",
+      "category": "house",
+      "reference_translations": {
+        "isiXhosa": "Ucango",
+        "isiZulu": "Isicabha",
+        "Amharic": "በር",
+        "Wolof": "Bunt",
+        "Mandinka": "Bundaa"
+      },
+      "n_reference_languages": 5,
+      "site_spellings": [
+        "Door"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Doorway",
+      "english_lower": "doorway",
+      "category": "house",
+      "reference_translations": {
+        "isiXhosa": "Umnyango",
+        "isiZulu": "Umnyango",
+        "Hausa": "Ƙofa",
+        "kiSwahili": "Baraza",
+        "Igbo": "Mgbo",
+        "Akan Twi": "Ɛpono"
+      },
+      "n_reference_languages": 6,
+      "site_spellings": [
+        "Doorway"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Dress",
+      "english_lower": "dress",
+      "category": "clothing",
+      "reference_translations": {
+        "isiXhosa": "Ilokhwe",
+        "isiZulu": "Ilokwe/Ingubo",
+        "Amharic": "ቀሚስ",
+        "Wolof": "Mbubb",
+        "Hausa": "Riga",
+        "kiSwahili": "Gauni",
+        "Igbo": "Akwa",
+        "Akan Twi": "Atadeɛ",
+        "Mandinka": "Dendikoo/Robboo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Dress"
+      ],
+      "ghana_nouns_total": 641.0,
+      "frequency_band": 2
+    },
+    {
+      "english": "Duck",
+      "english_lower": "duck",
+      "category": "animals",
+      "reference_translations": {
+        "isiXhosa": "Idada",
+        "isiZulu": "Idada",
+        "Amharic": "ዳክዬ",
+        "Wolof": "Kanaara",
+        "Hausa": "Agwagwa",
+        "kiSwahili": "Bata",
+        "Igbo": "Ọbọgwụ",
+        "Akan Twi": "Dabodabo",
+        "Mandinka": "Buroo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Duck"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Ear",
+      "english_lower": "ear",
+      "category": "body parts",
+      "reference_translations": {
+        "isiXhosa": "Indlebe",
+        "isiZulu": "Indlebe",
+        "Amharic": "ጆሮ",
+        "Wolof": "Nopp",
+        "Hausa": "Kunne",
+        "kiSwahili": "Sikio",
+        "Igbo": "Ntị",
+        "Akan Twi": "Aso"
+      },
+      "n_reference_languages": 8,
+      "site_spellings": [
+        "Ear"
+      ],
+      "ghana_nouns_total": 796.0,
+      "frequency_band": 2
+    },
+    {
+      "english": "Earring",
+      "english_lower": "earring",
+      "category": "clothing",
+      "reference_translations": {
+        "isiXhosa": "Icici",
+        "isiZulu": "Icici",
+        "Amharic": "ጉትቻ",
+        "Wolof": "Jaaro Nopp",
+        "Hausa": "Ɗan Kunne",
+        "kiSwahili": "Hereni",
+        "Igbo": "Ọla ntị",
+        "Akan Twi": "Asomadeɛ",
+        "Mandinka": "Tulutotaa"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Earring"
+      ],
+      "ghana_nouns_total": 28.0,
+      "frequency_band": 3
+    },
+    {
+      "english": "Egg",
+      "english_lower": "egg",
+      "category": "food and drink",
+      "reference_translations": {
+        "isiXhosa": "Amaqanda",
+        "isiZulu": "Amaqanda",
+        "Amharic": "እንቁላል",
+        "Wolof": "Nen",
+        "Hausa": "Ƙwai",
+        "kiSwahili": "Mayai",
+        "Igbo": "Akwa",
+        "Akan Twi": "Kosua",
+        "Mandinka": "Kiloolu"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Egg",
+        "Eggs"
+      ],
+      "ghana_nouns_total": 1.0,
+      "frequency_band": 4
+    },
+    {
+      "english": "Eight",
+      "english_lower": "eight",
+      "category": "numbers",
+      "reference_translations": {
+        "isiXhosa": "Sibhozo",
+        "isiZulu": "Isishiyagalombili",
+        "Amharic": "ስምንት",
+        "Wolof": "Juróóm Ñett",
+        "Hausa": "Takwas",
+        "kiSwahili": "Nane",
+        "Igbo": "Asatọ",
+        "Akan Twi": "Nwɔtwe",
+        "Mandinka": "Seyi"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Eight"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Elbow",
+      "english_lower": "elbow",
+      "category": "body parts",
+      "reference_translations": {
+        "isiXhosa": "Ingqiniba",
+        "isiZulu": "Indololwane",
+        "Wolof": "Conco",
+        "Hausa": "Gwiwar Hannu",
+        "kiSwahili": "Kiwiko",
+        "Igbo": "Ikpere aka",
+        "Mandinka": "Nonkonkuŋo/Nonkoŋo"
+      },
+      "n_reference_languages": 7,
+      "site_spellings": [
+        "Elbow"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Eraser",
+      "english_lower": "eraser",
+      "category": "school",
+      "reference_translations": {
+        "isiXhosa": "Idasta",
+        "isiZulu": "Idasta",
+        "Amharic": "ማጥፊያ/ዳስተር",
+        "Hausa": "Mashafi",
+        "kiSwahili": "Ufutio",
+        "Igbo": "Nhicha"
+      },
+      "n_reference_languages": 6,
+      "site_spellings": [
+        "Eraser"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Eye",
+      "english_lower": "eye",
+      "category": "body parts",
+      "reference_translations": {
+        "isiXhosa": "Iliso/Amehlo",
+        "isiZulu": "Iso/Amehlo",
+        "Amharic": "ዓይን",
+        "Wolof": "Bët",
+        "Hausa": "Ido",
+        "kiSwahili": "Macho",
+        "Igbo": "Anya",
+        "Akan Twi": "Ani",
+        "Mandinka": "Ñaa"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Eye"
+      ],
+      "ghana_nouns_total": 1.0,
+      "frequency_band": 4
+    },
+    {
+      "english": "Face",
+      "english_lower": "face",
+      "category": "body parts",
+      "reference_translations": {
+        "isiXhosa": "Ubuso",
+        "isiZulu": "Ubuso",
+        "Amharic": "ፊት",
+        "Wolof": "Kanam",
+        "Hausa": "Fuska",
+        "kiSwahili": "Uso",
+        "Igbo": "Ihu",
+        "Akan Twi": "Anim",
+        "Mandinka": "Ñaadaa"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Face"
+      ],
+      "ghana_nouns_total": 1.0,
+      "frequency_band": 4
+    },
+    {
+      "english": "Father",
+      "english_lower": "father",
+      "category": "people",
+      "reference_translations": {
+        "isiXhosa": "Utata",
+        "isiZulu": "Ubaba",
+        "Amharic": "አባት",
+        "Wolof": "Baay Walla Pàppa",
+        "Hausa": "Uba",
+        "kiSwahili": "Baba",
+        "Igbo": "Nna",
+        "Akan Twi": "Agya",
+        "Mandinka": "Faamaa/Faa"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Father",
+        "father"
+      ],
+      "ghana_nouns_total": 9804.0,
+      "frequency_band": 1
+    },
+    {
+      "english": "Field",
+      "english_lower": "field",
+      "category": "farm",
+      "reference_translations": {
+        "isiXhosa": "Intsimi",
+        "isiZulu": "Insimu",
+        "Hausa": "Fage",
+        "Igbo": "Ama"
+      },
+      "n_reference_languages": 4,
+      "site_spellings": [
+        "Field"
+      ],
+      "ghana_nouns_total": 13516.0,
+      "frequency_band": 1
+    },
+    {
+      "english": "Finger",
+      "english_lower": "finger",
+      "category": "body parts",
+      "reference_translations": {
+        "isiXhosa": "Umnwe",
+        "isiZulu": "Umunwe",
+        "Amharic": "ጣት",
+        "Wolof": "Baaraam",
+        "Hausa": "Yatsu",
+        "kiSwahili": "Kidole cha mkono",
+        "Igbo": "Mkpịsị aka",
+        "Mandinka": "Bulukondiŋo"
+      },
+      "n_reference_languages": 8,
+      "site_spellings": [
+        "Finger",
+        "Fingers"
+      ],
+      "ghana_nouns_total": 1.0,
+      "frequency_band": 5
+    },
+    {
+      "english": "Fire",
+      "english_lower": "fire",
+      "category": "cooking",
+      "reference_translations": {
+        "isiXhosa": "Umlilo",
+        "isiZulu": "Umlilo",
+        "Amharic": "እሳት",
+        "Wolof": "Safara/Taal",
+        "Hausa": "Wuta",
+        "kiSwahili": "Moto",
+        "Igbo": "Ọkụ",
+        "Akan Twi": "Egya",
+        "Mandinka": "Dimbaa"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Fire"
+      ],
+      "ghana_nouns_total": 3.0,
+      "frequency_band": 4
+    },
+    {
+      "english": "Fish",
+      "english_lower": "fish",
+      "category": "food and drink",
+      "reference_translations": {
+        "isiXhosa": "Intlanzi",
+        "isiZulu": "Inhlanzi",
+        "Amharic": "አሣ",
+        "Wolof": "Jën",
+        "Hausa": "Kifi",
+        "kiSwahili": "Samaki",
+        "Igbo": "Azụ",
+        "Akan Twi": "Nsuomunam",
+        "Mandinka": "Ñewoo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Fish"
+      ],
+      "ghana_nouns_total": 1.0,
+      "frequency_band": 5
+    },
+    {
+      "english": "Five",
+      "english_lower": "five",
+      "category": "numbers",
+      "reference_translations": {
+        "isiXhosa": "Hlanu",
+        "isiZulu": "Nhlanu",
+        "Amharic": "አምስት",
+        "Wolof": "Juróóm",
+        "Hausa": "Biyar",
+        "kiSwahili": "Tano",
+        "Igbo": "Ise",
+        "Akan Twi": "Enum",
+        "Mandinka": "Luulu"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Five"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Food",
+      "english_lower": "food",
+      "category": "food and drink",
+      "reference_translations": {
+        "Hausa": "Tuwo",
+        "Igbo": "Nri"
+      },
+      "n_reference_languages": 2,
+      "site_spellings": [
+        "Food"
+      ],
+      "ghana_nouns_total": 24696.0,
+      "frequency_band": 1
+    },
+    {
+      "english": "Foot",
+      "english_lower": "foot",
+      "category": "body parts",
+      "reference_translations": {
+        "isiXhosa": "Unyawo/Iinyawo",
+        "isiZulu": "Unyawo",
+        "Amharic": "እግር",
+        "Wolof": "Tànk",
+        "Hausa": "ƙafa",
+        "kiSwahili": "Nyayo",
+        "Igbo": "Ụkwụ/Ọkpa",
+        "Mandinka": "Dafatoo/Sindafatoo"
+      },
+      "n_reference_languages": 8,
+      "site_spellings": [
+        "Foot"
+      ],
+      "ghana_nouns_total": 1.0,
+      "frequency_band": 5
+    },
+    {
+      "english": "Fork",
+      "english_lower": "fork",
+      "category": "cooking",
+      "reference_translations": {
+        "isiXhosa": "Ifolokhwe",
+        "isiZulu": "Imfologo",
+        "Amharic": "ሹካ",
+        "Wolof": "Furset",
+        "Hausa": "Cokali mai yatsu",
+        "kiSwahili": "Uma",
+        "Akan Twi": "Adinam",
+        "Mandinka": "Furusetoo"
+      },
+      "n_reference_languages": 8,
+      "site_spellings": [
+        "Fork"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Four",
+      "english_lower": "four",
+      "category": "numbers",
+      "reference_translations": {
+        "isiXhosa": "Ne",
+        "isiZulu": "Ne",
+        "Amharic": "አራት",
+        "Wolof": "Ñeent",
+        "Hausa": "Huɗu",
+        "kiSwahili": "Nne",
+        "Igbo": "Anọ",
+        "Akan Twi": "Ɛnan",
+        "Mandinka": "Naani"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Four"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Friday",
+      "english_lower": "friday",
+      "category": "days of the week",
+      "reference_translations": {
+        "isiXhosa": "uLwesihlanu",
+        "isiZulu": "uLwesihlanu",
+        "Amharic": "ዓርብ",
+        "Wolof": "Ajjuma",
+        "Hausa": "Ran Jumma’a",
+        "kiSwahili": "Alhamisi",
+        "Igbo": "Ụbọchị ise na izuụka",
+        "Akan Twi": "Efiada",
+        "Mandinka": "Arjumoo/Jumaluŋo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Friday"
+      ],
+      "ghana_nouns_total": 1.0,
+      "frequency_band": 5
+    },
+    {
+      "english": "Garden",
+      "english_lower": "garden",
+      "category": "farm",
+      "reference_translations": {
+        "isiXhosa": "Igadi",
+        "isiZulu": "Ingadi",
+        "Hausa": "Garka",
+        "Igbo": "Ubi"
+      },
+      "n_reference_languages": 4,
+      "site_spellings": [
+        "Garden"
+      ],
+      "ghana_nouns_total": 446.0,
+      "frequency_band": 3
+    },
+    {
+      "english": "Girl",
+      "english_lower": "girl",
+      "category": "people",
+      "reference_translations": {
+        "isiXhosa": "Intombi/Intombazana",
+        "isiZulu": "Intombazana",
+        "Amharic": "ሴት ልጅ",
+        "Wolof": "Xale Bu Jigéén",
+        "Hausa": "Yarinya",
+        "kiSwahili": "Msichana",
+        "Igbo": "Nwata nwanyị",
+        "Akan Twi": "Abayewa",
+        "Mandinka": "Sungutoo/Sunkutoo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Girl",
+        "girl"
+      ],
+      "ghana_nouns_total": 8.0,
+      "frequency_band": 3
+    },
+    {
+      "english": "Goat",
+      "english_lower": "goat",
+      "category": "animals",
+      "reference_translations": {
+        "isiXhosa": "Ibhokhwe",
+        "isiZulu": "Imbuzi",
+        "Amharic": "ፍየል",
+        "Wolof": "Bëy",
+        "Hausa": "Akuya",
+        "kiSwahili": "Mbuzi",
+        "Igbo": "Ewu",
+        "Akan Twi": "Abirekyie",
+        "Mandinka": "Baa/Baakotoŋo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Goat"
+      ],
+      "ghana_nouns_total": 479.0,
+      "frequency_band": 3
+    },
+    {
+      "english": "Grape",
+      "english_lower": "grape",
+      "category": "food and drink",
+      "reference_translations": {
+        "isiXhosa": "Idiliya",
+        "isiZulu": "Igelebhusi",
+        "Amharic": "ወይን",
+        "kiSwahili": "Zabibu"
+      },
+      "n_reference_languages": 4,
+      "site_spellings": [
+        "Grape",
+        "Grapes"
+      ],
+      "ghana_nouns_total": 26.0,
+      "frequency_band": 3
+    },
+    {
+      "english": "Green",
+      "english_lower": "green",
+      "category": "colors",
+      "reference_translations": {
+        "isiXhosa": "Luhlaza/Okwengca",
+        "isiZulu": "Luhlaza/Okotshani",
+        "Amharic": "አረንጓዴ",
+        "Wolof": "Wert",
+        "Hausa": "Kore",
+        "kiSwahili": "Rangi ya kijani",
+        "Igbo": "Akwụkwọ ndụ",
+        "Akan Twi": "Ahahan mmono",
+        "Mandinka": "Jambakeroo/Jambakeremaa/Wertoo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Green"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Grey",
+      "english_lower": "grey",
+      "category": "colors",
+      "reference_translations": {
+        "isiXhosa": "Ngwevu",
+        "isiZulu": "Mpunga/Ngwevu",
+        "Amharic": "ግራጫ/ሸበቶ",
+        "Wolof": "Dóóm",
+        "Hausa": "Mai Ruwan Toka",
+        "kiSwahili": "Kijivu",
+        "Igbo": "Ntụ",
+        "Mandinka": "Seebutumaa/Seebutiriŋo/Giriyoo"
+      },
+      "n_reference_languages": 8,
+      "site_spellings": [
+        "Grey"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Guava",
+      "english_lower": "guava",
+      "category": "food and drink",
+      "reference_translations": {
+        "isiXhosa": "Igwava",
+        "isiZulu": "Igwava",
+        "Amharic": "ዘይቱን",
+        "Wolof": "Guyaab",
+        "Hausa": "Gwaiba",
+        "kiSwahili": "Pera",
+        "Akan Twi": "Oguaa"
+      },
+      "n_reference_languages": 7,
+      "site_spellings": [
+        "Guava"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Hair",
+      "english_lower": "hair",
+      "category": "body parts",
+      "reference_translations": {
+        "isiXhosa": "Unwele/Iinwele",
+        "isiZulu": "Unwele/Izinwele",
+        "Amharic": "ፀጉር",
+        "Wolof": "Karaw",
+        "Hausa": "Gashi",
+        "kiSwahili": "Nywele",
+        "Igbo": "Ntutu isi",
+        "Mandinka": "Kuntuñoo"
+      },
+      "n_reference_languages": 8,
+      "site_spellings": [
+        "Hair"
+      ],
+      "ghana_nouns_total": 2388.0,
+      "frequency_band": 2
+    },
+    {
+      "english": "Hand",
+      "english_lower": "hand",
+      "category": "body parts",
+      "reference_translations": {
+        "isiXhosa": "Isandla",
+        "isiZulu": "Isandla",
+        "Amharic": "እጅ",
+        "Hausa": "Hannu",
+        "kiSwahili": "Kiganja",
+        "Igbo": "Aka"
+      },
+      "n_reference_languages": 6,
+      "site_spellings": [
+        "Hand"
+      ],
+      "ghana_nouns_total": 5.0,
+      "frequency_band": 4
+    },
+    {
+      "english": "Hat",
+      "english_lower": "hat",
+      "category": "clothing",
+      "reference_translations": {
+        "isiXhosa": "Umnqwazi",
+        "isiZulu": "Isigqoko",
+        "Amharic": "ባርኔጣ/ቆብ",
+        "Wolof": "Mbaxana",
+        "Hausa": "Hula",
+        "kiSwahili": "Kofia",
+        "Igbo": "Okpu",
+        "Akan Twi": "Ɛkyɛ",
+        "Mandinka": "Naafoo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Hat"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Head",
+      "english_lower": "head",
+      "category": "body parts",
+      "reference_translations": {
+        "isiXhosa": "Intloko",
+        "isiZulu": "Ikhanda",
+        "Amharic": "ራስ",
+        "Wolof": "Bopp",
+        "Hausa": "Kai",
+        "kiSwahili": "Kichwa",
+        "Igbo": "Isi",
+        "Mandinka": "Kuŋo"
+      },
+      "n_reference_languages": 8,
+      "site_spellings": [
+        "Head"
+      ],
+      "ghana_nouns_total": 16982.0,
+      "frequency_band": 1
+    },
+    {
+      "english": "Headscarf",
+      "english_lower": "headscarf",
+      "category": "clothing",
+      "reference_translations": {
+        "isiXhosa": "Iqhiya",
+        "isiZulu": "Iduku",
+        "Wolof": "Musóór",
+        "Hausa": "Kallabi",
+        "kiSwahili": "Kilemba",
+        "Igbo": "Akwa isi / Ichafụ",
+        "Akan Twi": "Duku",
+        "Mandinka": "Tikkoo"
+      },
+      "n_reference_languages": 8,
+      "site_spellings": [
+        "Headscarf"
+      ],
+      "ghana_nouns_total": 27.0,
+      "frequency_band": 3
+    },
+    {
+      "english": "Heel",
+      "english_lower": "heel",
+      "category": "body parts",
+      "reference_translations": {
+        "isiXhosa": "Isithende",
+        "isiZulu": "Isithende",
+        "kiSwahili": "Kisigino",
+        "Igbo": "Ọba ụkwụ"
+      },
+      "n_reference_languages": 4,
+      "site_spellings": [
+        "Heel"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Hoe",
+      "english_lower": "hoe",
+      "category": "farm",
+      "reference_translations": {
+        "isiXhosa": "Igaba",
+        "isiZulu": "Ikhuba/Igeja",
+        "Amharic": "ማረሻ",
+        "Wolof": "Illeer",
+        "Hausa": "Fartanya",
+        "kiSwahili": "Jembe",
+        "Igbo": "Ọgụ",
+        "Akan Twi": "Asɔ",
+        "Mandinka": "Daboo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Hoe"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Horse",
+      "english_lower": "horse",
+      "category": "animals",
+      "reference_translations": {
+        "isiXhosa": "Ihashi",
+        "isiZulu": "Ihhashi",
+        "Amharic": "ፈረስ",
+        "Wolof": "Fas",
+        "Hausa": "Doki",
+        "kiSwahili": "Farasi",
+        "Igbo": "Ịnyịya",
+        "Akan Twi": "Pɔnkɔ",
+        "Mandinka": "Suwoo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Horse"
+      ],
+      "ghana_nouns_total": 319.0,
+      "frequency_band": 3
+    },
+    {
+      "english": "Hundred",
+      "english_lower": "hundred",
+      "category": "numbers",
+      "reference_translations": {
+        "isiXhosa": "Ikhulu",
+        "isiZulu": "Ikhulu",
+        "Wolof": "Tééméér",
+        "Hausa": "Ɗari",
+        "Igbo": "Narị",
+        "Akan Twi": "Ɔha",
+        "Mandinka": "Keme"
+      },
+      "n_reference_languages": 7,
+      "site_spellings": [
+        "Hundred"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Jacket",
+      "english_lower": "jacket",
+      "category": "clothing",
+      "reference_translations": {
+        "isiXhosa": "Ibhatyi",
+        "isiZulu": "Ibhantshi",
+        "Wolof": "Jaget",
+        "Hausa": "Rigan Gaba",
+        "kiSwahili": "Jaketi",
+        "Igbo": "Jaketị",
+        "Mandinka": "Jaketoo"
+      },
+      "n_reference_languages": 7,
+      "site_spellings": [
+        "Jacket"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Key",
+      "english_lower": "key",
+      "category": "school",
+      "reference_translations": {
+        "isiXhosa": "Isitshixo",
+        "isiZulu": "Ukhiye",
+        "Amharic": "ቁልፍ",
+        "Wolof": "Caabi",
+        "Hausa": "Makulli",
+        "kiSwahili": "Ufunguo",
+        "Igbo": "Ngodo",
+        "Akan Twi": "Safoa",
+        "Mandinka": "Caaboo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Key"
+      ],
+      "ghana_nouns_total": 1.0,
+      "frequency_band": 5
+    },
+    {
+      "english": "Kitchen",
+      "english_lower": "kitchen",
+      "category": "cooking",
+      "reference_translations": {
+        "isiXhosa": "Ikhitshi",
+        "isiZulu": "Ikhishi",
+        "Amharic": "ወጥ ቤት",
+        "Wolof": "Waañ",
+        "Hausa": "Wurin Dafuwa",
+        "kiSwahili": "Jiko",
+        "Igbo": "Ụsọ ekwu",
+        "Akan Twi": "Egyaade",
+        "Mandinka": "Waañoo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Kitchen"
+      ],
+      "ghana_nouns_total": 1480.0,
+      "frequency_band": 2
+    },
+    {
+      "english": "Knee",
+      "english_lower": "knee",
+      "category": "body parts",
+      "reference_translations": {
+        "isiXhosa": "Idolo",
+        "isiZulu": "Idolo",
+        "Amharic": "ጉልበት",
+        "Wolof": "Òom",
+        "Hausa": "Gwiwa",
+        "kiSwahili": "Goti",
+        "Igbo": "Ikpere",
+        "Mandinka": "Kumbaliŋo"
+      },
+      "n_reference_languages": 8,
+      "site_spellings": [
+        "Knee"
+      ],
+      "ghana_nouns_total": 1.0,
+      "frequency_band": 5
+    },
+    {
+      "english": "Knife",
+      "english_lower": "knife",
+      "category": "cooking",
+      "reference_translations": {
+        "isiXhosa": "Imela",
+        "isiZulu": "Ummese",
+        "Amharic": "ቢላ / ቢላዋ",
+        "Wolof": "Paaka",
+        "Hausa": "Wuƙa",
+        "kiSwahili": "Kisu",
+        "Igbo": "Mma",
+        "Akan Twi": "Sekanmoaa",
+        "Mandinka": "Muroo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Knife"
+      ],
+      "ghana_nouns_total": 910.0,
+      "frequency_band": 2
+    },
+    {
+      "english": "Ladle",
+      "english_lower": "ladle",
+      "category": "cooking",
+      "reference_translations": {
+        "isiXhosa": "Icephe Lokuphaka",
+        "isiZulu": "Ukhezo",
+        "Amharic": "ጭልፋ",
+        "Wolof": "Cinwaar",
+        "Hausa": "Ludayi",
+        "kiSwahili": "Upawa",
+        "Igbo": "Eku",
+        "Akan Twi": "Nkwanta",
+        "Mandinka": "Cumuwaaroo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Ladle"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Lake",
+      "english_lower": "lake",
+      "category": "natural world",
+      "reference_translations": {
+        "isiXhosa": "Idike/Ichibi",
+        "isiZulu": "Ichibi",
+        "Amharic": "ሀይቅ",
+        "Wolof": "Déég",
+        "Hausa": "Tafki",
+        "kiSwahili": "Ziwa",
+        "Igbo": "Ọmị",
+        "Akan Twi": "Nsutadeɛ",
+        "Mandinka": "Daloo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Lake"
+      ],
+      "ghana_nouns_total": 1.0,
+      "frequency_band": 5
+    },
+    {
+      "english": "Land",
+      "english_lower": "land",
+      "category": "natural world",
+      "reference_translations": {
+        "Hausa": "Ƙasa",
+        "Akan Twi": "Asaase"
+      },
+      "n_reference_languages": 2,
+      "site_spellings": [
+        "Land"
+      ],
+      "ghana_nouns_total": 8.0,
+      "frequency_band": 3
+    },
+    {
+      "english": "Legs",
+      "english_lower": "legs",
+      "category": "body parts",
+      "reference_translations": {
+        "isiXhosa": "Umlenze/Imilenze",
+        "isiZulu": "Imilenze",
+        "Wolof": "Yeel",
+        "kiSwahili": "Miguu",
+        "Igbo": "Ụkwụ/Ọkpa",
+        "Mandinka": "Sinkaloolu/Siŋolu"
+      },
+      "n_reference_languages": 6,
+      "site_spellings": [
+        "Legs"
+      ],
+      "ghana_nouns_total": 1613.0,
+      "frequency_band": 2
+    },
+    {
+      "english": "Lemon",
+      "english_lower": "lemon",
+      "category": "food and drink",
+      "reference_translations": {
+        "isiXhosa": "Ilemoni",
+        "isiZulu": "Ilamula",
+        "Amharic": "ሎሚ",
+        "Wolof": "Limoŋ",
+        "Hausa": "Lemun tsami",
+        "kiSwahili": "Limao",
+        "Akan Twi": "Ankaa twadeɛ",
+        "Mandinka": "Leemunoo/Kumoo"
+      },
+      "n_reference_languages": 8,
+      "site_spellings": [
+        "Lemon"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Lion",
+      "english_lower": "lion",
+      "category": "animals",
+      "reference_translations": {
+        "Igbo": "Ọdụm",
+        "Akan Twi": "Gyata"
+      },
+      "n_reference_languages": 2,
+      "site_spellings": [
+        "Lion"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Lip",
+      "english_lower": "lip",
+      "category": "body parts",
+      "reference_translations": {
+        "isiXhosa": "Imilebe",
+        "isiZulu": "Izindebe",
+        "Amharic": "ከንፈር",
+        "Wolof": "Tuñ",
+        "Hausa": "Leɓe",
+        "kiSwahili": "Midomo",
+        "Igbo": "Igbirigbe ọnụ",
+        "Akan Twi": "Anofafa",
+        "Mandinka": "Daaturoo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Lip",
+        "Lips"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Man",
+      "english_lower": "man",
+      "category": "people",
+      "reference_translations": {
+        "isiXhosa": "Indoda",
+        "isiZulu": "Indoda",
+        "Amharic": "ወንድ",
+        "Wolof": "Góór",
+        "Hausa": "Namiji",
+        "kiSwahili": "Mwanaume",
+        "Igbo": "Nwoke",
+        "Akan Twi": "Ɔbarima",
+        "Mandinka": "Kewoo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Man",
+        "man"
+      ],
+      "ghana_nouns_total": 6.0,
+      "frequency_band": 3
+    },
+    {
+      "english": "Mango",
+      "english_lower": "mango",
+      "category": "food and drink",
+      "reference_translations": {
+        "isiXhosa": "Imengo",
+        "isiZulu": "Umango",
+        "Amharic": "ማንጎ",
+        "Hausa": "Mangwaro",
+        "kiSwahili": "Embe",
+        "Mandinka": "Dutoo"
+      },
+      "n_reference_languages": 6,
+      "site_spellings": [
+        "Mango"
+      ],
+      "ghana_nouns_total": 3.0,
+      "frequency_band": 4
+    },
+    {
+      "english": "Market",
+      "english_lower": "market",
+      "category": "places",
+      "reference_translations": {
+        "isiXhosa": "Imarike",
+        "isiZulu": "Imakethe",
+        "Amharic": "ገበያ/መርካቶ",
+        "Wolof": "Marse",
+        "Hausa": "Kasuwa",
+        "kiSwahili": "Soko",
+        "Igbo": "Ahịa",
+        "Akan Twi": "Edwamu",
+        "Mandinka": "Marisee"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Market"
+      ],
+      "ghana_nouns_total": 24684.0,
+      "frequency_band": 1
+    },
+    {
+      "english": "Meat",
+      "english_lower": "meat",
+      "category": "food and drink",
+      "reference_translations": {
+        "isiXhosa": "Inyama",
+        "isiZulu": "Inyama",
+        "Amharic": "ስጋ",
+        "Wolof": "Yàpp/Ndawal",
+        "Hausa": "Nama",
+        "kiSwahili": "Nyama",
+        "Igbo": "Anụ",
+        "Akan Twi": "Ɛnam",
+        "Mandinka": "Suboo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Meat"
+      ],
+      "ghana_nouns_total": 2021.0,
+      "frequency_band": 2
+    },
+    {
+      "english": "Milk",
+      "english_lower": "milk",
+      "category": "food and drink",
+      "reference_translations": {
+        "isiXhosa": "Ubisi",
+        "isiZulu": "Ubisi",
+        "Amharic": "ወተት",
+        "Wolof": "Meew",
+        "Hausa": "Madara",
+        "Igbo": "Mmiri ara ehi",
+        "Akan Twi": "Nufusuo",
+        "Mandinka": "Keekee/Meewoo"
+      },
+      "n_reference_languages": 8,
+      "site_spellings": [
+        "Milk"
+      ],
+      "ghana_nouns_total": 1325.0,
+      "frequency_band": 2
+    },
+    {
+      "english": "Millet",
+      "english_lower": "millet",
+      "category": "food and drink",
+      "reference_translations": {
+        "isiXhosa": "Amazimba",
+        "isiZulu": "Amabele",
+        "Amharic": "ማሽላ",
+        "Wolof": "Dugub",
+        "Hausa": "Dawa",
+        "kiSwahili": "Mtama",
+        "Igbo": "Ahịhịa na adị ka ọka",
+        "Akan Twi": "Atokoɔ",
+        "Mandinka": "Ñoo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Millet"
+      ],
+      "ghana_nouns_total": 1.0,
+      "frequency_band": 5
+    },
+    {
+      "english": "Million",
+      "english_lower": "million",
+      "category": "numbers",
+      "reference_translations": {
+        "isiXhosa": "Isigidi",
+        "isiZulu": "Isigidi",
+        "Wolof": "Fukki Téémééri Junni/Benn Milyoŋ",
+        "Hausa": "Miliyan",
+        "Igbo": "Nde",
+        "Akan Twi": "Ɔpepem",
+        "Mandinka": "Miliyoŋ"
+      },
+      "n_reference_languages": 7,
+      "site_spellings": [
+        "Million"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Monday",
+      "english_lower": "monday",
+      "category": "days of the week",
+      "reference_translations": {
+        "isiXhosa": "uMvulo",
+        "isiZulu": "uMsombuluko",
+        "Amharic": "ሰኞ",
+        "Wolof": "Altine",
+        "Hausa": "Ran Littinin",
+        "kiSwahili": "Jumapili",
+        "Igbo": "Ụbọchị mbụ na izuụka",
+        "Akan Twi": "Ɛdwoada",
+        "Mandinka": "Teneŋo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Monday"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Moon",
+      "english_lower": "moon",
+      "category": "natural world",
+      "reference_translations": {
+        "isiXhosa": "Inyanga",
+        "isiZulu": "Inyanga",
+        "Amharic": "ጨረቃ",
+        "Wolof": "Weer",
+        "Hausa": "Wata",
+        "kiSwahili": "Mwezi",
+        "Igbo": "Ọnwa",
+        "Akan Twi": "Bosome",
+        "Mandinka": "Karoo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Moon"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Mosque",
+      "english_lower": "mosque",
+      "category": "places",
+      "reference_translations": {
+        "isiXhosa": "I-mosque / Icawe yamasilamsi",
+        "isiZulu": "I-mosque / Isonto Lamasulumane",
+        "Amharic": "መስጊድ",
+        "Wolof": "Jàkka/Jumaa",
+        "Hausa": "Masallaci",
+        "kiSwahili": "Msikiti",
+        "Igbo": "Ụlọ ụka ndị alakụba",
+        "Akan Twi": "Nkramodan",
+        "Mandinka": "Misiroo/Jumoo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Mosque"
+      ],
+      "ghana_nouns_total": 597.0,
+      "frequency_band": 2
+    },
+    {
+      "english": "Mother",
+      "english_lower": "mother",
+      "category": "people",
+      "reference_translations": {
+        "isiXhosa": "Umama",
+        "isiZulu": "Umama",
+        "Amharic": "እናት",
+        "Wolof": "Yaay",
+        "Hausa": "Uwa",
+        "kiSwahili": "Mama",
+        "Igbo": "Nne",
+        "Akan Twi": "Maame",
+        "Mandinka": "Baamaa/Naa/Baa"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Mother",
+        "mother"
+      ],
+      "ghana_nouns_total": 12889.0,
+      "frequency_band": 1
+    },
+    {
+      "english": "Motorcycle",
+      "english_lower": "motorcycle",
+      "category": "transportation",
+      "reference_translations": {
+        "isiXhosa": "Isithuthuthu",
+        "isiZulu": "Isithuthuthu",
+        "Wolof": "Moto",
+        "Hausa": "Moto",
+        "kiSwahili": "Pikipiki",
+        "Igbo": "Ọgbatumtum",
+        "Akan Twi": "Moto sakere"
+      },
+      "n_reference_languages": 7,
+      "site_spellings": [
+        "Motorcycle"
+      ],
+      "ghana_nouns_total": 362.0,
+      "frequency_band": 3
+    },
+    {
+      "english": "Mountain",
+      "english_lower": "mountain",
+      "category": "natural world",
+      "reference_translations": {
+        "isiXhosa": "Intaba",
+        "isiZulu": "Intaba",
+        "Amharic": "ተራራ",
+        "Wolof": "Tund",
+        "Hausa": "Dutsi",
+        "kiSwahili": "Mlima",
+        "Igbo": "Nnukwu ugwu",
+        "Akan Twi": "Bepɔ",
+        "Mandinka": "Bere Konkoŋo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Mountain",
+        "Mountains"
+      ],
+      "ghana_nouns_total": 559.0,
+      "frequency_band": 2
+    },
+    {
+      "english": "Mouth",
+      "english_lower": "mouth",
+      "category": "body parts",
+      "reference_translations": {
+        "isiXhosa": "Umlomo",
+        "isiZulu": "Umlomo",
+        "Amharic": "አፍ",
+        "Wolof": "Gémmiñ",
+        "Hausa": "Baki",
+        "kiSwahili": "Kinywa",
+        "Igbo": "Ọnụ",
+        "Akan Twi": "Ano",
+        "Mandinka": "Daa"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Mouth"
+      ],
+      "ghana_nouns_total": 2989.0,
+      "frequency_band": 2
+    },
+    {
+      "english": "Nail",
+      "english_lower": "nail",
+      "category": "body parts",
+      "reference_translations": {
+        "isiXhosa": "Uzipho/Iinzipho",
+        "isiZulu": "Uzipho/Izinzipho",
+        "Wolof": "We",
+        "Hausa": "Farce",
+        "kiSwahili": "Kucha",
+        "Igbo": "Mbọ",
+        "Mandinka": "Ŋooriŋo"
+      },
+      "n_reference_languages": 7,
+      "site_spellings": [
+        "Nail",
+        "Nails"
+      ],
+      "ghana_nouns_total": 266.0,
+      "frequency_band": 3
+    },
+    {
+      "english": "Neck",
+      "english_lower": "neck",
+      "category": "body parts",
+      "reference_translations": {
+        "isiXhosa": "Intamo",
+        "isiZulu": "Intamo",
+        "Amharic": "አንገት",
+        "Wolof": "Baat",
+        "Hausa": "Wuya",
+        "kiSwahili": "Shingo",
+        "Igbo": "Olu",
+        "Akan Twi": "Ɛkɔn",
+        "Mandinka": "Kaŋo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Neck"
+      ],
+      "ghana_nouns_total": 1.0,
+      "frequency_band": 5
+    },
+    {
+      "english": "Necklace",
+      "english_lower": "necklace",
+      "category": "clothing",
+      "reference_translations": {
+        "isiXhosa": "Itsheyina/Inekleyisi",
+        "isiZulu": "Umgexo",
+        "Amharic": "ሀብል/ጨሌ/ዶቃ",
+        "Wolof": "Caq",
+        "Hausa": "Sarka",
+        "kiSwahili": "Mkufu",
+        "Igbo": "Ihe olu",
+        "Akan Twi": "Komadeɛ",
+        "Mandinka": "Ceenoo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Necklace"
+      ],
+      "ghana_nouns_total": 1.0,
+      "frequency_band": 5
+    },
+    {
+      "english": "Necktie",
+      "english_lower": "necktie",
+      "category": "clothing",
+      "reference_translations": {
+        "isiXhosa": "Iqhina",
+        "isiZulu": "Uthayi",
+        "Amharic": "ክራቫት"
+      },
+      "n_reference_languages": 3,
+      "site_spellings": [
+        "Necktie"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Nine",
+      "english_lower": "nine",
+      "category": "numbers",
+      "reference_translations": {
+        "isiXhosa": "Lithoba",
+        "isiZulu": "Isishiyagalolunye",
+        "Amharic": "ዘጠኝ",
+        "Wolof": "Juróóm Ñeent",
+        "Hausa": "Tara",
+        "kiSwahili": "Tisa",
+        "Igbo": "Itolu",
+        "Akan Twi": "Nkron",
+        "Mandinka": "Kononto"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Nine"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Nose",
+      "english_lower": "nose",
+      "category": "body parts",
+      "reference_translations": {
+        "isiXhosa": "Impumlo",
+        "isiZulu": "Ikhala",
+        "Amharic": "አፍንጫ",
+        "Wolof": "Bakan",
+        "Hausa": "Hanci",
+        "kiSwahili": "Pua",
+        "Igbo": "Imi",
+        "Akan Twi": "Ɛhwene",
+        "Mandinka": "Nuŋo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Nose"
+      ],
+      "ghana_nouns_total": 799.0,
+      "frequency_band": 2
+    },
+    {
+      "english": "Nurse",
+      "english_lower": "nurse",
+      "category": "professions",
+      "reference_translations": {
+        "isiXhosa": "Umongikazi/Unesi",
+        "isiZulu": "Unesi/Umongi",
+        "Igbo": "Onye uwe  ọcha",
+        "Akan Twi": "Nɛɛse"
+      },
+      "n_reference_languages": 4,
+      "site_spellings": [
+        "Nurse"
+      ],
+      "ghana_nouns_total": 1808.0,
+      "frequency_band": 2
+    },
+    {
+      "english": "Ocean",
+      "english_lower": "ocean",
+      "category": "natural world",
+      "reference_translations": {
+        "isiXhosa": "Ulwandle",
+        "isiZulu": "Ulwandle",
+        "Amharic": "ባሕር",
+        "Hausa": "Teku",
+        "kiSwahili": "Bahari",
+        "Igbo": "Oshimiri nnu"
+      },
+      "n_reference_languages": 6,
+      "site_spellings": [
+        "Ocean/Sea"
+      ],
+      "ghana_nouns_total": 1.0,
+      "frequency_band": 5
+    },
+    {
+      "english": "One",
+      "english_lower": "one",
+      "category": "numbers",
+      "reference_translations": {
+        "isiXhosa": "Nye",
+        "isiZulu": "Nye",
+        "Amharic": "አንድ",
+        "Wolof": "Benn",
+        "Hausa": "Ɗaya",
+        "kiSwahili": "Moja",
+        "Igbo": "Otu",
+        "Akan Twi": "Baako",
+        "Mandinka": "Kiliŋ"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "One"
+      ],
+      "ghana_nouns_total": 17.0,
+      "frequency_band": 3
+    },
+    {
+      "english": "Onion",
+      "english_lower": "onion",
+      "category": "food and drink",
+      "reference_translations": {
+        "Hausa": "Albasa",
+        "Akan Twi": "Gyeene"
+      },
+      "n_reference_languages": 2,
+      "site_spellings": [
+        "Onion"
+      ],
+      "ghana_nouns_total": 2.0,
+      "frequency_band": 4
+    },
+    {
+      "english": "Orange",
+      "english_lower": "orange",
+      "category": "food and drink",
+      "reference_translations": {
+        "isiXhosa": "I-orenji",
+        "isiZulu": "Iwolintshi",
+        "Amharic": "ብርቱካን",
+        "Wolof": "Orans",
+        "Hausa": "Lemu",
+        "kiSwahili": "Chungwa",
+        "Igbo": "Oroma",
+        "Mandinka": "Oransoo"
+      },
+      "n_reference_languages": 8,
+      "site_spellings": [
+        "Orange"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Pants",
+      "english_lower": "pants",
+      "category": "clothing",
+      "reference_translations": {
+        "isiXhosa": "Ibhulukhwe ende",
+        "isiZulu": "Ibhulukwe",
+        "Amharic": "ረጅም ሱሪ/ቦላለ",
+        "Wolof": "Tubéy",
+        "Hausa": "Wando",
+        "kiSwahili": "Suruali",
+        "Igbo": "Ịba",
+        "Akan Twi": "Trɔsa",
+        "Mandinka": "Pantaloŋo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Pants"
+      ],
+      "ghana_nouns_total": 1.0,
+      "frequency_band": 5
+    },
+    {
+      "english": "Paper",
+      "english_lower": "paper",
+      "category": "school",
+      "reference_translations": {
+        "isiXhosa": "Iphepha",
+        "isiZulu": "Iphepha",
+        "Amharic": "ወረቀት",
+        "Wolof": "Kayit",
+        "Hausa": "Takarda",
+        "kiSwahili": "Karatasi",
+        "Igbo": "Akwụkwọ",
+        "Akan Twi": "Krataa",
+        "Mandinka": "Kayitoo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Paper"
+      ],
+      "ghana_nouns_total": 8882.0,
+      "frequency_band": 1
+    },
+    {
+      "english": "Parent",
+      "english_lower": "parent",
+      "category": "people",
+      "reference_translations": {
+        "isiXhosa": "Abazali",
+        "isiZulu": "Abazali",
+        "Akan Twi": "Ɔwofoɔ"
+      },
+      "n_reference_languages": 3,
+      "site_spellings": [
+        "Parent",
+        "Parents"
+      ],
+      "ghana_nouns_total": 3.0,
+      "frequency_band": 4
+    },
+    {
+      "english": "Pastor",
+      "english_lower": "pastor",
+      "category": "professions",
+      "reference_translations": {
+        "isiXhosa": "Umfundisi",
+        "isiZulu": "Umfundisi",
+        "Igbo": "Ụkọ chukwu",
+        "Akan Twi": "Ɔsɔfoɔ"
+      },
+      "n_reference_languages": 4,
+      "site_spellings": [
+        "Pastor/Priest"
+      ],
+      "ghana_nouns_total": 1555.0,
+      "frequency_band": 2
+    },
+    {
+      "english": "Path",
+      "english_lower": "path",
+      "category": "farm",
+      "reference_translations": {
+        "kiSwahili": "Njia",
+        "Igbo": "Ụzọ ụkwụ"
+      },
+      "n_reference_languages": 2,
+      "site_spellings": [
+        "Path"
+      ],
+      "ghana_nouns_total": 6669.0,
+      "frequency_band": 1
+    },
+    {
+      "english": "Peach",
+      "english_lower": "peach",
+      "category": "food and drink",
+      "reference_translations": {
+        "isiXhosa": "Ipesika",
+        "isiZulu": "Impentshisi",
+        "Amharic": "ኮክ",
+        "kiSwahili": "Tipisi"
+      },
+      "n_reference_languages": 4,
+      "site_spellings": [
+        "Peach"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Pen",
+      "english_lower": "pen",
+      "category": "school",
+      "reference_translations": {
+        "isiXhosa": "Ipeni",
+        "isiZulu": "Ipeni",
+        "Amharic": "ብዕር",
+        "Wolof": "Xalima/Bindukaay",
+        "Hausa": "Alƙalami",
+        "kiSwahili": "Kalamu",
+        "Igbo": "Mkpịsị ode (Penụ)",
+        "Akan Twi": "Twerɛ dua",
+        "Mandinka": "Bikkoo/Kalaa/Saferilaŋo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Pen"
+      ],
+      "ghana_nouns_total": 892.0,
+      "frequency_band": 2
+    },
+    {
+      "english": "Pencil",
+      "english_lower": "pencil",
+      "category": "school",
+      "reference_translations": {
+        "isiXhosa": "Ipensile",
+        "isiZulu": "Ipensela",
+        "Amharic": "እርሳስ",
+        "Wolof": "Montar/Montor",
+        "Hausa": "Fensir",
+        "kiSwahili": "Penseli",
+        "Igbo": "Mkpịsị ode (Pensụl)",
+        "Mandinka": "Kereyoŋo"
+      },
+      "n_reference_languages": 8,
+      "site_spellings": [
+        "Pencil"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Pig",
+      "english_lower": "pig",
+      "category": "animals",
+      "reference_translations": {
+        "isiXhosa": "Ihagu",
+        "isiZulu": "Ingulube",
+        "Amharic": "አሳማ",
+        "Wolof": "Mbaam Xuux",
+        "Hausa": "Alade",
+        "kiSwahili": "Nguruwe",
+        "Igbo": "Ezi",
+        "Akan Twi": "Prako",
+        "Mandinka": "Sewoo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Pig"
+      ],
+      "ghana_nouns_total": 205.0,
+      "frequency_band": 3
+    },
+    {
+      "english": "Pineapple",
+      "english_lower": "pineapple",
+      "category": "food and drink",
+      "reference_translations": {
+        "isiXhosa": "Ipayina",
+        "isiZulu": "Uphayinaphu",
+        "Amharic": "አናናስ",
+        "Wolof": "Ananaas",
+        "Hausa": "Abarba",
+        "kiSwahili": "Nanasi",
+        "Akan Twi": "Aborɔbɛ",
+        "Mandinka": "Ananaasoo"
+      },
+      "n_reference_languages": 8,
+      "site_spellings": [
+        "Pineapple"
+      ],
+      "ghana_nouns_total": 487.0,
+      "frequency_band": 3
+    },
+    {
+      "english": "Pink",
+      "english_lower": "pink",
+      "category": "colors",
+      "reference_translations": {
+        "isiXhosa": "Pinki",
+        "isiZulu": "Bomvana",
+        "Amharic": "ሃምራዊ",
+        "Wolof": "Roos",
+        "Hausa": "Mai Ruwan Hoda",
+        "kiSwahili": "Waridi/Pinki",
+        "Igbo": "Pịnkị",
+        "Mandinka": "Roosoo/Roozoo"
+      },
+      "n_reference_languages": 8,
+      "site_spellings": [
+        "Pink"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Plantain",
+      "english_lower": "plantain",
+      "category": "food and drink",
+      "reference_translations": {
+        "Igbo": "Ogede",
+        "Akan Twi": "Borɔdeɛ"
+      },
+      "n_reference_languages": 2,
+      "site_spellings": [
+        "Plantain"
+      ],
+      "ghana_nouns_total": 2.0,
+      "frequency_band": 4
+    },
+    {
+      "english": "Plate",
+      "english_lower": "plate",
+      "category": "cooking",
+      "reference_translations": {
+        "Amharic": "ዝርግ ሰሃን",
+        "Akan Twi": "Prɛte"
+      },
+      "n_reference_languages": 2,
+      "site_spellings": [
+        "Plate",
+        "Plates"
+      ],
+      "ghana_nouns_total": 1.0,
+      "frequency_band": 5
+    },
+    {
+      "english": "Plough",
+      "english_lower": "plough",
+      "category": "farm",
+      "reference_translations": {
+        "isiXhosa": "Ikhuba",
+        "isiZulu": "Igeja",
+        "Hausa": "Garmar Shanu",
+        "Igbo": "Nkọ"
+      },
+      "n_reference_languages": 4,
+      "site_spellings": [
+        "Plough"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Plow",
+      "english_lower": "plow",
+      "category": "farm",
+      "reference_translations": {
+        "isiXhosa": "Lima",
+        "isiZulu": "Lima",
+        "Igbo": "Nkọ ala"
+      },
+      "n_reference_languages": 3,
+      "site_spellings": [
+        "Plow"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Police",
+      "english_lower": "police",
+      "category": "professions",
+      "reference_translations": {
+        "isiXhosa": "Ipolisa",
+        "isiZulu": "Iphoyisa",
+        "Wolof": "Alkaati",
+        "Hausa": "Ɗan senda",
+        "kiSwahili": "Askari/Polisi",
+        "Igbo": "Onye uwe ojii",
+        "Akan Twi": "Polisini",
+        "Mandinka": "Poliisoo/Alkaatiyoo"
+      },
+      "n_reference_languages": 8,
+      "site_spellings": [
+        "Police"
+      ],
+      "ghana_nouns_total": 43140.0,
+      "frequency_band": 1
+    },
+    {
+      "english": "Pot",
+      "english_lower": "pot",
+      "category": "cooking",
+      "reference_translations": {
+        "Hausa": "Tukunya",
+        "Igbo": "Ite"
+      },
+      "n_reference_languages": 2,
+      "site_spellings": [
+        "Pot"
+      ],
+      "ghana_nouns_total": 1.0,
+      "frequency_band": 5
+    },
+    {
+      "english": "Purple",
+      "english_lower": "purple",
+      "category": "colors",
+      "reference_translations": {
+        "isiXhosa": "Msobo",
+        "isiZulu": "Nsomi",
+        "Amharic": "ሃምራዊ",
+        "Wolof": "Yolet",
+        "Hausa": "Launin Jar Garura",
+        "kiSwahili": "Zambarau",
+        "Igbo": "Pọpụlụ",
+        "Mandinka": "Wiyooleriŋo/"
+      },
+      "n_reference_languages": 8,
+      "site_spellings": [
+        "Purple"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Rain",
+      "english_lower": "rain",
+      "category": "natural world",
+      "reference_translations": {
+        "isiXhosa": "Imvula",
+        "isiZulu": "Imvula",
+        "Amharic": "ዝናብ",
+        "Wolof": "Taw",
+        "kiSwahili": "Mvua",
+        "Igbo": "Mmiri ozizo",
+        "Mandinka": "Samaa"
+      },
+      "n_reference_languages": 7,
+      "site_spellings": [
+        "Rain"
+      ],
+      "ghana_nouns_total": 1.0,
+      "frequency_band": 5
+    },
+    {
+      "english": "Red",
+      "english_lower": "red",
+      "category": "colors",
+      "reference_translations": {
+        "isiXhosa": "Bomvu",
+        "isiZulu": "Bomvu",
+        "Amharic": "ቀይ",
+        "Wolof": "Xonq",
+        "Hausa": "Ja",
+        "kiSwahili": "Nyekundu",
+        "Igbo": "Mmee mmee",
+        "Akan Twi": "Kɔkɔɔ",
+        "Mandinka": "Welen/Wuleŋo/Wuleeriŋo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Red"
+      ],
+      "ghana_nouns_total": 1.0,
+      "frequency_band": 5
+    },
+    {
+      "english": "Rice",
+      "english_lower": "rice",
+      "category": "food and drink",
+      "reference_translations": {
+        "isiXhosa": "I-rayisi",
+        "isiZulu": "I-rayisi",
+        "Amharic": "ሩዝ",
+        "Wolof": "Ceeb",
+        "Hausa": "Shinkafa",
+        "kiSwahili": "Wali",
+        "Igbo": "Osikapa",
+        "Akan Twi": "Ɛmoo",
+        "Mandinka": "Maanoo/Kinoo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Rice"
+      ],
+      "ghana_nouns_total": 6714.0,
+      "frequency_band": 1
+    },
+    {
+      "english": "River",
+      "english_lower": "river",
+      "category": "natural world",
+      "reference_translations": {
+        "isiXhosa": "Umlambo",
+        "isiZulu": "Umfula",
+        "Amharic": "ወንዝ",
+        "Wolof": "Dex",
+        "Hausa": "Kogi",
+        "kiSwahili": "Mto",
+        "Igbo": "Oshimiri",
+        "Akan Twi": "Asutene",
+        "Mandinka": "Baa"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "River",
+        "River/Sea"
+      ],
+      "ghana_nouns_total": 4693.0,
+      "frequency_band": 1
+    },
+    {
+      "english": "Road",
+      "english_lower": "road",
+      "category": "farm",
+      "reference_translations": {
+        "Wolof": "Mbedd/Yoon",
+        "Hausa": "Hanya",
+        "kiSwahili": "Barabara",
+        "Igbo": "Okporo ụzo",
+        "Mandinka": "Siloo"
+      },
+      "n_reference_languages": 5,
+      "site_spellings": [
+        "Road",
+        "Road/Path"
+      ],
+      "ghana_nouns_total": 15872.0,
+      "frequency_band": 1
+    },
+    {
+      "english": "Room",
+      "english_lower": "room",
+      "category": "house",
+      "reference_translations": {
+        "Wolof": "Néég",
+        "Igbo": "Ịme ụlọ",
+        "Akan Twi": "Ɛdan mu",
+        "Mandinka": "Buŋo"
+      },
+      "n_reference_languages": 4,
+      "site_spellings": [
+        "Room"
+      ],
+      "ghana_nouns_total": 10439.0,
+      "frequency_band": 1
+    },
+    {
+      "english": "Saturday",
+      "english_lower": "saturday",
+      "category": "days of the week",
+      "reference_translations": {
+        "isiXhosa": "uMgqibelo",
+        "isiZulu": "uMgqibelo",
+        "Amharic": "ቅዳሜ",
+        "Hausa": "Ran Asabar",
+        "kiSwahili": "Ijumaa",
+        "Igbo": "Ụbọchị isii na izuụka",
+        "Akan Twi": "Memenda",
+        "Mandinka": "Sibitoo"
+      },
+      "n_reference_languages": 8,
+      "site_spellings": [
+        "Saturday"
+      ],
+      "ghana_nouns_total": 3.0,
+      "frequency_band": 4
+    },
+    {
+      "english": "Scarf",
+      "english_lower": "scarf",
+      "category": "clothing",
+      "reference_translations": {
+        "isiXhosa": "Isikhafu",
+        "isiZulu": "Isikafu",
+        "Amharic": "ሻሸ",
+        "Wolof": "Kaala",
+        "Hausa": "Safa",
+        "kiSwahili": "Ushungi",
+        "Igbo": "Akwa Olu",
+        "Mandinka": "Fulaaroo/Faanoo"
+      },
+      "n_reference_languages": 8,
+      "site_spellings": [
+        "Scarf"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Sea",
+      "english_lower": "sea",
+      "category": "natural world",
+      "reference_translations": {
+        "Wolof": "Gééj",
+        "Akan Twi": "Ɔpo"
+      },
+      "n_reference_languages": 2,
+      "site_spellings": [
+        "Sea"
+      ],
+      "ghana_nouns_total": 1.0,
+      "frequency_band": 5
+    },
+    {
+      "english": "Seed",
+      "english_lower": "seed",
+      "category": "farm",
+      "reference_translations": {
+        "isiXhosa": "Imbewu",
+        "isiZulu": "Imbewu/Inhlamvu",
+        "Amharic": "ዘር",
+        "Wolof": "Jiwu",
+        "Hausa": "Iri",
+        "kiSwahili": "Mbegu",
+        "Igbo": "Mkpụrụ osisi",
+        "Akan Twi": "Aba",
+        "Mandinka": "Turoo/Kuloo/Kesoo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Seed"
+      ],
+      "ghana_nouns_total": 2.0,
+      "frequency_band": 4
+    },
+    {
+      "english": "Seven",
+      "english_lower": "seven",
+      "category": "numbers",
+      "reference_translations": {
+        "isiXhosa": "Sixhenxe",
+        "isiZulu": "Isikhombisa",
+        "Amharic": "ሰባት",
+        "Wolof": "Juróóm Ñaar",
+        "Hausa": "Bakwai",
+        "kiSwahili": "Saba",
+        "Igbo": "Asaa",
+        "Akan Twi": "Nson",
+        "Mandinka": "Woorowula"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Seven"
+      ],
+      "ghana_nouns_total": 2.0,
+      "frequency_band": 4
+    },
+    {
+      "english": "Sheep",
+      "english_lower": "sheep",
+      "category": "animals",
+      "reference_translations": {
+        "isiXhosa": "Igusha/Imvu",
+        "isiZulu": "Imvu",
+        "Amharic": "በግ",
+        "Wolof": "Xar",
+        "Hausa": "Tunkiya",
+        "kiSwahili": "Kondoo",
+        "Igbo": "Atụrụ",
+        "Akan Twi": "Odwan",
+        "Mandinka": "Saajiyoo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Sheep"
+      ],
+      "ghana_nouns_total": 1.0,
+      "frequency_band": 5
+    },
+    {
+      "english": "Shirt",
+      "english_lower": "shirt",
+      "category": "clothing",
+      "reference_translations": {
+        "isiXhosa": "Ihempe",
+        "isiZulu": "Ihembe",
+        "Amharic": "ሸሚዝ",
+        "Wolof": "Simis",
+        "kiSwahili": "Shati",
+        "Igbo": "Uwe/Afe",
+        "Akan Twi": "Shɛɛte",
+        "Mandinka": "Kamiisoo/Semiisoo"
+      },
+      "n_reference_languages": 8,
+      "site_spellings": [
+        "Shirt"
+      ],
+      "ghana_nouns_total": 473.0,
+      "frequency_band": 3
+    },
+    {
+      "english": "Shoe",
+      "english_lower": "shoe",
+      "category": "clothing",
+      "reference_translations": {
+        "isiXhosa": "Isihlangu",
+        "isiZulu": "Isicathulo",
+        "Amharic": "ጫማ",
+        "Wolof": "Dàll",
+        "Hausa": "Takalmi",
+        "kiSwahili": "Kiatu",
+        "Igbo": "Akpụkpọ ụkwụ",
+        "Akan Twi": "Mpaboa",
+        "Mandinka": "Samatoo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Shoe",
+        "Shoes"
+      ],
+      "ghana_nouns_total": 277.0,
+      "frequency_band": 3
+    },
+    {
+      "english": "Shorts",
+      "english_lower": "shorts",
+      "category": "clothing",
+      "reference_translations": {
+        "isiXhosa": "Ushoti / Ibhulukhwe emfutshane",
+        "isiZulu": "Ibhulukwe Elifushane",
+        "Amharic": "አጭር ሱሪ/ቁምጣ",
+        "Wolof": "Kilot",
+        "Hausa": "Gajeren Wando",
+        "kiSwahili": "Kaptula",
+        "Igbo": "Mkpuye",
+        "Akan Twi": "Nika",
+        "Mandinka": "Kilotoo/Kurtoo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Shorts"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Shoulder",
+      "english_lower": "shoulder",
+      "category": "body parts",
+      "reference_translations": {
+        "isiXhosa": "Igxalaba",
+        "isiZulu": "Ihlombe",
+        "Wolof": "Mbàgg",
+        "Hausa": "Kafaɗa",
+        "kiSwahili": "Bega",
+        "Igbo": "Ubu",
+        "Mandinka": "Dabakunkuŋo"
+      },
+      "n_reference_languages": 7,
+      "site_spellings": [
+        "Shoulder"
+      ],
+      "ghana_nouns_total": 2.0,
+      "frequency_band": 4
+    },
+    {
+      "english": "Sibling",
+      "english_lower": "sibling",
+      "category": "people",
+      "reference_translations": {
+        "Wolof": "Mag Ak Rakk",
+        "Hausa": "Ƙanne",
+        "kiSwahili": "Ndugu",
+        "Igbo": "Ụmụnne",
+        "Mandinka": "Faadiŋo/Baadiŋo"
+      },
+      "n_reference_languages": 5,
+      "site_spellings": [
+        "Sibling",
+        "Siblings"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Sister",
+      "english_lower": "sister",
+      "category": "people",
+      "reference_translations": {
+        "isiXhosa": "Usisi/Udadewethu",
+        "isiZulu": "Usisi/Udadewethu",
+        "Hausa": "Ya",
+        "Akan Twi": "Nua baa"
+      },
+      "n_reference_languages": 4,
+      "site_spellings": [
+        "Sister"
+      ],
+      "ghana_nouns_total": 3004.0,
+      "frequency_band": 2
+    },
+    {
+      "english": "Six",
+      "english_lower": "six",
+      "category": "numbers",
+      "reference_translations": {
+        "isiXhosa": "Thandathu",
+        "isiZulu": "Isithupha",
+        "Amharic": "ስድስት",
+        "Wolof": "Juróóm Benn",
+        "Hausa": "Shida",
+        "kiSwahili": "Sita",
+        "Igbo": "Isii",
+        "Akan Twi": "Nsia",
+        "Mandinka": "Wooro"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Six"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Skirt",
+      "english_lower": "skirt",
+      "category": "clothing",
+      "reference_translations": {
+        "isiXhosa": "Isiketi",
+        "isiZulu": "Isiketi",
+        "Amharic": "አጭር ቀሚስ",
+        "Wolof": "Sipp",
+        "kiSwahili": "Sketi",
+        "Igbo": "Skeetị",
+        "Akan Twi": "Maa fɔm atade",
+        "Mandinka": "Jippoo/Miniyoo"
+      },
+      "n_reference_languages": 8,
+      "site_spellings": [
+        "Skirt"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Snake",
+      "english_lower": "snake",
+      "category": "animals",
+      "reference_translations": {
+        "Igbo": "Agwọ",
+        "Akan Twi": "Ɔwɔ"
+      },
+      "n_reference_languages": 2,
+      "site_spellings": [
+        "Snake"
+      ],
+      "ghana_nouns_total": 359.0,
+      "frequency_band": 3
+    },
+    {
+      "english": "Socks",
+      "english_lower": "socks",
+      "category": "clothing",
+      "reference_translations": {
+        "isiXhosa": "Iikawusi",
+        "isiZulu": "Amasokisi",
+        "Amharic": "ካልሰ",
+        "Wolof": "Kawass",
+        "kiSwahili": "Soksi",
+        "Igbo": "Sọkụsụ",
+        "Mandinka": "Kawaasoo"
+      },
+      "n_reference_languages": 7,
+      "site_spellings": [
+        "Socks"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Spoon",
+      "english_lower": "spoon",
+      "category": "cooking",
+      "reference_translations": {
+        "isiXhosa": "Icephe",
+        "isiZulu": "Isipunu",
+        "Amharic": "ማንኪያ",
+        "Wolof": "Kuddu",
+        "Hausa": "Cokali",
+        "kiSwahili": "Kijiko",
+        "Igbo": "Ngaji",
+        "Akan Twi": "Atere",
+        "Mandinka": "Koojaaroo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Spoon"
+      ],
+      "ghana_nouns_total": 1.0,
+      "frequency_band": 5
+    },
+    {
+      "english": "Star",
+      "english_lower": "star",
+      "category": "natural world",
+      "reference_translations": {
+        "isiXhosa": "Iinkwenkwezi",
+        "isiZulu": "Izinkanyezi",
+        "Amharic": "ኮከብ",
+        "Wolof": "Biddééw",
+        "Hausa": "Tauraruwa",
+        "kiSwahili": "Nyota",
+        "Igbo": "Kpakpando",
+        "Akan Twi": "Nsonoma",
+        "Mandinka": "Looloolu"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Star",
+        "Stars"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Stomach",
+      "english_lower": "stomach",
+      "category": "body parts",
+      "reference_translations": {
+        "isiXhosa": "Isisu",
+        "isiZulu": "Isisu",
+        "Wolof": "Biir/Coll",
+        "Hausa": "Ciki",
+        "kiSwahili": "Tumbo",
+        "Igbo": "Afọ",
+        "Mandinka": "Konoo"
+      },
+      "n_reference_languages": 7,
+      "site_spellings": [
+        "Stomach"
+      ],
+      "ghana_nouns_total": 1.0,
+      "frequency_band": 5
+    },
+    {
+      "english": "Stove",
+      "english_lower": "stove",
+      "category": "cooking",
+      "reference_translations": {
+        "isiXhosa": "Isitovu",
+        "isiZulu": "Isitofu",
+        "Igbo": "Osi ite"
+      },
+      "n_reference_languages": 3,
+      "site_spellings": [
+        "Stove"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Street",
+      "english_lower": "street",
+      "category": "places",
+      "reference_translations": {
+        "isiXhosa": "Isitalato/Indlela/Umgaqo",
+        "isiZulu": "Isitaladi/Umgwaqo/Indlela",
+        "Hausa": "Hanya",
+        "kiSwahili": "Mtaa",
+        "Igbo": "Okporo ụzo"
+      },
+      "n_reference_languages": 5,
+      "site_spellings": [
+        "Street",
+        "Street/Road/Path"
+      ],
+      "ghana_nouns_total": 3993.0,
+      "frequency_band": 1
+    },
+    {
+      "english": "Student",
+      "english_lower": "student",
+      "category": "professions",
+      "reference_translations": {
+        "isiXhosa": "Umfundi/Isityudenti",
+        "isiZulu": "Umfundi/Isitshudeni",
+        "Amharic": "ተማሪ",
+        "Wolof": "Dongo",
+        "Hausa": "Ɗalabi",
+        "kiSwahili": "Mwanafunzi",
+        "Igbo": "Nwa akwụkwọ",
+        "Akan Twi": "Ɔsuani",
+        "Mandinka": "Karandiŋo/Elewoo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Student"
+      ],
+      "ghana_nouns_total": 8346.0,
+      "frequency_band": 1
+    },
+    {
+      "english": "Sun",
+      "english_lower": "sun",
+      "category": "natural world",
+      "reference_translations": {
+        "isiXhosa": "Ilanga",
+        "isiZulu": "Ilanga",
+        "Amharic": "ፀሐይ",
+        "Wolof": "Jànt",
+        "Hausa": "Rana",
+        "kiSwahili": "Jua",
+        "Igbo": "Anyanwụ",
+        "Akan Twi": "Owia",
+        "Mandinka": "Tiloo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Sun"
+      ],
+      "ghana_nouns_total": 1.0,
+      "frequency_band": 5
+    },
+    {
+      "english": "Sunday",
+      "english_lower": "sunday",
+      "category": "days of the week",
+      "reference_translations": {
+        "isiXhosa": "iCawa",
+        "isiZulu": "iSonto",
+        "Amharic": "እሁድ",
+        "Wolof": "Dibéér/Dimaas",
+        "Hausa": "Ran Lahadi",
+        "kiSwahili": "Jumamosi",
+        "Igbo": "Ụbọchị asaa na izuụka",
+        "Akan Twi": "Kwasiada",
+        "Mandinka": "Alahadoo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Sunday"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Sweater",
+      "english_lower": "sweater",
+      "category": "clothing",
+      "reference_translations": {
+        "isiXhosa": "Ijezi",
+        "isiZulu": "Ijezi",
+        "Amharic": "ሹራብ",
+        "Wolof": "Piliweer",
+        "kiSwahili": "Sweta",
+        "Igbo": "Akwa Oyi",
+        "Akan Twi": "Swata",
+        "Mandinka": "Sumiyaa/Dendiko/Pulaweero"
+      },
+      "n_reference_languages": 8,
+      "site_spellings": [
+        "Sweater"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Synagogue",
+      "english_lower": "synagogue",
+      "category": "places",
+      "reference_translations": {
+        "isiXhosa": "Isinagogo / Icawe yamajuda",
+        "isiZulu": "Isinagogo / Isonto Lamajuda",
+        "Amharic": "ምኵራብ",
+        "Igbo": "Ụlọ ụka ndị juu"
+      },
+      "n_reference_languages": 4,
+      "site_spellings": [
+        "Synagogue"
+      ],
+      "ghana_nouns_total": 65.0,
+      "frequency_band": 3
+    },
+    {
+      "english": "Table",
+      "english_lower": "table",
+      "category": "house",
+      "reference_translations": {
+        "isiXhosa": "Itafile",
+        "isiZulu": "Itafula",
+        "Amharic": "ጠረጴዛ",
+        "Wolof": "Taabal",
+        "Hausa": "Tebur",
+        "kiSwahili": "Meza",
+        "Igbo": "Oche ndebe ihe",
+        "Akan Twi": "Adidi pono",
+        "Mandinka": "Taabuloo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Table"
+      ],
+      "ghana_nouns_total": 1.0,
+      "frequency_band": 5
+    },
+    {
+      "english": "Teacher",
+      "english_lower": "teacher",
+      "category": "professions",
+      "reference_translations": {
+        "isiXhosa": "Utitshala/Utitshalakazi",
+        "isiZulu": "Uthisha/Umfundisi",
+        "Amharic": "አስተማሪ",
+        "Wolof": "Jàngalekat",
+        "Hausa": "Malami",
+        "kiSwahili": "Mwalimu",
+        "Igbo": "Onye nkuzi",
+        "Akan Twi": "Ɔkyerɛkyerɛni",
+        "Mandinka": "Karandirilaa/Karammoo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Teacher"
+      ],
+      "ghana_nouns_total": 7359.0,
+      "frequency_band": 1
+    },
+    {
+      "english": "Teeth",
+      "english_lower": "teeth",
+      "category": "body parts",
+      "reference_translations": {
+        "isiXhosa": "Amazinyo",
+        "isiZulu": "Amazinyo",
+        "Hausa": "Haƙori",
+        "kiSwahili": "Meno",
+        "Igbo": "Eze",
+        "Akan Twi": "Ɛse"
+      },
+      "n_reference_languages": 6,
+      "site_spellings": [
+        "Teeth"
+      ],
+      "ghana_nouns_total": 8.0,
+      "frequency_band": 3
+    },
+    {
+      "english": "Telephone",
+      "english_lower": "telephone",
+      "category": "house",
+      "reference_translations": {
+        "isiXhosa": "Umnxeba/Ifowuni",
+        "isiZulu": "Ucingo",
+        "Amharic": "ስልክ",
+        "Wolof": "Telefon",
+        "Hausa": "Waya",
+        "kiSwahili": "Simu",
+        "Igbo": "Igwe eji ekwu okwu",
+        "Mandinka": "Mobayloo/Telefonoo"
+      },
+      "n_reference_languages": 8,
+      "site_spellings": [
+        "Telephone"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Ten",
+      "english_lower": "ten",
+      "category": "numbers",
+      "reference_translations": {
+        "isiXhosa": "Lishumi",
+        "isiZulu": "Ishumi",
+        "Amharic": "አስር",
+        "Wolof": "Fukk",
+        "Hausa": "Goma",
+        "kiSwahili": "Kumi",
+        "Igbo": "Iri",
+        "Akan Twi": "Edu",
+        "Mandinka": "Taŋ"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Ten"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Thousand",
+      "english_lower": "thousand",
+      "category": "numbers",
+      "reference_translations": {
+        "isiXhosa": "Iwaka",
+        "isiZulu": "Inkulungwane",
+        "Wolof": "Junni",
+        "Hausa": "Dubu",
+        "Igbo": "Puku",
+        "Akan Twi": "Mpem mpem",
+        "Mandinka": "Wili/Wili Kiliŋ"
+      },
+      "n_reference_languages": 7,
+      "site_spellings": [
+        "Thousand",
+        "Thousand/One Thousand",
+        "Thousands"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Three",
+      "english_lower": "three",
+      "category": "numbers",
+      "reference_translations": {
+        "isiXhosa": "Thathu",
+        "isiZulu": "Thathu",
+        "Amharic": "ሦስት",
+        "Wolof": "Ñett",
+        "Hausa": "Uku",
+        "kiSwahili": "Tatu",
+        "Igbo": "Atọ",
+        "Akan Twi": "Mmiɛnsa",
+        "Mandinka": "Saba"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Three"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Thursday",
+      "english_lower": "thursday",
+      "category": "days of the week",
+      "reference_translations": {
+        "isiXhosa": "uLwesine",
+        "isiZulu": "uLwesine",
+        "Amharic": "ሐሙስ",
+        "Wolof": "Alxamis",
+        "Hausa": "Ran Alhamis",
+        "kiSwahili": "Jumatano",
+        "Igbo": "Ụbọchị anọ na izuụka",
+        "Akan Twi": "Yawoada",
+        "Mandinka": "Araamisoo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Thursday"
+      ],
+      "ghana_nouns_total": 2.0,
+      "frequency_band": 4
+    },
+    {
+      "english": "Tie",
+      "english_lower": "tie",
+      "category": "clothing",
+      "reference_translations": {
+        "Hausa": "Taye",
+        "kiSwahili": "Tai",
+        "Igbo": "Taị"
+      },
+      "n_reference_languages": 3,
+      "site_spellings": [
+        "Tie"
+      ],
+      "ghana_nouns_total": 1.0,
+      "frequency_band": 5
+    },
+    {
+      "english": "Tiger",
+      "english_lower": "tiger",
+      "category": "animals",
+      "reference_translations": {
+        "Igbo": "Agụ",
+        "Akan Twi": "Ɔsebɔ"
+      },
+      "n_reference_languages": 2,
+      "site_spellings": [
+        "Tiger"
+      ],
+      "ghana_nouns_total": 132.0,
+      "frequency_band": 3
+    },
+    {
+      "english": "Toe",
+      "english_lower": "toe",
+      "category": "body parts",
+      "reference_translations": {
+        "isiXhosa": "Uzwane",
+        "isiZulu": "Uzwani",
+        "Wolof": "Barraamu Tànk",
+        "Hausa": "Yatsun ƙafa",
+        "kiSwahili": "Kidole cha mguu",
+        "Igbo": "Mkpịsị ụkwụ",
+        "Akan Twi": "Nannsowaa",
+        "Mandinka": "Sinkondiŋo"
+      },
+      "n_reference_languages": 8,
+      "site_spellings": [
+        "Toe",
+        "Toes"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Tongue",
+      "english_lower": "tongue",
+      "category": "body parts",
+      "reference_translations": {
+        "isiXhosa": "Ulwimi",
+        "isiZulu": "Ulimi",
+        "Amharic": "ምላስ",
+        "Wolof": "Lãmmiñ",
+        "Hausa": "Harshe",
+        "kiSwahili": "Ulimi",
+        "Igbo": "Ire",
+        "Akan Twi": "Tɛkyerɛma",
+        "Mandinka": "Neŋo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Tongue"
+      ],
+      "ghana_nouns_total": 1.0,
+      "frequency_band": 5
+    },
+    {
+      "english": "Tooth",
+      "english_lower": "tooth",
+      "category": "body parts",
+      "reference_translations": {
+        "Amharic": "ጥርስ",
+        "Wolof": "Bëñ",
+        "Mandinka": "Ñiŋo"
+      },
+      "n_reference_languages": 3,
+      "site_spellings": [
+        "Tooth"
+      ],
+      "ghana_nouns_total": 193.0,
+      "frequency_band": 3
+    },
+    {
+      "english": "Train",
+      "english_lower": "train",
+      "category": "transportation",
+      "reference_translations": {
+        "isiXhosa": "Uloliwe",
+        "isiZulu": "Isitimela",
+        "Amharic": "ባቡር",
+        "Wolof": "Saxaar",
+        "Hausa": "Jirgin ƙasa",
+        "kiSwahili": "Gari Moshi",
+        "Igbo": "Ụgbọ oloko",
+        "Akan Twi": "Ketekye",
+        "Mandinka": "Tereŋoo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Train"
+      ],
+      "ghana_nouns_total": 931.0,
+      "frequency_band": 2
+    },
+    {
+      "english": "Tree",
+      "english_lower": "tree",
+      "category": "natural world",
+      "reference_translations": {
+        "isiXhosa": "Umthi",
+        "isiZulu": "Isihlahla/Umuthi",
+        "Amharic": "ዛፍ",
+        "Wolof": "Garab",
+        "Hausa": "Itace",
+        "kiSwahili": "Mti",
+        "Igbo": "Osisi",
+        "Akan Twi": "Dua",
+        "Mandinka": "Yiiroo/Yiiri Juwoo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Tree"
+      ],
+      "ghana_nouns_total": 3486.0,
+      "frequency_band": 1
+    },
+    {
+      "english": "Tuesday",
+      "english_lower": "tuesday",
+      "category": "days of the week",
+      "reference_translations": {
+        "isiXhosa": "uLwesibini",
+        "isiZulu": "uLwesibili",
+        "Amharic": "ማክሰኞ",
+        "Wolof": "Talaata",
+        "Hausa": "Ran Talata",
+        "kiSwahili": "Jumatatu",
+        "Igbo": "Ụbọchị abụọ na izuụka",
+        "Akan Twi": "Ɛbenada",
+        "Mandinka": "Talaatoo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Tuesday"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Two",
+      "english_lower": "two",
+      "category": "numbers",
+      "reference_translations": {
+        "isiXhosa": "Bini",
+        "isiZulu": "Bili",
+        "Amharic": "ሁለት",
+        "Wolof": "Ñaar",
+        "Hausa": "Biyu",
+        "kiSwahili": "Mbili",
+        "Igbo": "Abụọ",
+        "Akan Twi": "Mmienu",
+        "Mandinka": "Fula"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Two"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Vest",
+      "english_lower": "vest",
+      "category": "clothing",
+      "reference_translations": {
+        "isiXhosa": "Ivesti",
+        "isiZulu": "Ivesti",
+        "Hausa": "Falmaran"
+      },
+      "n_reference_languages": 3,
+      "site_spellings": [
+        "Vest"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Village",
+      "english_lower": "village",
+      "category": "places",
+      "reference_translations": {
+        "isiXhosa": "Ilali",
+        "isiZulu": "Umuzi",
+        "Amharic": "መንደር",
+        "Wolof": "Dëkku Kaw",
+        "Hausa": "Ƙauye",
+        "kiSwahili": "Kijiji",
+        "Igbo": "Ime obodo",
+        "Akan Twi": "Akuraa"
+      },
+      "n_reference_languages": 8,
+      "site_spellings": [
+        "Village"
+      ],
+      "ghana_nouns_total": 3502.0,
+      "frequency_band": 1
+    },
+    {
+      "english": "Water",
+      "english_lower": "water",
+      "category": "food and drink",
+      "reference_translations": {
+        "isiXhosa": "Amanzi",
+        "isiZulu": "Amanzi",
+        "Amharic": "ውሃ",
+        "Wolof": "Ndox",
+        "Hausa": "Ruwa",
+        "kiSwahili": "Maji",
+        "Igbo": "Mmiri",
+        "Akan Twi": "Nsuo",
+        "Mandinka": "Jiyoo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Water"
+      ],
+      "ghana_nouns_total": 49548.0,
+      "frequency_band": 1
+    },
+    {
+      "english": "Watermelon",
+      "english_lower": "watermelon",
+      "category": "food and drink",
+      "reference_translations": {
+        "Wolof": "Xaal",
+        "kiSwahili": "Tikiti maji",
+        "Mandinka": "Saroo"
+      },
+      "n_reference_languages": 3,
+      "site_spellings": [
+        "Watermelon"
+      ],
+      "ghana_nouns_total": 1.0,
+      "frequency_band": 5
+    },
+    {
+      "english": "Wednesday",
+      "english_lower": "wednesday",
+      "category": "days of the week",
+      "reference_translations": {
+        "isiXhosa": "uLwesithathu",
+        "isiZulu": "uLwesithathu",
+        "Amharic": "ረቡዕ",
+        "Wolof": "Àllarba",
+        "Hausa": "Ran Laraba",
+        "kiSwahili": "Jumanne",
+        "Igbo": "Ụbọchị atọ na izuụka",
+        "Akan Twi": "Wukuada",
+        "Mandinka": "Araboo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Wednesday"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "White",
+      "english_lower": "white",
+      "category": "colors",
+      "reference_translations": {
+        "isiXhosa": "Mhlophe",
+        "isiZulu": "Mhlophe",
+        "Amharic": "ነጭ",
+        "Wolof": "Weex",
+        "Hausa": "Fari",
+        "kiSwahili": "Nyeupe",
+        "Igbo": "Ọcha",
+        "Akan Twi": "Fitaa",
+        "Mandinka": "Koyimaa/Koyoo/Koyiriŋo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "White"
+      ],
+      "ghana_nouns_total": null
+    },
+    {
+      "english": "Window",
+      "english_lower": "window",
+      "category": "house",
+      "reference_translations": {
+        "isiXhosa": "Ifestile",
+        "isiZulu": "Ifasitela",
+        "Amharic": "መስኮት",
+        "Wolof": "Palanteer",
+        "Hausa": "Taga",
+        "kiSwahili": "Dirisha",
+        "Igbo": "Mpio ụlọ",
+        "Akan Twi": "Mpoma",
+        "Mandinka": "Palanteeroo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Window"
+      ],
+      "ghana_nouns_total": 1969.0,
+      "frequency_band": 2
+    },
+    {
+      "english": "Woman",
+      "english_lower": "woman",
+      "category": "people",
+      "reference_translations": {
+        "isiXhosa": "Umfazi/Inkosikazi",
+        "isiZulu": "Umfazi/Inkosikazi",
+        "Amharic": "ሴት",
+        "Wolof": "Jigéén",
+        "Hausa": "Mace",
+        "kiSwahili": "Mwanamke",
+        "Igbo": "Nwanyị",
+        "Akan Twi": "Ɔbaa",
+        "Mandinka": "Musoo"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Woman",
+        "woman"
+      ],
+      "ghana_nouns_total": 2.0,
+      "frequency_band": 4
+    },
+    {
+      "english": "Work",
+      "english_lower": "work",
+      "category": "professions",
+      "reference_translations": {
+        "isiXhosa": "Umsebenzi/Sebenza",
+        "isiZulu": "Umsebenzi/Sebenza",
+        "Amharic": "ሥራ",
+        "Wolof": "Liggééy",
+        "kiSwahili": "Kazi",
+        "Igbo": "Ọrụ",
+        "Akan Twi": "Adwuma",
+        "Mandinka": "Dookuwo"
+      },
+      "n_reference_languages": 8,
+      "site_spellings": [
+        "Work"
+      ],
+      "ghana_nouns_total": 77896.0,
+      "frequency_band": 1
+    },
+    {
+      "english": "Wrist",
+      "english_lower": "wrist",
+      "category": "body parts",
+      "reference_translations": {
+        "isiXhosa": "Isihlahla",
+        "isiZulu": "Isihlakala",
+        "Hausa": "Wuyar Hannu"
+      },
+      "n_reference_languages": 3,
+      "site_spellings": [
+        "Wrist"
+      ],
+      "ghana_nouns_total": 280.0,
+      "frequency_band": 3
+    },
+    {
+      "english": "Yellow",
+      "english_lower": "yellow",
+      "category": "colors",
+      "reference_translations": {
+        "isiXhosa": "Mthubi/Tyheli/Lubhelu",
+        "isiZulu": "Liphuzi/Ncombo",
+        "Amharic": "ቢጫ",
+        "Wolof": "Mboq",
+        "Hausa": "Rawaya",
+        "kiSwahili": "Manjano",
+        "Igbo": "Edo",
+        "Akan Twi": "Akokɔ sradeɛ",
+        "Mandinka": "Netemunkumaa"
+      },
+      "n_reference_languages": 9,
+      "site_spellings": [
+        "Yellow"
+      ],
+      "ghana_nouns_total": 1.0,
+      "frequency_band": 5
+    },
+    {
+      "english": "Zero",
+      "english_lower": "zero",
+      "category": "numbers",
+      "reference_translations": {
+        "Amharic": "ዜሮ",
+        "Wolof": "Tus",
+        "Hausa": "Sipili",
+        "kiSwahili": "Sifuri",
+        "Igbo": "Nọtụ",
+        "Mandinka": "Hanifeŋ"
+      },
+      "n_reference_languages": 6,
+      "site_spellings": [
+        "Zero"
+      ],
+      "ghana_nouns_total": null
+    }
+  ]
+}

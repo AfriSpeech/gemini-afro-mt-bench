@@ -1,0 +1,17 @@
+# inputs — regenerable, not committed
+data/afriso_languages.csv
+data/afriso_countries.csv
+data/ghana-nouns.csv
+data/bu200_cache/
+
+# raw run output — append-only, ~40 MB
+results/benchmark.partial.jsonl
+results/screening.partial.jsonl
+results/bench.log
+results/screening.json
+results/benchmark.json
+
+# python
+__pycache__/
+*.pyc
+.venv/
