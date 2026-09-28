@@ -162,8 +162,13 @@ against throughput.
 
 ## Dashboard
 
+A static HTML/JS page (Plotly, no backend) — deployed as a static
+[Hugging Face Space](space/) at [`space/index.html`](space/index.html). It
+fetches the JSON straight from this repo's `raw.githubusercontent.com` URLs at
+page load, so a new benchmark run appears with a page refresh and no redeploy.
+
 ```bash
-cd space && python3 app.py
+cd space && python3 -m http.server 8000   # then open http://localhost:8000
 ```
 
 | tab | what it answers |
@@ -173,10 +178,10 @@ cd space && python3 app.py
 | **Category heatmap** | top 120 languages × 16 categories at a glance |
 | **Language detail** | one language's category profile plus its actual round-trips, including BU reference comparison |
 
-Data source, overridable with `BENCH_REPO` / `BENCH_BRANCH`:
+Data source, overridable with `?repo=` / `?branch=` query params:
 
 ```
-https://raw.githubusercontent.com/michsethowusu/gemini-word-mt-bench/main/results/
+https://raw.githubusercontent.com/AfriSpeech/gemini-word-mt-bench/main/results/
 ```
 
 ## Data

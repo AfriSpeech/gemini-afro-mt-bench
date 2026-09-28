@@ -3,9 +3,7 @@ title: Gemini African Word-MT Benchmark
 emoji: 🌍
 colorFrom: green
 colorTo: blue
-sdk: gradio
-sdk_version: 5.23.0
-app_file: app.py
+sdk: static
 pinned: false
 license: cc-by-4.0
 short_description: Round-trip word translation benchmark for Gemini across African languages
