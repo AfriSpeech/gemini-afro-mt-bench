@@ -30,14 +30,14 @@ MEDIUM = 30.0
 EXAMPLE_TARGET = 10
 
 
-def tier_of(score: float, screened_out: bool) -> str:
-    if screened_out or score <= 0.0:
-        return "unsupported"
+def tier_of(score: float) -> str:
     if score >= STRONG:
         return "strong"
     if score >= MEDIUM:
         return "medium"
-    return "weak"
+    if score > 0.0:
+        return "weak"
+    return "unsupported"
 
 
 def rate(flags: list[bool]) -> float:
@@ -91,42 +91,31 @@ def main() -> None:
     for iso, rs in rows_by_lang.items():
         meta = langs_meta.get(iso, {})
         screen_rows = [r for r in rs if r.get("screen")]
-        screened_out = any(r.get("screened_out") for r in screen_rows)
 
         # Usable rows: scorable, not prompt collision
         scorable = [r for r in rs if r.get("scorable") and not r.get("prompt_collision")]
         screen_scorable = [r for r in screen_rows if r.get("scorable") and not r.get("prompt_collision")]
         screen_hits = sum(1 for r in screen_scorable if r.get("hit"))
 
-        if screened_out:
-            score = 0.0
-            score_majority = 0.0
-            score_core = 0.0
-            tier = "unsupported"
-            by_pos = {}
-            by_band = {}
-            script_match_rate = 0.0
-            echoed_rate = 0.0
-        else:
-            hits = [r for r in scorable if r.get("hit")]
-            score = rate([r.get("hit", False) for r in scorable])
-            score_majority = rate([r.get("hit_majority", False) for r in scorable])
+        hits = [r for r in scorable if r.get("hit")]
+        score = rate([r.get("hit", False) for r in scorable])
+        score_majority = rate([r.get("hit_majority", False) for r in scorable])
 
-            core_scorable = [r for r in scorable if r["word"] in core_words]
-            score_core = rate([r.get("hit", False) for r in core_scorable])
-            tier = tier_of(score_core, screened_out)
+        core_scorable = [r for r in scorable if r["word"] in core_words]
+        score_core = rate([r.get("hit", False) for r in core_scorable])
+        tier = tier_of(score_core)
 
-            # Breakdowns
-            by_p: dict[str, list[bool]] = defaultdict(list)
-            by_b: dict[str, list[bool]] = defaultdict(list)
-            for r in scorable:
-                by_p[r.get("pos", "noun")].append(r.get("hit", False))
-                by_b[r.get("band", "mid")].append(r.get("hit", False))
+        # Breakdowns
+        by_p: dict[str, list[bool]] = defaultdict(list)
+        by_b: dict[str, list[bool]] = defaultdict(list)
+        for r in scorable:
+            by_p[r.get("pos", "noun")].append(r.get("hit", False))
+            by_b[r.get("band", "mid")].append(r.get("hit", False))
 
-            by_pos = {p: rate(flags) for p, flags in sorted(by_p.items())}
-            by_band = {b: rate(flags) for b, flags in sorted(by_b.items())}
-            script_match_rate = rate([r.get("script_match", True) for r in scorable])
-            echoed_rate = rate([r.get("echoed_english", False) for r in scorable])
+        by_pos = {p: rate(flags) for p, flags in sorted(by_p.items())}
+        by_band = {b: rate(flags) for b, flags in sorted(by_b.items())}
+        script_match_rate = rate([r.get("script_match", True) for r in scorable])
+        echoed_rate = rate([r.get("echoed_english", False) for r in scorable])
 
         first = rs[0]
         lang_res = {
@@ -139,8 +128,6 @@ def main() -> None:
             "corpus_verses": meta.get("n_verses", first.get("corpus_verses")),
             "corpus_latin_share": first.get("corpus_latin_share"),
             "screen": f"{screen_hits}/{len(screen_scorable)}" if screen_scorable else "-",
-            "screened_out": screened_out,
-            "v1_screen_passed": meta.get("v1_screen_passed", False),
             "n_scorable": len(scorable),
             "n_hits": sum(1 for r in scorable if r.get("hit")),
             "score": score,
@@ -183,8 +170,7 @@ def main() -> None:
     def rollup(key: str) -> dict:
         g: dict[str, list] = defaultdict(list)
         for l in languages:
-            if not l["screened_out"]:
-                g[l[key]].append(l)
+            g[l[key]].append(l)
         return {
             k: {
                 "n": len(v),
@@ -196,15 +182,14 @@ def main() -> None:
             for k, v in sorted(g.items(), key=lambda kv: -mean([x["score_core"] for x in kv[1]]))
         }
 
-    # Pos & Band pools across all supported languages
+    # Pos & Band pools across all languages
     pos_pool: dict[str, list[float]] = defaultdict(list)
     band_pool: dict[str, list[float]] = defaultdict(list)
     for l in languages:
-        if not l["screened_out"]:
-            for p, v in l["by_pos"].items():
-                pos_pool[p].append(v)
-            for b, v in l["by_band"].items():
-                band_pool[b].append(v)
+        for p, v in l["by_pos"].items():
+            pos_pool[p].append(v)
+        for b, v in l["by_band"].items():
+            band_pool[b].append(v)
 
     by_pos = {
         p: {
@@ -234,8 +219,8 @@ def main() -> None:
             "generated": time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime()),
             "n_languages_manifest": len(langs_meta),
             "n_languages_evaluated": len(languages),
-            "n_languages_supported": sum(1 for l in languages if not l["screened_out"]),
-            "n_languages_screened_out": sum(1 for l in languages if l["screened_out"]),
+            "n_languages_supported": sum(1 for l in languages if l["score"] > 0),
+            "n_languages_zero": sum(1 for l in languages if l["score"] == 0),
             "n_words": len(wordlist["words"]),
             "n_core_words": len(core_words),
             "core_threshold": wordlist["meta"].get("core_threshold", 0.90),
@@ -256,7 +241,7 @@ def main() -> None:
     print(f"wrote {SUMMARY}")
     print(f"wrote {EXAMPLES}")
     print("\n--- Summary Highlights ---")
-    print(f"Languages evaluated: {len(languages)} (Supported: {summary['meta']['n_languages_supported']}, Screened out: {summary['meta']['n_languages_screened_out']})")
+    print(f"Languages evaluated: {len(languages)} (Score > 0: {summary['meta']['n_languages_supported']}, Score = 0: {summary['meta']['n_languages_zero']})")
     print(f"Tiers: {dict(tier_counts)}")
     print(f"By POS (mean %): { {k: v['mean'] for k, v in by_pos.items()} }")
     print(f"By Band (mean %): { {k: v['mean'] for k, v in by_band.items()} }")

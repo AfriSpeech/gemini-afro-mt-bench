@@ -10,24 +10,24 @@ An interactive dashboard lives in [`space/`](space/) and is deployed as a static
 
 ## Benchmark Results
 
-* **645 languages** evaluated · **204 words** (150 nouns, 33 concrete adjectives, 21 numerals) · **82,427 rows** scored · model **gemini-3.6-flash**.
-* **398 languages supported** (scored > 0) · **247 languages screened out** (0 hits on the 5-numeral gate).
+* **645 languages** evaluated · **204 words** (150 nouns, 33 concrete adjectives, 21 numerals) · **131,580 rows** scored · model **gemini-3.6-flash**.
+* **637 languages supported** (scored > 0) · **only 8 languages scored 0%** (unsupported/script mismatch).
 * **Tiers (Standardized 90% Common Core)**:
   * **Strong (≥60%)**: **4 languages** — Afrikaans (68.2%), Ewe (65.1%), Lingala (64.1%), Congo Swahili (61.5%).
-  * **Medium (30–60%)**: **69 languages** — including Amharic (58.0%), Yoruba (56.9%), West Central Oromo (55.9%), Krio (55.4%), Chadian Arabic (54.9%), Plateau Malagasy (53.3%), Akan (52.8%), Chichewa (51.1%), Acoli (50.8%), Algerian Arabic (50.8%), Wolof (47.7%), Tigrinya (47.2%), Adangme (42.6%), Bassa (39.5%), Somali (37.9%), Dyula (36.9%), Bini (34.9%), Borana-Arsi-Guji Oromo (32.3%), Baoulé (31.3%).
-  * **Weak (<30%)**: **325 languages**.
-  * **Unsupported**: **247 languages** (failed the early-exit numeral gate).
+  * **Medium (30–60%)**: **72 languages** — including Amharic (58.0%), Yoruba (56.9%), West Central Oromo (55.9%), Krio (55.4%), Chadian Arabic (54.9%), Plateau Malagasy (53.3%), Akan (52.8%), Chichewa (51.1%), Acoli (50.8%), Algerian Arabic (50.8%), Wolof (47.7%), Tigrinya (47.2%), Adangme (42.6%), Dan (41.5%), Bassa (39.5%), Somali (37.9%), Dyula (36.9%), Bini (34.9%), Ngbaka (34.3%), Borana-Arsi-Guji Oromo (32.3%), Baoulé (31.3%), Zulu (29.9%), South Ndebele (27.5%), Northwest Gbaya (27.0%).
+  * **Weak (<30%)**: **561 languages**.
+  * **Unsupported (0%)**: **8 languages**.
 
 ### Performance Breakdowns
 
 * **By Part of Speech (POS)**:
-  * **Numerals**: **23.9%** mean match rate. Closed set, least ambiguous referents.
-  * **Nouns**: **17.7%** mean match rate across everyday concrete objects, nature, people, and society.
-  * **Adjectives**: **16.7%** mean match rate across physical, perceptible properties.
+  * **Numerals**: **17.0%** mean match rate.
+  * **Nouns**: **13.7%** mean match rate across everyday concrete concepts.
+  * **Adjectives**: **13.2%** mean match rate across physical, perceptible properties.
 * **By Frequency Band**:
-  * **Frequent**: **21.5%** mean score.
-  * **Mid**: **17.5%** mean score.
-  * **Rare**: **15.4%** mean score.
+  * **Frequent**: **16.6%** mean score.
+  * **Mid**: **13.4%** mean score.
+  * **Rare**: **11.8%** mean score.
 * **Common Core (195 words)**: 195 of the 204 words are alignable in ≥90% of languages with a Bible, providing an unbiased basis for cross-lingual comparison without Bible length bias.
 
 Full results are in [`results/summary.json`](results/summary.json), [`results/examples.json`](results/examples.json), and [`results/details.jsonl.gz`](results/details.jsonl.gz).

@@ -171,49 +171,31 @@ async def run_language(aio, lang: dict, words: list[dict], part: Path) -> dict:
             for r in rows:
                 fh.write(json.dumps(r, ensure_ascii=False) + "\n")
 
-    # ---- phase 1: numeral gate. Probed first so a language the model cannot
-    # write at all costs 5 calls instead of 204.
+    # ---- phase 1: numeral probe (kept as an informative diagnostic)
     probes = screen_set(words, lang)
     screen_rows = await asyncio.gather(*[one(w) for w in probes])
-    good = [r for r in screen_rows if r["scorable"] and not r["prompt_collision"]]
-    screen_hits = sum(1 for r in good if r["hit"])
-    # Too few scorable probes means a thin Bible, not an incapable model, so the
-    # gate stands down rather than dropping the language on coverage.
-    screen_enough = len(good) >= SCREEN_MIN_SCORABLE
-    screened_out = screen_enough and screen_hits == 0
-    screen_str = (f"{screen_hits}/{len(good)}" if screen_enough
-                  else f"skipped, {len(good)} scorable")
+    good_screen = [r for r in screen_rows if r["scorable"] and not r["prompt_collision"]]
+    screen_hits = sum(1 for r in good_screen if r["hit"])
+    screen_enough = len(good_screen) >= SCREEN_MIN_SCORABLE
+    screen_str = (f"{screen_hits}/{len(good_screen)}" if screen_enough
+                  else f"skipped, {len(good_screen)} scorable")
     for r in screen_rows:
         r["screen"] = True
-        r["screened_out"] = screened_out
 
-    if screened_out:
-        flush(screen_rows)
-        return {
-            "iso639_3": lang["iso639_3"],
-            "name": lang["name"],
-            "n": 0,
-            "hits": 0,
-            "screened_out": True,
-            "screen": f"0/{len(good)}",
-            "index_secs": round(index_secs, 2),
-        }
-
-    # ---- phase 2: the full word list, minus the probes already done.
+    # ---- phase 2: the rest of the words. Evaluated for EVERY language.
     rest = [w for w in words if w["word"] not in {p["word"] for p in probes}]
     rows = await asyncio.gather(*[one(w) for w in rest])
-    flush(screen_rows + rows)
     allrows = screen_rows + rows
+    flush(allrows)
     good = [r for r in allrows if r["scorable"] and not r["prompt_collision"]]
     return {
         "iso639_3": lang["iso639_3"],
         "name": lang["name"],
         "n": len(good),
         "hits": sum(1 for r in good if r["hit"]),
-            "screened_out": False,
-            "screen": screen_str,
-            "index_secs": round(index_secs, 2),
-        }
+        "screen": screen_str,
+        "index_secs": round(index_secs, 2),
+    }
 
 
 async def main() -> None:
@@ -239,7 +221,7 @@ async def main() -> None:
                 if line.strip():
                     try:
                         r = json.loads(line)
-                        if r.get("screened_out") or not r.get("screen"):
+                        if not r.get("screen"):
                             done_langs.add(r["iso639_3"])
                     except Exception:
                         pass
@@ -267,7 +249,7 @@ async def main() -> None:
         rate = 100 * st["hits"] / max(st["n"], 1)
         el = time.time() - t0
         eta = (len(langs) - i) * el / max(i, 1) / 60
-        tag = "DROPPED" if st.get("screened_out") else f"hit={rate:.1f}%"
+        tag = f"hit={rate:.1f}%"
         print(f"  [{i}/{len(langs)}] {st['name']} ({st['iso639_3']}) "
               f"{tag} ({st['hits']}/{st['n']}) screen={st['screen']} "
               f"idx={st['index_secs']}s | {el/60:.1f}m elapsed, eta {eta:.0f}m",
