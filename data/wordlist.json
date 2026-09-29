@@ -300,7 +300,7 @@
         "MRK.8.14"
       ],
       "core": true,
-      "n_langs_alignable": 635
+      "n_langs_alignable": 636
     },
     {
       "word": "building",
@@ -516,7 +516,7 @@
         "ROM.16.5"
       ],
       "core": true,
-      "n_langs_alignable": 630
+      "n_langs_alignable": 634
     },
     {
       "word": "citizen",
@@ -4597,7 +4597,7 @@
         "PSA.68.25"
       ],
       "core": false,
-      "n_langs_alignable": 259
+      "n_langs_alignable": 260
     },
     {
       "word": "soil",
@@ -6881,7 +6881,7 @@
         "ZEC.10.5"
       ],
       "core": true,
-      "n_langs_alignable": 597
+      "n_langs_alignable": 598
     },
     {
       "word": "clan",
@@ -7091,7 +7091,7 @@
         "ZEC.12.14"
       ],
       "core": false,
-      "n_langs_alignable": 299
+      "n_langs_alignable": 301
     },
     {
       "word": "coin",
@@ -7131,7 +7131,7 @@
         "MRK.12.42"
       ],
       "core": true,
-      "n_langs_alignable": 632
+      "n_langs_alignable": 636
     },
     {
       "word": "courtyard",
@@ -7827,7 +7827,7 @@
         "NUM.4.48"
       ],
       "core": true,
-      "n_langs_alignable": 590
+      "n_langs_alignable": 594
     },
     {
       "word": "fear",
@@ -8226,7 +8226,7 @@
         "ZEC.3.9"
       ],
       "core": false,
-      "n_langs_alignable": 273
+      "n_langs_alignable": 275
     },
     {
       "word": "killer",
@@ -8266,7 +8266,7 @@
         "NUM.35.31"
       ],
       "core": false,
-      "n_langs_alignable": 258
+      "n_langs_alignable": 263
     },
     {
       "word": "leather",
@@ -11256,7 +11256,7 @@
         "PSA.57.4"
       ],
       "core": true,
-      "n_langs_alignable": 625
+      "n_langs_alignable": 626
     },
     {
       "word": "tablet",
@@ -11545,7 +11545,7 @@
         "PSA.90.4"
       ],
       "core": true,
-      "n_langs_alignable": 610
+      "n_langs_alignable": 611
     },
     {
       "word": "wheat",
@@ -11665,7 +11665,7 @@
         "PRO.20.26"
       ],
       "core": false,
-      "n_langs_alignable": 269
+      "n_langs_alignable": 271
     },
     {
       "word": "wonder",
@@ -12342,7 +12342,7 @@
         "MRK.2.16"
       ],
       "core": true,
-      "n_langs_alignable": 632
+      "n_langs_alignable": 636
     },
     {
       "word": "copper",
@@ -12660,7 +12660,7 @@
         "PSA.71.7"
       ],
       "core": true,
-      "n_langs_alignable": 629
+      "n_langs_alignable": 630
     },
     {
       "word": "eye",
@@ -14798,7 +14798,7 @@
         "REV.9.21"
       ],
       "core": true,
-      "n_langs_alignable": 626
+      "n_langs_alignable": 627
     },
     {
       "word": "inhabitant",
@@ -14896,7 +14896,7 @@
         "ZEP.2.5"
       ],
       "core": false,
-      "n_langs_alignable": 277
+      "n_langs_alignable": 279
     },
     {
       "word": "journey",
@@ -15220,7 +15220,7 @@
         "PRO.3.3"
       ],
       "core": false,
-      "n_langs_alignable": 295
+      "n_langs_alignable": 298
     },
     {
       "word": "object",
@@ -15301,7 +15301,7 @@
         "PSA.79.4"
       ],
       "core": true,
-      "n_langs_alignable": 619
+      "n_langs_alignable": 620
     },
     {
       "word": "parent",
@@ -15627,7 +15627,7 @@
         "PSA.2.3"
       ],
       "core": true,
-      "n_langs_alignable": 625
+      "n_langs_alignable": 626
     },
     {
       "word": "scheme",
@@ -15665,7 +15665,7 @@
         "PSA.64.2"
       ],
       "core": true,
-      "n_langs_alignable": 617
+      "n_langs_alignable": 618
     },
     {
       "word": "sense",
@@ -15910,7 +15910,7 @@
         "PSA.89.51"
       ],
       "core": true,
-      "n_langs_alignable": 613
+      "n_langs_alignable": 614
     },
     {
       "word": "table",
@@ -17532,7 +17532,7 @@
         "LEV.14.6"
       ],
       "core": false,
-      "n_langs_alignable": 255
+      "n_langs_alignable": 258
     },
     {
       "word": "afraid",
@@ -21351,7 +21351,7 @@
         "ISA.45.14"
       ],
       "core": false,
-      "n_langs_alignable": 251
+      "n_langs_alignable": 254
     },
     {
       "word": "tired",
@@ -21396,7 +21396,7 @@
         "REV.2.3"
       ],
       "core": true,
-      "n_langs_alignable": 623
+      "n_langs_alignable": 624
     },
     {
       "word": "four",

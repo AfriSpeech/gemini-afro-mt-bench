@@ -26,6 +26,7 @@ import json
 import os
 import sys
 import time
+from collections import defaultdict
 from pathlib import Path
 
 from common import (
@@ -47,9 +48,6 @@ from common import (
 
 WORDS = DATA / "wordlist.json"
 MANIFEST = DATA / "corpus_manifest.json"
-# Mirrors common.MAX_VERSES in 03_build_bands.py: the number of aligned verses
-# a single (language, word) pair is allowed to be judged on.
-MAX_VERSES = 20
 CONCURRENCY = int(os.environ.get("BENCH_CONCURRENCY", "96"))
 
 
@@ -78,28 +76,33 @@ def snapshot_dir() -> str:
     return hits[0]
 
 
-def read_verses(path: Path) -> dict[str, str]:
-    with open(path, newline="", encoding="utf-8") as f:
-        return {r["verse_key"]: r.get("local") or "" for r in csv.DictReader(f)
-                if r.get("verse_key")}
+def read_verses(snap: Path, files: list[str]) -> dict[str, str]:
+    combined = defaultdict(list)
+    for fname in files:
+        p = snap / fname
+        if not p.exists():
+            continue
+        with open(p, newline="", encoding="utf-8") as f:
+            for r in csv.DictReader(f):
+                vk = r.get("verse_key")
+                loc = r.get("local")
+                if vk and loc:
+                    combined[vk].append(loc)
+    return {k: " \n ".join(vs) for k, vs in combined.items()}
 
 
 def score(index: CorpusIndex, term: str, verses: list[str]) -> dict:
-    """Look `term` up in the target-language Bible.
+    """Look `term` up in the target-language Bible across all aligned occurrences.
 
-    `verses` is every English verse the noun occurs in. Which of them are usable
-    depends on the target version, so they are filtered here rather than being
-    fixed up front: a YouVersion file may be a single Gospel or the New
-    Testament only, and a word that occurs only in the Pentateuch would then
-    have nothing to align against.
+    `verses` is every English verse the word occurs in. We check ALL parallel
+    occurrences where the word appears in the English side across all versions
+    for this language (no artificial verse cap).
     """
     needle = index.term(term)
     if not needle.usable:
         return {"scorable": False, "reason": "unmatchable_term", "n_aligned": 0}
-    present = [k for k in verses if k in index.script][:MAX_VERSES]
+    present = [k for k in verses if k in index.script]
     if not present:
-        # No shared verse with the English side: the version is too partial to
-        # test this word, so it is dropped rather than scored as a failure.
         return {"scorable": False, "reason": "no_aligned_verses", "n_aligned": 0}
     hits = [k for k in present if index.in_verse(needle, k)]
     f_count, s_count, mode = index.count(needle)
@@ -114,17 +117,14 @@ def score(index: CorpusIndex, term: str, verses: list[str]) -> dict:
         "corpus_mode": mode,
         "match_mode": mode if hits else "none",
         "example_verse": hits[0] if hits else None,
-        # A term written in a script the target Bible never uses can never be
-        # found. That is a different failure from giving the wrong word in the
-        # right script, and it is a real one -- the model is told the target
-        # language and still answers in a script nobody writes it in -- so it
-        # is scored as a miss but counted separately in the aggregate.
         "script_match": needle.latin == (index.latin_share > 0.5),
     }
 
 
 async def run_language(aio, lang: dict, words: list[dict], part: Path) -> dict:
-    verses = read_verses(Path(snapshot_dir()) / lang["file"])
+    snap = Path(snapshot_dir())
+    files = lang.get("files") or [lang["file"]]
+    verses = read_verses(snap, files)
     t0 = time.time()
     index = CorpusIndex(verses)
     index_secs = time.time() - t0

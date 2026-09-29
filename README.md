@@ -10,24 +10,24 @@ An interactive dashboard lives in [`space/`](space/) and is deployed as a static
 
 ## Benchmark Results
 
-* **645 languages** evaluated · **204 words** (150 nouns, 33 concrete adjectives, 21 numerals) · **131,580 rows** scored · model **gemini-3.6-flash**.
-* **637 languages supported** (scored > 0) · **only 8 languages scored 0%** (unsupported/script mismatch).
+* **645 languages** evaluated across **877 parallel Bible versions** · **204 words** (150 nouns, 33 concrete adjectives, 21 numerals) · **131,580 rows** scored · model **gemini-3.6-flash**.
+* **643 languages supported** (scored > 0) · **only 2 languages scored 0%** across the entire parallel corpus.
 * **Tiers (Standardized 90% Common Core)**:
-  * **Strong (≥60%)**: **4 languages** — Afrikaans (68.2%), Ewe (65.1%), Lingala (64.1%), Congo Swahili (61.5%).
-  * **Medium (30–60%)**: **72 languages** — including Amharic (58.0%), Yoruba (56.9%), West Central Oromo (55.9%), Krio (55.4%), Chadian Arabic (54.9%), Plateau Malagasy (53.3%), Akan (52.8%), Chichewa (51.1%), Acoli (50.8%), Algerian Arabic (50.8%), Wolof (47.7%), Tigrinya (47.2%), Adangme (42.6%), Dan (41.5%), Bassa (39.5%), Somali (37.9%), Dyula (36.9%), Bini (34.9%), Ngbaka (34.3%), Borana-Arsi-Guji Oromo (32.3%), Baoulé (31.3%), Zulu (29.9%), South Ndebele (27.5%), Northwest Gbaya (27.0%).
-  * **Weak (<30%)**: **561 languages**.
-  * **Unsupported (0%)**: **8 languages**.
+  * **Strong (≥60%)**: **23 languages** — Amharic (87.7%), Afrikaans (86.2%), Hausa (73.8%), Twi (73.8%), Ewe (73.3%), Plateau Malagasy (71.3%), Kinyarwanda (69.7%), Lingala (69.2%), Igbo (68.7%), Yoruba (68.2%), Ganda/Luganda (67.2%), Congo Swahili (64.6%), Chichewa (64.1%), West Central Oromo (63.6%), Krio (63.1%), Wolof (61.0%), Chadian Arabic (60.0%), and others.
+  * **Medium (30–60%)**: **90 languages** — including Somali (55.9%), Sudanese Arabic (53.8%), Zulu (53.3%), Morisyen (51.3%), Algerian Arabic (50.8%), Fanti (49.7%), Pedi/Northern Sotho (49.2%), Tigrinya (47.2%), Dan (44.1%), Swati (42.1%), Dagbani (36.9%), Bini (34.9%), Ngbaka (34.3%), and others.
+  * **Weak (<30%)**: **530 languages**.
+  * **Zero / Unsupported**: **2 languages**.
 
 ### Performance Breakdowns
 
 * **By Part of Speech (POS)**:
-  * **Numerals**: **17.0%** mean match rate.
-  * **Nouns**: **13.7%** mean match rate across everyday concrete concepts.
-  * **Adjectives**: **13.2%** mean match rate across physical, perceptible properties.
+  * **Numerals**: **21.5%** mean match rate.
+  * **Adjectives**: **17.3%** mean match rate across concrete, physical properties.
+  * **Nouns**: **17.1%** mean match rate across everyday concrete concepts.
 * **By Frequency Band**:
-  * **Frequent**: **16.6%** mean score.
-  * **Mid**: **13.4%** mean score.
-  * **Rare**: **11.8%** mean score.
+  * **Frequent**: **21.1%** mean score.
+  * **Mid**: **16.9%** mean score.
+  * **Rare**: **14.6%** mean score.
 * **Common Core (195 words)**: 195 of the 204 words are alignable in ≥90% of languages with a Bible, providing an unbiased basis for cross-lingual comparison without Bible length bias.
 
 Full results are in [`results/summary.json`](results/summary.json), [`results/examples.json`](results/examples.json), and [`results/details.jsonl.gz`](results/details.jsonl.gz).
@@ -36,8 +36,8 @@ Full results are in [`results/summary.json`](results/summary.json), [`results/ex
 
 ## Methodology
 
-### 1. Ground Truth Target Bibles
-We index **950 YouVersion African language Bible versions** aligned at verse level to the English pivot text (31,082 verses). To maximize coverage, the pipeline selects the single best version per language based on aligned verses and word coverage.
+### 1. Multi-Version Parallel Bible Corpus
+We index **877 YouVersion African language Bible versions** aligned at verse level to the English pivot text (31,082 verses). For languages with multiple translations (e.g. Swahili has 13, Afrikaans 9, Shona 8, Oromo 8, Twi 5, Amharic 5), all versions are pooled simultaneously to capture orthographic and dialectal variation.
 
 ### 2. Lexicon & Part-of-Speech Tiers
 The vocabulary consists of **204 concepts** across three distinct linguistic tiers, each requiring at least 20 distinct English verse occurrences:
@@ -45,11 +45,9 @@ The vocabulary consists of **204 concepts** across three distinct linguistic tie
 * **Adjectives (33 words)**: Curated allow-list of physical, concrete properties (`big`, `clean`, `old`, `strong`, `hungry`, etc.), banded into 3 tiers based on English Bible frequency.
 * **Numerals (21 words)**: Cardinal numbers 1–20, tens through 90, hundred, thousand, banded by Bible frequency.
 
-### 3. Five-Numeral Early-Exit Gate
-Before running the full 204-word evaluation, each language is probed on 5 frequent numerals. If Gemini scores 0 hits across all scorable numerals, the language is dropped early. This saves ~200 API calls per unsupported language and prevents hallucinated noise from entering the evaluation.
-
-### 4. Verse-Parallel Verification
-A translation only passes if the term appears in the **exact aligned target verses** where the source English word occurs:
+### 3. Comprehensive Verse-Parallel Verification
+Every word is evaluated across **all parallel verse occurrences** where the English word appears in the Bible (no artificial verse cap):
+* **Multi-Version Search**: If Gemini's translation appears in any of the available versions for that language in that verse, it is credited.
 * **Latin script**: Whole-word phrase matching with space-delimited boundaries to prevent substring false-positives (e.g., `ane` cannot match inside `wanene`).
 * **Non-Latin scripts**: Unicode substring search (`fold_search`) that preserves Ge'ez, Arabic, Tifinagh, and Cyrillic scripts while normalizing combining accents and whitespace.
 * **Boundary Isolation**: Verse boundaries are sentinel-isolated (`␟`) so multi-word terms cannot cross verse boundaries.

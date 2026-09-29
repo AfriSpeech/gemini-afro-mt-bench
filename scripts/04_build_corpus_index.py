@@ -19,6 +19,7 @@ import json
 import os
 import re
 import sys
+from collections import defaultdict
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -44,7 +45,7 @@ def english_keys() -> set[str]:
     """Verse keys available on the English pivot side."""
     from importlib import import_module
 
-    mod = import_module("10_extract_nouns")
+    mod = import_module("02_extract_lexicon")
     keys, _ = mod.load_english()
     return set(keys)
 
@@ -66,48 +67,52 @@ def main() -> None:
         for k in w["verses"]:
             by_verse.setdefault(k, []).append(i)
 
-    best: dict[str, dict] = {}
-    coverage: dict[str, set[int]] = {}
+    versions_by_iso: dict[str, list[dict]] = defaultdict(list)
+    keys_by_iso: dict[str, set[str]] = defaultdict(set)
+    coverage: dict[str, set[int]] = defaultdict(set)
+
     for fname in os.listdir(snap):
         m = FILENAME_RE.match(fname)
         if not m:
             continue
+        iso = m.group("code")
         path = os.path.join(snap, fname)
         with open(path, newline="", encoding="utf-8") as f:
             n = n_align = 0
-            hit: set[int] = set()
             for row in csv.DictReader(f):
                 key = row.get("verse_key") or ""
                 n += 1
                 if key in english:
                     n_align += 1
+                    keys_by_iso[iso].add(key)
                     idx = by_verse.get(key)
                     if idx:
-                        hit.update(idx)
-        cand = {
-            "iso639_3": m.group("code"),
+                        coverage[iso].update(idx)
+        versions_by_iso[iso].append({
             "file": fname,
             "version_id": int(m.group("vid")),
             "version_title": os.path.splitext(fname)[0].rsplit("_v", 1)[0],
             "n_verses": n,
             "n_aligned": n_align,
-        }
-        prev = best.get(cand["iso639_3"])
-        # Coverage of the English pivot is the criterion, not raw verse count:
-        # a version with more verses but fewer English keys is less useful here.
-        if prev is None or (cand["n_aligned"], cand["n_verses"]) > (prev["n_aligned"], prev["n_verses"]):
-            best[cand["iso639_3"]] = cand
-            coverage[cand["iso639_3"]] = hit
+        })
 
     languages = {l["iso639_3"]: l for l in
                  json.loads((DATA / "languages.json").read_text(encoding="utf-8"))}
 
     rows = []
-    for iso, info in best.items():
+    for iso, v_list in versions_by_iso.items():
         if iso not in languages:  # not in afriso's African-country set
             continue
+        v_list.sort(key=lambda x: (x["n_aligned"], x["n_verses"]), reverse=True)
+        primary = v_list[0]
         row = dict(languages[iso])
-        row.update(info)
+        row["version_id"] = primary["version_id"]
+        row["version_title"] = primary["version_title"]
+        row["file"] = primary["file"]
+        row["files"] = [v["file"] for v in v_list]
+        row["n_versions"] = len(v_list)
+        row["n_verses"] = sum(v["n_verses"] for v in v_list)
+        row["n_aligned"] = len(keys_by_iso[iso])
         row["n_scorable_words"] = len(coverage[iso])
         rows.append(row)
     rows.sort(key=lambda r: (r["name"], r["iso639_3"]))
@@ -147,7 +152,7 @@ def main() -> None:
 
     out = {
         "meta": {"snapshot": os.path.basename(snap), "n_languages": len(rows),
-                 "n_candidates": len(best), "core_threshold": CORE_THRESHOLD,
+                 "n_candidates": len(versions_by_iso), "core_threshold": CORE_THRESHOLD,
                  "n_core_words": len(core)},
         "languages": rows,
     }
