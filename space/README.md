@@ -9,7 +9,7 @@ license: cc-by-4.0
 short_description: Corpus-grounded MT benchmark for Gemini, African languages
 ---
 
-# Gemini × African Languages — Corpus-Grounded MT Benchmark
+# Gemini × African Languages Corpus-Grounded MT Benchmark
 
 How well does Google's **Gemini** translate words into African languages?
 

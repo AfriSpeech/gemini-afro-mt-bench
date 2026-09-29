@@ -1,4 +1,4 @@
-# Gemini × African Languages — Corpus-Grounded Word MT Benchmark
+# Gemini × African Languages Corpus-Grounded MT Benchmark
 
 How well does Google's **Gemini** translate vocabulary into African languages?
 
