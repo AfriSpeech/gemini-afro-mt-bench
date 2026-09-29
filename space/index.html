@@ -62,12 +62,31 @@
 </head>
 <body>
 <header>
-  <h1>Gemini × African Languages — Corpus-Grounded MT Benchmark</h1>
+  <h1>Gemini Afro MT Bench</h1>
+  <div style="font-size:1.15rem;font-weight:500;color:var(--muted);margin:-2px 0 14px;">Gemini × African Languages — Corpus-Grounded MT Benchmark</div>
   <p class="lede">
-    Every word is translated <b>English → African language</b> and checked for presence in the target language's aligned Bible text (YouVersion parallel corpus via AfriSpeech).
-    The evaluation covers 3 Part-of-Speech tiers (nouns, concrete adjectives, numerals) with a 5-numeral early-exit gate and a standardized 90% common core for unbiased cross-language ranking.
-    <br><span>Tiers: strong ≥ 60% · medium ≥ 30% · weak &lt; 30% · unsupported (failed numeral gate).</span>
+    This dashboard evaluates how accurately Google <b>Gemini</b> translates vocabulary into <b>645 African languages</b>.
+    Rather than relying on model self-grading or synthetic tests, each translation is directly verified against human-authored parallel literature from the YouVersion corpus (<a href="https://huggingface.co/datasets/AfriSpeech/africa-corpus" target="_blank" rel="noopener">AfriSpeech/africa-corpus</a>) across <b>877 African language Bible editions</b>.
   </p>
+  <div class="explainer" style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin:16px 0 8px;display:flex;flex-wrap:wrap;gap:18px 24px;font-size:0.88rem;">
+    <div style="flex:1 1 260px;">
+      <b style="color:var(--text);display:block;margin-bottom:4px;">🎯 How It Works</b>
+      Gemini is asked for the everyday translation of 204 concepts (nouns, adjectives, numerals). A translation is marked verified only if it appears in actual written sentences for that word in the language's parallel corpus.
+    </div>
+    <div style="flex:1 1 260px;">
+      <b style="color:var(--text);display:block;margin-bottom:4px;">📊 Common Core Score</b>
+      The <b>Core Score</b> standardizes rankings across 195 universally attested concepts present in virtually all African Bibles, ensuring large national languages and smaller dialects are compared fairly.
+    </div>
+    <div style="flex:1 1 260px;">
+      <b style="color:var(--text);display:block;margin-bottom:4px;">🏷️ Capability Tiers</b>
+      <div style="line-height:1.7;">
+        <span class="pill strong">Strong (≥60%)</span> Established vocabulary<br>
+        <span class="pill medium">Medium (30–60%)</span> Everyday coverage, some gaps<br>
+        <span class="pill weak">Weak (&lt;30%)</span> Emerging or fragmented knowledge<br>
+        <span class="pill unsupported">Unsupported (0%)</span> No verified written vocabulary
+      </div>
+    </div>
+  </div>
   <div class="stats" id="stat-head"></div>
 </header>
 <main>
@@ -79,6 +98,7 @@
   </nav>
 
   <section id="tab-overview" class="tab-panel active">
+    <p style="color:var(--muted);font-size:0.9rem;margin:0 0 16px;">Macro patterns across 645 African languages: performance across word types (Parts of Speech), tier distributions, geographical regions, and word frequency bands.</p>
     <div class="row">
       <div class="panel"><div id="plot-overview-pos"></div></div>
       <div class="panel"><div id="plot-tier"></div></div>
@@ -90,6 +110,7 @@
   </section>
 
   <section id="tab-leaderboard" class="tab-panel">
+    <p style="color:var(--muted);font-size:0.9rem;margin:0 0 14px;">Browse and compare all 645 languages. Search by language name or ISO 639-3 code, sort by standardized Common Core Score, or filter by African region and language family.</p>
     <div class="controls">
       <div class="field"><label>Region</label><select id="f-region"></select></div>
       <div class="field"><label>Family</label><select id="f-family"></select></div>
@@ -118,10 +139,12 @@
   </section>
 
   <section id="tab-breakdown" class="tab-panel">
+    <p style="color:var(--muted);font-size:0.9rem;margin:0 0 16px;">Compare language performance across linguistic categories: basic concrete nouns, physical adjectives, and cardinal numerals.</p>
     <div class="panel"><div id="plot-breakdown"></div></div>
   </section>
 
   <section id="tab-detail" class="tab-panel">
+    <p style="color:var(--muted);font-size:0.9rem;margin:0 0 16px;">Select any language to inspect its performance profile, linguistic metadata, and individual translations side-by-side with verified parallel Bible verses.</p>
     <div class="controls">
       <div class="field" style="flex:1 1 500px;">
         <label>Language</label>
@@ -293,8 +316,8 @@ function renderLeaderboard(summary){
       x: chartView.map(l => l.score_core ?? 0), y: chartView.map(l => l.name),
       marker:{color: chartView.map(l => TIER_COLOR[l.tier] || '#999')},
       text: chartView.map(l => l.tier),
-      customdata: chartView.map(l => [l.iso639_3, l.family, l.region, l.score ?? 0, l.screen ?? '-', l.n_scorable ?? 0]),
-      hovertemplate:'%{y}<br>core score=%{x:.1f}%<br>iso=%{customdata[0]} · %{customdata[1]} · %{customdata[2]}<br>raw=%{customdata[3]:.1f}% · gate=%{customdata[4]} · words=%{customdata[5]}<extra></extra>',
+      customdata: chartView.map(l => [l.iso639_3, l.family, l.region, l.score ?? 0, l.n_versions || 1, l.n_scorable ?? 0]),
+      hovertemplate:'%{y}<br>core score=%{x:.1f}%<br>iso=%{customdata[0]} · %{customdata[1]} · %{customdata[2]}<br>raw=%{customdata[3]:.1f}% · versions=%{customdata[4]} · words=%{customdata[5]}<extra></extra>',
     }], {
       height: Math.max(320, 22*view.length + 140), margin:{l:160,r:10,t:50,b:40},
       title:`Top ${view.length} of ${df.length} languages (Standardized Common Core Score)`,
@@ -305,11 +328,11 @@ function renderLeaderboard(summary){
     const table = document.getElementById('l-table');
     table.innerHTML = `<thead><tr>
         <th>Language</th><th>ISO</th><th>Family</th><th>Region</th><th>Tier</th>
-        <th>Core Score %</th><th>Raw Hit %</th><th>Majority %</th><th>Gate</th><th>Scorable</th></tr></thead>
+        <th>Core Score %</th><th>Raw Hit %</th><th>Majority %</th><th>Versions</th><th>Scorable</th></tr></thead>
       <tbody>${rows.map(l => `<tr>
         <td>${l.name}</td><td>${l.iso639_3}</td><td>${l.family}</td><td>${l.region}</td>
         <td>${tierPill(l.tier)}</td><td><b>${fmt(l.score_core)}</b></td><td>${fmt(l.score)}</td>
-        <td>${fmt(l.score_majority)}</td><td>${l.screen}</td><td>${l.n_scorable}</td></tr>`).join('')}</tbody>`;
+        <td>${fmt(l.score_majority)}</td><td>${l.n_versions || 1}</td><td>${l.n_scorable}</td></tr>`).join('')}</tbody>`;
   }
 
   [regionSel, familySel, document.getElementById('f-tier'), document.getElementById('f-sort')]
@@ -319,7 +342,7 @@ function renderLeaderboard(summary){
 }
 
 function renderBreakdown(summary){
-  const langs = (summary.languages || []).filter(l => !l.screened_out).slice(0, 80);
+  const langs = (summary.languages || []).filter(l => l.tier !== 'unsupported').slice(0, 80);
   const tiers = ['noun', 'adjective', 'number'];
   const z = langs.map(l => tiers.map(t => l.by_pos?.[t] ?? 0));
   Plotly.newPlot('plot-breakdown', [{
@@ -345,7 +368,7 @@ async function renderDetail(summary){
 
     document.getElementById('d-info').innerHTML =
       `<h3>${rec.name} <code>${rec.iso639_3}</code></h3>
-       <p style="margin:0 0 6px;color:var(--muted);"><b>${rec.family}</b> · ${rec.region} · 5-numeral gate: <b>${rec.screen}</b> · Bible: <b>${rec.version_title || rec.version_id}</b> (${(rec.corpus_verses||0).toLocaleString()} verses)</p>
+       <p style="margin:0 0 6px;color:var(--muted);"><b>${rec.family}</b> · ${rec.region} · Versions: <b>${rec.n_versions || 1}</b> · Bible: <b>${rec.version_title || rec.version_id}</b> (${(rec.corpus_verses||0).toLocaleString()} verses)</p>
        <table>
          <tr><td>tier</td><td>${tierPill(rec.tier)}</td></tr>
          <tr><td>common core standardized score</td><td><b>${fmt(rec.score_core)}%</b></td></tr>
