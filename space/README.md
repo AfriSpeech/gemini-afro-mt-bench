@@ -6,7 +6,7 @@ colorTo: blue
 sdk: static
 pinned: false
 license: cc-by-4.0
-short_description: Corpus-grounded word MT benchmark for Gemini across 645 African languages
+short_description: Corpus-grounded MT benchmark for Gemini, African languages
 ---
 
 # Gemini × African Languages — Word-Level MT Benchmark
