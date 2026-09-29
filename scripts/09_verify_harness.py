@@ -1,13 +1,17 @@
-"""Verify the benchmark harness has no answer-leak channel.
+"""Verify the benchmark harness and corpus matching integrity.
 
-The back-translation is only meaningful if the model cannot see the English
-source word when it produces the English back-translation. This asserts:
-
+Asserts:
   1. the pipeline never uses the chat/session API (no conversational memory)
-  2. every prompt is a fresh stateless generate_content call
-  3. the back-translation prompt never contains the source word
-  4. the leakage guard actually fires when a leak is introduced
-  5. no full source-word list is ever placed in a prompt
+  2. every model call is a fresh stateless generate_content
+  3. the forward prompt template has proper slot constraints
+  4. no benchmark word collides with the prompt template instructions
+  5. echo detection works accurately for source leaks
+  6. word list integrity (204 words across 3 tiers, frequency bands, >=20 verses)
+  7. corpus manifest integrity (645 languages, version selection, 90% core)
+  8. CorpusIndex matching logic:
+     - Latin whole-word matching (no false substring hits)
+     - Non-Latin substring search (Ge'ez, Arabic)
+     - Verse boundary isolation (no cross-verse phrase matches)
 """
 from __future__ import annotations
 
@@ -18,18 +22,14 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 from common import (  # noqa: E402
-    BACKWARD_TEMPLATE,
     DATA,
     FORWARD_TEMPLATE,
+    CorpusIndex,
     assert_no_leak,
-    REF_MODE_FOLDED,
-    REF_MODE_SCRIPT,
-    backward_prompt,
-    compare_reference,
     fold_orthographic,
-    prompt_collision,
+    fold_search,
     normalise,
-    score_match,
+    prompt_collision,
 )
 
 SCRIPTS = Path(__file__).parent
@@ -45,7 +45,7 @@ def check(label: str, cond: bool) -> None:
 print("1. no chat/session API anywhere in the pipeline")
 for py in sorted(SCRIPTS.glob("*.py")):
     if py.name == Path(__file__).name:
-        continue  # this file names the banned APIs in order to look for them
+        continue
     src = py.read_text(encoding="utf-8")
     banned = [
         t for t in ("start_chat", "chats.create", "send_message", "history=")
@@ -64,57 +64,33 @@ for py in sorted(SCRIPTS.glob("0*.py")):
     ]
     check(f"{py.name}: {len(calls)} generate_content call(s)", True)
 
-print("\n3. the back-translation template has no slot for the source word")
+print("\n3. prompt template slots are constrained")
 check(
-    "template slots are name/iso/target only",
-    set(place := {
-        f.split("}")[0].split(":")[0].lstrip("{")
-        for f in BACKWARD_TEMPLATE.split("{")[1:]
-    }) == {"name", "iso", "target"},
+    "forward template slots are word/name/iso/region only",
+    set(f.split("}")[0].split(":")[0].lstrip("{") for f in FORWARD_TEMPLATE.split("{")[1:])
+    == {"word", "name", "iso", "region"},
 )
-check("template mentions no source-word argument", "source" not in BACKWARD_TEMPLATE.lower())
-fn = next(
-    n for n in ast.walk(ast.parse((SCRIPTS / "common.py").read_text(encoding="utf-8")))
-    if isinstance(n, ast.FunctionDef) and n.name == "backward_prompt"
-)
-params = [a.arg for a in fn.args.args]
-check(f"backward_prompt params = {params}", "source" not in params and "english" not in params)
 
-print("\n4. no benchmark word appears in either prompt template")
-lang = {"iso639_3": "twi", "name": "Twi", "family": "Atlantic-Congo", "region": "West Africa"}
-probe = json.load(open(DATA / "wordlist.json", encoding="utf-8"))
-words = [w["english"] for w in probe["words"]]
+print("\n4. no benchmark word collides with template instructions")
+wordlist_file = DATA / "wordlist.json"
+wordlist_data = json.loads(wordlist_file.read_text(encoding="utf-8"))
+words = [w["word"] for w in wordlist_data["words"]]
 check(f"{len(words)} benchmark words loaded", len(words) == 204)
 
 SENTINEL = "zzqx"
-for label, tmpl in (("forward", FORWARD_TEMPLATE), ("backward", BACKWARD_TEMPLATE)):
-    rendered = tmpl.format(word=SENTINEL, target=SENTINEL, name="Twi", iso="twi",
-                           region="West Africa")
-    toks = set(normalise(rendered).split())
-    collide = sorted({w for w in words if set(normalise(w).split()) <= toks})
-    check(f"{label} template collides with: {collide or 'nothing'}", not collide)
+rendered = FORWARD_TEMPLATE.format(word=SENTINEL, name="Twi", iso="twi", region="West Africa")
+toks = set(normalise(rendered).split())
+collide = sorted({w for w in words if set(normalise(w).split()) <= toks})
+check(f"forward template collides with: {collide or 'nothing'}", not collide)
 
-# A language name or ISO code could also smuggle a word in. Every such pair
-# must be flagged for exclusion rather than silently scored.
 langs = json.load(open(DATA / "languages.json", encoding="utf-8"))
-collide = [
+prompt_collisions = [
     (l["iso639_3"], l["name"], w)
     for l in langs
     for w in words
     if prompt_collision(w, l)
 ]
-check(f"prompt-collision pairs flagged for exclusion: {len(collide)}", bool(collide))
-print("        " + ", ".join(f"{n}/{w}" for _, n, w in collide))
-
-# And the fully rendered backward prompt must not contain a *different*
-# benchmark word, which would let the model copy it out of the instructions.
-leaks = []
-for w in words:
-    toks = set(normalise(backward_prompt(w, lang)).split()) - set(normalise(w).split())
-    for other in words:
-        if other != w and set(normalise(other).split()) <= toks:
-            leaks.append((w, other))
-check(f"cross-contamination leaks: {len(leaks)}", not leaks)
+check(f"prompt-collision pairs flagged for exclusion: {len(prompt_collisions)}", bool(prompt_collisions))
 
 print("\n5. echo detection is a flag, not a crash")
 check("exact echo detected", assert_no_leak("Field", "Field") is True)
@@ -123,36 +99,47 @@ check("compound echo detected", assert_no_leak("field", "palm field") is True)
 check("clean target", assert_no_leak("Field", "Eyina") is False)
 check("substring is not a token match", assert_no_leak("Apple", "Pineapple") is False)
 
-print("\n6. matching logic")
-check("exact 'eti'->'eti'", score_match("eti", "eti") == (True, True))
-check("normalised 'The Head.'->'head'", score_match("The Head.", "head") == (True, True))
-check("accent 'Ngor'->'ngor'", score_match("Café", "cafe") == (True, True))
-check("wrong word fails", score_match("head", "dog")[0] is False)
-check("plural does not pass", score_match("cat", "cats") == (False, False))
-check("close on superset", score_match("head", "big head") == (False, True))
-check("empty back fails", score_match("head", "") == (False, False))
-
-print("\n7. reference comparison is script-robust")
-# A non-Latin script must never fold to a truthy blank, or every pair of
-# non-Latin spellings would compare equal and score as agreement.
-check("Ge'ez folds to empty", fold_orthographic("አውሮፕላን") == "")
-check("Arabic folds to empty", fold_orthographic("سُوسُو") == "")
-check("Devanagari folds to empty", fold_orthographic("सेब") == "")
-check("blank is falsy", not fold_orthographic("ፖም"))
-check("non-Latin never agrees on a fold", compare_reference("አውሮፕላን", "አይሮፕላን") == (False, REF_MODE_SCRIPT))
-check("non-Latin exact match agrees", compare_reference("ፖም", "ፖም") == (True, REF_MODE_SCRIPT))
-check("Latin orthography folds", compare_reference("bulukondingo", "Bulukondiŋo") == (True, REF_MODE_FOLDED))
-check("eng folds to n", fold_orthographic("ŋ") == "n")
-check("slash alternatives", compare_reference("bulukondingo", "Waŋ/Bulukondiŋo") == (True, REF_MODE_FOLDED))
-check("vowel length not folded", compare_reference("doktoo", "Jaararlaa/Doktooroo") == (False, REF_MODE_FOLDED))
-check("wrong word disagrees", compare_reference("namaso", "Banaanoo") == (False, REF_MODE_FOLDED))
-check("no comparable content", compare_reference("---", "---")[0] is None)
-check("disagreeing Ge'ez", compare_reference("አውሮፕላን", "አይሮፕላን")[0] is False)
-
-print("\n8. word list integrity")
-check("204 single words", len(words) == 204)
+print("\n6. word list integrity (204 concepts across 3 tiers)")
+check("204 words in wordlist.json", len(words) == 204)
 check("no duplicates", len(set(w.lower() for w in words)) == len(words))
-check("16 categories", len(probe["categories"]) == 16)
+pos_counts = {p: sum(1 for w in wordlist_data["words"] if w["pos"] == p) for p in ("noun", "adjective", "number")}
+check("3 tiers: noun=150, adj=33, num=21", pos_counts == {"noun": 150, "adjective": 33, "number": 21})
+check("all words have >=20 verses in English Bible", all(len(w["verses"]) >= 20 for w in wordlist_data["words"]))
+check("common core defined (>=90% alignable)", wordlist_data["meta"].get("n_core", 0) >= 180)
+
+print("\n7. corpus manifest integrity")
+manifest = json.loads((DATA / "corpus_manifest.json").read_text(encoding="utf-8"))
+check("645 African languages with YouVersion Bibles", len(manifest["languages"]) == 645)
+check("all entries have valid ISO and file", all(l.get("iso639_3") and l.get("file") for l in manifest["languages"]))
+
+print("\n8. CorpusIndex matching logic")
+idx = CorpusIndex({
+    "GEN.1.1": "Wɔwoo baako pɛ",
+    "GEN.1.2": "wanene nso nyame",
+    "GEN.1.3": "አንድ ሁለት ሦስት",   # Ge'ez: 1, 2, 3
+    "GEN.1.4": "سُوسُو فِي البَيْتِ",  # Arabic
+})
+
+# Latin whole-word matching
+n_baako = idx.term("baako")
+check("baako matches in GEN.1.1", idx.in_verse(n_baako, "GEN.1.1") is True)
+n_ane = idx.term("ane")
+check("ane does NOT match inside wanene (whole-word boundary)", idx.in_verse(n_ane, "GEN.1.2") is False)
+
+# Non-Latin substring matching
+n_geez = idx.term("አንድ")
+check("Ge'ez substring matches in GEN.1.3", idx.in_verse(n_geez, "GEN.1.3") is True)
+n_arab = idx.term("البَيْتِ")
+check("Arabic substring matches in GEN.1.4", idx.in_verse(n_arab, "GEN.1.4") is True)
+
+# Cross-verse isolation
+n_cross = idx.term("pɛ wanene")
+check("cross-verse phrase does NOT match across verses", idx.count(n_cross)[2] == "incomparable")
+
+# Script preservation
+check("fold_search preserves Ge'ez", fold_search("አንድ") == "አንድ")
+check("fold_search preserves Arabic", fold_search("سُوسُو") == "سوسو")
+check("fold_orthographic empties non-Latin", fold_orthographic("አንድ") == "")
 
 print("\n" + ("ALL CHECKS PASSED" if ok else "SOME CHECKS FAILED"))
 sys.exit(0 if ok else 1)

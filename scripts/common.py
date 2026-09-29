@@ -20,17 +20,48 @@ RESULTS = ROOT / "results"
 RESULTS.mkdir(exist_ok=True)
 DATA.mkdir(exist_ok=True)
 
-API_KEY = os.environ.get("GEMINI_API_KEY", "AIzaSyDCCdgeH9KAje_GiT_PDzg-lk5exJl7sEM")
+# No default key: GEMINI_API_KEY must be exported. Committing a key would put a
+# live credential in the repo, and a revoked one in a fallback silently turns
+# every call into an empty translation rather than an error.
+API_KEY = os.environ.get("GEMINI_API_KEY", "")
 MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.6-flash")
 
 SEED = 20260928
-WORDS_PER_BAND = 50
-N_BANDS = 5
 CONCURRENCY = int(os.environ.get("BENCH_CONCURRENCY", "64"))
 SCREEN_CONCURRENCY = int(os.environ.get("SCREEN_CONCURRENCY", "96"))
 
-# 3 very common, near-universal concrete nouns used to screen language support.
-SCREEN_WORDS = ["head", "water", "mother"]
+# ------------------------------------------------- v2 lexicon / band settings
+# A word needs this many distinct English verses before it can be benchmarked:
+# after intersecting with a version that covers only part of the Bible, there
+# has to be an aligned verse left to test the target term against.
+MIN_VERSES = 20
+# Sampled words per (part-of-speech, frequency band) cell. The numeral pool is
+# only ~25 strong, so its cells are whatever the data allows -- see
+# 11_build_bands.py, which reports the shortfall instead of hiding it.
+PER_BAND = 50
+N_BANDS = 3
+# Part-of-speech tiers, each with its own frequency bands. "band_source" names
+# the axis the bands are cut on: Ghana frequency is only defined for words in
+# the GhanaNouns inventory, which is a noun list.
+TIERS = {
+    "noun": {"band_source": "ghana_count"},
+    "adjective": {"band_source": "bible_count"},
+    "number": {"band_source": "bible_count"},
+}
+
+# Language screen. A language is dropped from the full evaluation only if
+# Gemini scores zero on this many numerals, drawn from the most frequent ones in
+# the English text. Numerals make the best probe available: the set is closed,
+# the referents are unambiguous, and it is disjoint from the noun and adjective
+# metrics the leaderboard is built on, so screening on it cannot favour the
+# languages that are good at the thing being measured.
+SCREEN_TIER = "number"
+SCREEN_N = 5
+# A language needs at least this many *scorable* screen words before the gate is
+# allowed to drop it. Below that the zero would be explained by a thin Bible
+# rather than by a model that cannot translate, and dropping it would quietly
+# reintroduce the coverage confound the per-language denominator exists to avoid.
+SCREEN_MIN_SCORABLE = 3
 
 TRANSLATION_SCHEMA = types.Schema(
     type=types.Type.OBJECT,
@@ -42,6 +73,8 @@ _STOP = {"the", "a", "an", "of"}
 
 
 def client() -> genai.Client:
+    if not API_KEY:
+        raise SystemExit("GEMINI_API_KEY is not set")
     return genai.Client(api_key=API_KEY)
 
 
@@ -168,21 +201,179 @@ def normalise(text: str) -> str:
     return " ".join(toks)
 
 
-def score_match(source: str, back: str) -> tuple[bool, bool]:
-    """Return (exact_pass, close_pass) for a back-translation vs the source word.
+# ------------------------------------------------------- v2 corpus-grounded match
+# The v2 benchmark does not ask the model to translate anything back. It asks
+# whether the term Gemini produced is the term real speakers of the target
+# language actually use, by searching that language's own Bible text. That needs
+# a normalisation that keeps non-Latin scripts intact -- fold_orthographic
+# deliberately erases them -- plus a way to search a whole corpus cheaply.
 
-    exact: normalised back-translation equals normalised source.
-    close: every content token of the source survives in the back-translation
-           (tolerates an extra qualifier, but not a different head noun).
+# Character-level fold only: IPA-ish letters, no geminates. Geminates are pure
+# orthographic convention (ng/n, sh/s) and collapsing them is what makes
+# "Bulukondiŋo" and "bulukondingo" comparable, but it also maps distinct words
+# onto each other ("wash" -> "was"), so the loosest pass is only ever reported
+# alongside the exact-script pass, never instead of it.
+_FOLD_CHARS = str.maketrans({ord(k): v for k, v in _ORTHOGRAPHIC_FOLD.items()})
+_ASCII_RE = re.compile(r"[a-z0-9 ]*")
+
+
+def fold_search(text: str) -> str:
+    """Casefold, de-accent and fold IPA-ish letters, keeping other scripts.
+
+    Unlike fold_orthographic this preserves Ge'ez, N'Ko, Tifinagh, Cyrillic and
+    Arabic, so a folded term can be searched for inside text written in any
+    script. Geminates are left alone -- see _FOLD_CHARS.
     """
-    ns, nb = normalise(source), normalise(back)
-    if not ns or not nb:
-        return False, False
-    if ns == nb:
-        return True, True
-    st, bt = set(ns.split()), set(nb.split())
-    close = st.issubset(bt) or bt.issubset(st)
-    return False, close
+    t = unicodedata.normalize("NFC", str(text)).lower().translate(_FOLD_CHARS)
+    t = unicodedata.normalize("NFKD", t)
+    t = "".join(c for c in t if not unicodedata.combining(c))
+    return re.sub(r"[\s\W_]+", " ", t, flags=re.UNICODE).strip()
+
+
+def is_latinish(folded: str) -> bool:
+    """True when a folded string is plain Latin, i.e. word-delimited search is safe."""
+    return bool(folded) and _ASCII_RE.fullmatch(folded) is not None
+
+
+def _substring_present(needle: str, hay: str) -> bool:
+    """Substring search for scripts that are not space-delimited."""
+    if not needle:
+        return False
+    if needle in hay:
+        return True
+    # Some orthographies write a noun and its enclitic without a space; compare
+    # with all whitespace removed as well.
+    tight = needle.replace(" ", "")
+    return len(tight) >= 2 and tight in hay.replace(" ", "")
+
+
+def _phrase_present(needle: str, hay: str) -> bool:
+    """Whole-word phrase search, for space-delimited (Latin) text."""
+    padded = f" {hay} "
+    return f" {needle} " in padded
+
+
+# Verse separator inside the pre-joined corpus blobs. It has to be a character
+# that fold_search and fold_orthographic cannot emit, so that a whole-word probe
+# can be counted by searching for SEP + term + SEP.
+SEP = "␟"
+
+
+class CorpusIndex:
+    """A target-language Bible, indexed for "is this term in here?" lookups.
+
+    Two views of the same text, mirroring compare_reference's folded-then-exact
+    policy:
+
+      * `folded`  - fold_orthographic, for Latin-script text
+      * `script`  - fold_search, used for non-Latin scripts and as the loose
+                    fallback for Latin text
+
+    A term matches when either view contains it. Latin text is searched by whole
+    words, so "ane" cannot match inside "wanene"; other scripts are searched by
+    substring, because a large part of Africa is written without word spacing.
+    """
+
+    __slots__ = ("script", "folded", "_blob_script", "_blob_script_squeezed",
+                 "_blob_folded", "n_verses", "latin_share")
+
+    def __init__(self, verses: dict[str, str]) -> None:
+        self.n_verses = len(verses)
+        self.script = {k: fold_search(v) for k, v in verses.items()}
+        self.folded: dict[str, str] = {}
+        for k, v in verses.items():
+            f = fold_orthographic(v)  # empty means non-Latin: not foldable
+            if f:
+                self.folded[k] = f
+        # Share of verses written in Latin script. A minority-language Bible in
+        # Ge'ez or N'Ko will be near 0, a Latin-orthography one near 1. Used to
+        # tell "wrong script" apart from "wrong word" without screening the
+        # language out, since that is a real finding about the model rather than
+        # a reason to drop the row.
+        self.latin_share = len(self.folded) / max(self.n_verses, 1)
+        # Space-padded verses separated by SEP: ensures whole-word matching
+        # works anywhere in a verse while stopping matches across verse boundaries.
+        self._blob_folded = SEP.join(f" {v} " for v in self.folded.values())
+        self._blob_script = SEP.join(f" {v} " for v in self.script.values())
+        self._blob_script_squeezed = SEP.join(
+            v.replace(" ", "") for v in self.script.values())
+
+    # ------------------------------------------------------------------ matching
+    def term(self, term: str) -> "TermNeedle":
+        return TermNeedle(term)
+
+    def count(self, needle: "TermNeedle") -> tuple[int, int, str]:
+        """Corpus-wide occurrences of `needle` -> (folded_count, script_count, mode).
+
+        The counting rule has to agree with in_verse() exactly. When it did not,
+        a term could be reported absent from every verse it was judged on while
+        the corpus-wide count claimed hundreds of occurrences: for Adhola,
+        "three" -> "dek" returned 913 hits because the script view was counted
+        by raw substring and so matched inside "adek" and "ndek".
+        """
+        f = s = 0
+        if needle.latin:
+            # Space-delimited: whole-word only, mirroring in_verse().
+            if needle.folded:
+                f = self._blob_folded.count(f" {needle.folded} ")
+            if needle.script:
+                s = self._blob_script.count(f" {needle.script} ")
+                tight = needle.script.replace(" ", "")
+                if not s and len(tight) >= 2:
+                    s = self._blob_script_squeezed.count(tight)
+        else:
+            # Not space-delimited: substring, mirroring _substring_present().
+            if needle.folded:
+                f = self._blob_folded.count(needle.folded)
+            if needle.script:
+                s = self._blob_script.count(needle.script)
+                tight = needle.script.replace(" ", "")
+                if not s and len(tight) >= 2:
+                    s = self._blob_script_squeezed.count(tight)
+        if f and s:
+            return f, s, REF_MODE_FOLDED
+        if f:
+            return f, 0, REF_MODE_FOLDED
+        if s:
+            return 0, s, REF_MODE_SCRIPT
+        return 0, 0, REF_MODE_NONE
+
+    def in_verse(self, needle: "TermNeedle", key: str) -> bool:
+        """Does verse `key` contain `needle`, under either view?"""
+        if needle.latin:
+            # Space-delimited: whole-word only, so "ane" cannot match "wanene".
+            text = self.folded.get(key)
+            if text is not None and _phrase_present(needle.folded, text):
+                return True
+            text = self.script.get(key)
+            if text is not None and _phrase_present(needle.script, text):
+                return True
+            return False
+        for view, probe in ((self.folded, needle.folded), (self.script, needle.script)):
+            text = view.get(key)
+            if text and _substring_present(probe, text):
+                return True
+        return False
+
+
+class TermNeedle:
+    """A search term reduced to the two views CorpusIndex looks for."""
+
+    __slots__ = ("raw", "folded", "script", "latin")
+
+    def __init__(self, term: str) -> None:
+        self.raw = str(term).strip()
+        self.script = fold_search(self.raw)
+        folded = fold_orthographic(self.raw)
+        self.folded = folded or self.script
+        # Whether the term is written in Latin script at all. A term in a
+        # script the corpus never uses can never be found, which is a different
+        # failure from giving the wrong word in the right script.
+        self.latin = bool(folded) and is_latinish(folded)
+
+    @property
+    def usable(self) -> bool:
+        return bool(self.folded or self.script)
 
 
 # ------------------------------------------------------------------- prompting
@@ -201,20 +392,19 @@ def prompt_collision(source_word: str, row: dict) -> bool:
     The ISO 639-3 code is required in the prompt to disambiguate the language,
     but a few codes are also English words (bus, box, hoe, man, two) and a few
     language names contain one (Mango, Cross River Mbembe). For those pairs the
-    word is visible in the back-translation instructions, so the round-trip
-    result is not evidence of translation. Flagged here and dropped from scoring.
+    word is visible in the prompt, so the result is dropped from scoring.
     """
     label = set(normalise(lang_label(row)).split())
     return set(normalise(source_word).split()) <= label
 
 
 FORWARD_TEMPLATE = (
-    "Translate the English noun \"{word}\" into {name} (ISO 639-3: {iso}), "
+    "Translate the English word \"{word}\" into {name} (ISO 639-3: {iso}), "
     "a language spoken in {region}.\n"
     "Rules:\n"
-    "- Output the everyday, native term for this noun in {name}.\n"
+    "- Output the everyday, native term for this word in {name}.\n"
     "- Keep the native orthography and diacritics. Do not romanise.\n"
-    "- If the noun has a distinct everyday usage, prefer that usage.\n"
+    "- If the word has a distinct everyday usage, prefer that usage.\n"
     "- Output the single term only, with no gloss, no explanation, no quotes."
 )
 
@@ -228,58 +418,10 @@ def forward_prompt(word: str, row: dict) -> str:
     )
 
 
-def backward_prompt(translation: str, row: dict) -> str:
-    return BACKWARD_TEMPLATE.format(
-        name=row["name"], iso=row["iso639_3"], target=translation
-    )
-
-
-BACKWARD_SCHEMA = types.Schema(
-    type=types.Type.OBJECT,
-    properties={
-        "is_translation": types.Schema(
-            type=types.Type.BOOLEAN,
-            description="false if the input was not actually in the target language",
-        ),
-        "back_translation": types.Schema(type=types.Type.STRING),
-    },
-    required=["is_translation", "back_translation"],
-)
-
-
-class AnswerLeak(AssertionError):
-    """Raised if a source word can reach the back-translation prompt."""
-
-
-# The back-translation prompt is assembled from this template, which has no slot
-# for the English source word at all. Every forward/backward pair is a fresh,
-# stateless `generate_content` call - the pipeline never uses the chat/session
-# API - so the model has no conversational memory of the forward pass. The
-# template is the only place a leak could originate, so it is checked here once.
-#
-# Wording is constrained: no word from the 204-word benchmark list may appear in
-# this template (or in the forward template), or the model would be handed the
-# answer for that item. scripts/09_verify_harness.py asserts this.
-BACKWARD_TEMPLATE = (
-    "Translate the following {name} (ISO 639-3: {iso}) term into English.\n"
-    "Term: {target}\n"
-    "Rules:\n"
-    "- First check whether the term above is genuinely in {name} rather than "
-    "already English. If it is already English, or you cannot read it at all, "
-    'set is_translation to false and leave back_translation empty.\n'
-    "- Otherwise set is_translation to true and give the plain English noun it "
-    "denotes (lowercase, singular, no article, no explanation).\n"
-    "- Output the single English term only."
-)
-
-
 def assert_no_leak(source_word: str, prompt: str) -> bool:
     """Diagnostic: did the model's own output smuggle the source word back?
 
-    This is *not* a harness bug - a target like "Fields" for "Field" is Gemini
-    echoing English, which the round-trip test scores as a failure. Callers
-    record the flag and carry on rather than aborting.
-
+    A target like "Fields" for "Field" is Gemini echoing English.
     Stem-aware so a plural echo counts, token-aware so "pineapple" is not
     reported as containing "apple".
     """

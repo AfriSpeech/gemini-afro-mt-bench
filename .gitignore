@@ -6,10 +6,16 @@ data/bu200_cache/
 
 # raw run output — append-only, ~40 MB
 results/benchmark.partial.jsonl
+results/bench.partial.*.jsonl
 results/screening.partial.jsonl
 results/bench.log
 results/screening.json
 results/benchmark.json
+results/*.log
+*.log
+
+# prompt dumps
+2026-*.txt
 
 # python
 __pycache__/

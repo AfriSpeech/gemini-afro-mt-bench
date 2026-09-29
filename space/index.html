@@ -3,19 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Gemini × African Languages — Word-Level MT Benchmark</title>
+<title>Gemini × African Languages — Corpus-Grounded MT Benchmark</title>
 <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
 <style>
   :root{
     --bg:#f7f8fa; --panel:#ffffff; --text:#1f2430; --muted:#5b6472; --border:#e3e6ea;
-    --strong:#1a936f; --medium:#e9a13b; --weak:#d1495b; --accent:#3457d5;
+    --strong:#1a936f; --medium:#e9a13b; --weak:#d1495b; --unsupported:#8e9aa8; --accent:#3457d5;
   }
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--text);
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
   header{padding:24px 24px 12px;max-width:1400px;margin:0 auto;}
   h1{font-size:1.6rem;margin:0 0 8px;}
-  .lede{color:var(--muted);font-size:0.95rem;line-height:1.5;max-width:900px;}
+  .lede{color:var(--muted);font-size:0.95rem;line-height:1.5;max-width:960px;}
   .lede code{background:#eef0f3;padding:1px 5px;border-radius:4px;font-size:0.85em;}
   .stats{display:flex;flex-wrap:wrap;gap:6px 22px;margin:14px 0 4px;font-size:0.9rem;color:var(--muted);}
   .stats b{color:var(--text);}
@@ -46,7 +46,8 @@
   table.dash tr:hover{background:#fafbfc;}
   .table-wrap{max-height:640px;overflow:auto;border:1px solid var(--border);border-radius:10px;}
   .pill{display:inline-block;padding:1px 8px;border-radius:999px;font-size:0.75rem;font-weight:600;color:#fff;}
-  .pill.strong{background:var(--strong);} .pill.medium{background:var(--medium);} .pill.weak{background:var(--weak);}
+  .pill.strong{background:var(--strong);} .pill.medium{background:var(--medium);}
+  .pill.weak{background:var(--weak);} .pill.unsupported{background:var(--unsupported);}
   .detail-head{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:16px 18px;margin-bottom:16px;}
   .detail-head h3{margin:0 0 6px;}
   .detail-head table{border-collapse:collapse;margin-top:8px;font-size:0.88rem;}
@@ -61,14 +62,11 @@
 </head>
 <body>
 <header>
-  <h1>Gemini × African Languages — Word-Level MT Benchmark</h1>
+  <h1>Gemini × African Languages — Corpus-Grounded MT Benchmark</h1>
   <p class="lede">
-    Every word is translated <b>English → target language → back to English</b> and scored on
-    whether the round-trip returns the original word. Each direction is a separate, stateless
-    call, so the back-translator never sees the source word. Vocabulary is the
-    <a href="https://www.bu.edu/200word/" target="_blank" rel="noopener">BU 200 Word Project</a>
-    English side, cross-checked across all 9 published editions.
-    <br><span id="tier-legend"></span>
+    Every word is translated <b>English → African language</b> and checked for presence in the target language's aligned Bible text (YouVersion parallel corpus via AfriSpeech).
+    The evaluation covers 3 Part-of-Speech tiers (nouns, concrete adjectives, numerals) with a 5-numeral early-exit gate and a standardized 90% common core for unbiased cross-language ranking.
+    <br><span>Tiers: strong ≥ 60% · medium ≥ 30% · weak &lt; 30% · unsupported (failed numeral gate).</span>
   </p>
   <div class="stats" id="stat-head"></div>
 </header>
@@ -76,16 +74,15 @@
   <nav class="tabs">
     <button data-tab="overview" class="active">Overview</button>
     <button data-tab="leaderboard">Leaderboard</button>
-    <button data-tab="heatmap">Category heatmap</button>
+    <button data-tab="breakdown">POS & Bands</button>
     <button data-tab="detail">Language detail</button>
   </nav>
 
   <section id="tab-overview" class="tab-panel active">
     <div class="row">
-      <div class="panel"><div id="plot-scatter"></div></div>
+      <div class="panel"><div id="plot-overview-pos"></div></div>
       <div class="panel"><div id="plot-tier"></div></div>
     </div>
-    <div class="panel" style="margin-bottom:16px;"><div id="plot-cat"></div></div>
     <div class="row">
       <div class="panel"><div id="plot-region"></div></div>
       <div class="panel"><div id="plot-band"></div></div>
@@ -100,15 +97,15 @@
         <select id="f-tier">
           <option>All</option><option value="strong">strong</option>
           <option value="medium">medium</option><option value="weak">weak</option>
+          <option value="unsupported">unsupported</option>
         </select>
       </div>
       <div class="field"><label>Search</label><input id="f-search" placeholder="name or ISO code"></div>
-      <div class="field"><label>Min words scored (<span class="rangeval" id="f-min-val">0</span>)</label>
-        <input id="f-min" type="range" min="0" max="204" value="0" step="1"></div>
       <div class="field"><label>Sort by</label>
         <select id="f-sort">
-          <option value="pass">pass rate</option><option value="close">close rate</option>
-          <option value="name">name</option><option value="screen_score">screen score</option>
+          <option value="score_core">common core score</option>
+          <option value="score">raw hit rate</option>
+          <option value="name">name</option>
           <option value="region">region</option>
         </select>
       </div>
@@ -120,8 +117,8 @@
     <div class="table-wrap"><table class="dash" id="l-table"></table></div>
   </section>
 
-  <section id="tab-heatmap" class="tab-panel">
-    <div class="panel"><div id="plot-heatmap"></div></div>
+  <section id="tab-breakdown" class="tab-panel">
+    <div class="panel"><div id="plot-breakdown"></div></div>
   </section>
 
   <section id="tab-detail" class="tab-panel">
@@ -144,32 +141,33 @@ const OWNER = params.get('repo') || 'AfriSpeech/gemini-word-mt-bench';
 const BRANCH = params.get('branch') || 'main';
 const RAW = `https://raw.githubusercontent.com/${OWNER}/${BRANCH}`;
 const TTL = 600_000;
-const TIER_COLOR = {strong:'#1a936f', medium:'#e9a13b', weak:'#d1495b'};
-const TIER_ORDER = {strong:0, medium:1, weak:2};
+const TIER_COLOR = {strong:'#1a936f', medium:'#e9a13b', weak:'#d1495b', unsupported:'#8e9aa8'};
 const SCALE = [[0,'#d1495b'],[0.5,'#e9a13b'],[1,'#1a936f']];
 const PLOTLY_CFG = {displaylogo:false, responsive:true};
 
 const cache = {};
-async function load(name){
-  const hit = cache[name];
+
+async function load(fileSubpath){
+  const hit = cache[fileSubpath];
   if (hit && Date.now() - hit.t < TTL) return hit.v;
-  const candidates = [`results/${name}.json`, `${RAW}/results/${name}.json`];
+  const candidates = [`${fileSubpath}`, `${RAW}/${fileSubpath}`];
   let lastErr;
   for (const url of candidates){
     try{
       const r = await fetch(url, {cache:'no-store'});
       if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
       const v = await r.json();
-      cache[name] = {t: Date.now(), v};
+      cache[fileSubpath] = {t: Date.now(), v};
       return v;
     }catch(e){ lastErr = e; }
   }
-  return {__error__: `could not load ${name}.json: ${lastErr}`};
+  return {__error__: `could not load ${fileSubpath}: ${lastErr}`};
 }
 
-function fmt(n){ return (n === null || n === undefined || Number.isNaN(n)) ? '-' : n.toFixed(1); }
+function fmt(n){ return (n === null || n === undefined || Number.isNaN(n)) ? '-' : Number(n).toFixed(1); }
+function tierPill(t){ return `<span class="pill ${t || 'weak'}">${t || 'weak'}</span>`; }
 
-function tabs(){
+function setupTabs(){
   document.querySelectorAll('nav.tabs button').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('nav.tabs button').forEach(b => b.classList.remove('active'));
@@ -183,134 +181,96 @@ function tabs(){
 }
 
 function renderOverview(summary){
-  const el = id => document.getElementById(id);
-  if (summary.__error__){
-    el('plot-cat').innerHTML = `<div class="error">${summary.__error__}</div>`;
-    return;
-  }
-  const meta = summary.meta, bc = summary.by_category;
+  const meta = summary.meta || {};
 
-  el('tier-legend').textContent =
-    `Tiers — strong ≥ ${(meta.tiers?.strong ?? 0.6)*100 | 0}% · medium ≥ ${(meta.tiers?.medium ?? 0.3)*100 | 0}% · weak below that.`;
-  el('stat-head').innerHTML =
+  document.getElementById('stat-head').innerHTML =
     `<span><b>Model</b> <code>${meta.model}</code></span>
      <span><b>Generated</b> ${meta.generated}</span>
-     <span><b>Languages</b> ${meta.n_languages_tested.toLocaleString()} tested / ${meta.n_languages_screened.toLocaleString()} screened</span>
-     <span><b>Words each</b> ${meta.n_words}</span>
-     <span><b>Rows</b> ${meta.n_rows.toLocaleString()}</span>
-     <span><b>Calls</b> ${(meta.n_rows*2).toLocaleString()}</span>`;
-  el('footer').innerHTML =
+     <span><b>Languages</b> ${(meta.n_languages_evaluated || 0).toLocaleString()} evaluated (${(meta.n_languages_supported || 0).toLocaleString()} supported, ${(meta.n_languages_screened_out || 0).toLocaleString()} screened out)</span>
+     <span><b>Words each</b> ${meta.n_words || 204} (${meta.n_core_words || 0} common core)</span>
+     <span><b>Total rows</b> ${(meta.total_rows || 0).toLocaleString()}</span>`;
+
+  document.getElementById('footer').innerHTML =
     `<small>Data: <a href="${RAW}/results/summary.json" target="_blank">${OWNER}</a> @ <code>${BRANCH}</code>
      · per-word rows: <a href="${RAW}/results/details.jsonl.gz" target="_blank">details.jsonl.gz</a>
      · refreshes every ${TTL/60000|0} min</small>`;
 
-  // category bar
-  const cats = Object.entries(bc).sort((a,b) => a[1].mean_pass - b[1].mean_pass);
-  Plotly.newPlot('plot-cat', [{
-    type:'bar', orientation:'h',
-    x: cats.map(c => c[1].mean_pass), y: cats.map(c => c[0]),
-    marker:{color: cats.map(c => c[1].mean_pass), colorscale: SCALE, cmin:0, cmax:100},
-    hovertemplate:'%{y}: %{x:.1f}%<extra></extra>',
-  }], {
-    height:520, margin:{l:140,r:20,t:40,b:40},
-    title:'Pass rate by BU 200 Word category (pooled over all languages)',
-    xaxis:{title:'Mean pass rate (%)'}, yaxis:{title:''},
-  }, PLOTLY_CFG);
+  if (summary.by_pos){
+    const pos = Object.entries(summary.by_pos).sort((a,b) => b[1].mean - a[1].mean);
+    Plotly.newPlot('plot-overview-pos', [{
+      type:'bar', x: pos.map(p => p[0].toUpperCase()), y: pos.map(p => p[1].mean),
+      marker:{color: pos.map(p => p[1].mean), colorscale: SCALE, cmin:0, cmax:100},
+      text: pos.map(p => `${p[1].mean.toFixed(1)}%`), textposition:'outside',
+      hovertemplate:'%{x}: mean %{y:.1f}%<extra></extra>',
+    }], {
+      height:380, margin:{l:40,r:20,t:40,b:40},
+      title:'Corpus Match Rate by Part of Speech (POS)',
+      yaxis:{title:'Mean match rate (%)', range:[0,105]}, xaxis:{title:'Tier'},
+    }, PLOTLY_CFG);
+  }
 
-  // region bar
-  const regs = Object.entries(summary.by_region).sort((a,b) => b[1].mean_pass - a[1].mean_pass);
-  Plotly.newPlot('plot-region', [{
-    type:'bar', x: regs.map(r => r[0]), y: regs.map(r => r[1].mean_pass),
-    marker:{color: regs.map(r => r[1].mean_pass), colorscale: SCALE, cmin:0, cmax:100},
-    hovertemplate:'%{x}: %{y:.1f}%<extra></extra>',
-  }], {
-    height:380, margin:{l:50,r:20,t:40,b:60},
-    title:'Pass rate by African region', yaxis:{title:'Mean pass rate (%)'},
-  }, PLOTLY_CFG);
-
-  // tier donut
-  const tiers = ['strong','medium','weak'];
+  // Tiers donut
+  const tiers = ['strong','medium','weak','unsupported'];
   Plotly.newPlot('plot-tier', [{
     type:'pie', hole:0.55, labels: tiers.map(t => t[0].toUpperCase()+t.slice(1)),
-    values: tiers.map(t => summary.tier_counts[t] || 0),
+    values: tiers.map(t => summary.tier_counts?.[t] || 0),
     marker:{colors: tiers.map(t => TIER_COLOR[t]), line:{color:'#fff', width:2}},
     textinfo:'label+percent',
   }], { height:380, title:'Languages per tier', showlegend:false, margin:{t:40,b:10} }, PLOTLY_CFG);
 
-  // frequency band bar
-  const band = summary.by_frequency_band || {};
-  const labelFor = { 1:'most frequent', 2:'frequent', 3:'mid', 4:'low', 5:'rarest' };
-  const bkeys = Object.keys(band).sort((a,b) => +a - +b);
-  if (bkeys.length){
-    Plotly.newPlot('plot-band', [{
-      type:'bar', x: bkeys.map(k => 'Q'+k), y: bkeys.map(k => band[k].mean_pass),
-      text: bkeys.map(k => `${band[k].n_words} words<br>${band[k].mean_pass.toFixed(0)}%`),
-      textposition:'outside',
-      customdata: bkeys.map(k => labelFor[k] || k),
-      hovertemplate:'%{customdata}: %{y:.1f}%<extra></extra>',
-      marker:{color: bkeys.map(k => band[k].mean_pass), colorscale: SCALE, cmin:0, cmax:100},
-    }], {
-      height:380, margin:{l:50,r:20,t:50,b:40}, yaxis:{title:'Mean pass rate (%)', range:[0,105]},
-      xaxis:{title:'Frequency quintile'},
-      title:'Pass rate by GhanaNouns frequency band (2nd axis; 134/204 words have a count)',
-    }, PLOTLY_CFG);
-  } else {
-    Plotly.newPlot('plot-band', [], {height:380, title:'No frequency band data'}, PLOTLY_CFG);
-  }
+  // Region bar
+  const regs = Object.entries(summary.by_region || {}).sort((a,b) => (b[1].mean_core ?? 0) - (a[1].mean_core ?? 0));
+  Plotly.newPlot('plot-region', [{
+    type:'bar', x: regs.map(r => r[0]), y: regs.map(r => r[1].mean_core ?? 0),
+    marker:{color: regs.map(r => r[1].mean_core ?? 0), colorscale: SCALE, cmin:0, cmax:100},
+    hovertemplate:'%{x}: %{y:.1f}%<extra></extra>',
+  }], {
+    height:380, margin:{l:50,r:20,t:40,b:60},
+    title:'Pass rate by African region (Common Core)', yaxis:{title:'Mean score (%)'},
+  }, PLOTLY_CFG);
 
-  // scatter: screen score vs pass, colored by region
-  const langs = summary.languages;
-  const byRegion = {};
-  langs.forEach(l => (byRegion[l.region] ||= []).push(l));
-  const traces = Object.entries(byRegion).map(([region, ls]) => ({
-    type:'scatter', mode:'markers', name: region,
-    x: ls.map(l => l.screen_score), y: ls.map(l => l.pass),
-    text: ls.map(l => `${l.name} (${l.iso639_3})<br>${l.family}<br>${l.tier} · n=${l.n}`),
-    hovertemplate:'%{text}<br>screen=%{x} pass=%{y:.1f}%<extra></extra>',
-    marker:{size:7, opacity:0.7},
-  }));
-  Plotly.newPlot('plot-scatter', traces, {
-    height:380, margin:{l:50,r:20,t:40,b:40},
-    title:'Pass rate vs screening score',
-    xaxis:{title:'Screening score (of 3 common words)'}, yaxis:{title:'Pass rate (%)'},
-    legend:{orientation:'h', y:-0.25},
+  // Frequency band bar
+  const band = summary.by_band || {};
+  const bkeys = Object.keys(band).sort();
+  Plotly.newPlot('plot-band', [{
+    type:'bar', x: bkeys.map(k => k.toUpperCase()), y: bkeys.map(k => band[k].mean ?? 0),
+    text: bkeys.map(k => `${(band[k].mean ?? 0).toFixed(1)}%`),
+    textposition:'outside',
+    marker:{color: bkeys.map(k => band[k].mean ?? 0), colorscale: SCALE, cmin:0, cmax:100},
+    hovertemplate:'Band %{x}: %{y:.1f}%<extra></extra>',
+  }], {
+    height:380, margin:{l:50,r:20,t:50,b:40}, yaxis:{title:'Mean score (%)', range:[0,105]},
+    title:'Score by Frequency Band',
   }, PLOTLY_CFG);
 }
 
-function tierPill(t){ return `<span class="pill ${t}">${t}</span>`; }
-
 function renderLeaderboard(summary){
-  if (summary.__error__) return;
-  const langs = summary.languages;
+  const langs = summary.languages || [];
   const regionSel = document.getElementById('f-region');
   const familySel = document.getElementById('f-family');
-  regionSel.innerHTML = ['All', ...Object.keys(summary.by_region).sort()]
-    .map(r => `<option>${r}</option>`).join('');
+  regionSel.innerHTML = ['All', ...Object.keys(summary.by_region || {}).sort()].map(r => `<option>${r}</option>`).join('');
   const families = [...new Set(langs.map(l => l.family))].sort();
   familySel.innerHTML = ['All', ...families].map(f => `<option>${f}</option>`).join('');
 
-  const minEl = document.getElementById('f-min'), minVal = document.getElementById('f-min-val');
   const topEl = document.getElementById('f-top'), topVal = document.getElementById('f-top-val');
-  minEl.addEventListener('input', () => { minVal.textContent = minEl.value; run(); });
   topEl.addEventListener('input', () => { topVal.textContent = topEl.value; run(); });
-  minVal.textContent = minEl.value; topVal.textContent = topEl.value;
+  topVal.textContent = topEl.value;
 
   function run(){
     let df = langs.slice();
     const region = regionSel.value, family = familySel.value, tier = document.getElementById('f-tier').value;
     const search = document.getElementById('f-search').value.trim().toLowerCase();
-    const minWords = +minEl.value, sortBy = document.getElementById('f-sort').value, topN = +topEl.value;
+    const sortBy = document.getElementById('f-sort').value, topN = +topEl.value;
 
     if (region !== 'All') df = df.filter(l => l.region === region);
     if (family !== 'All') df = df.filter(l => l.family === family);
     if (tier !== 'All') df = df.filter(l => l.tier === tier);
     if (search) df = df.filter(l => l.name.toLowerCase().includes(search) || l.iso639_3.toLowerCase().includes(search));
-    df = df.filter(l => l.n >= minWords);
 
-    const counts = {strong:0, medium:0, weak:0};
-    df.forEach(l => counts[l.tier]++);
+    const counts = {strong:0, medium:0, weak:0, unsupported:0};
+    df.forEach(l => { counts[l.tier] = (counts[l.tier] || 0) + 1; });
     document.getElementById('l-stat').innerHTML =
-      `<b>Strong</b>: ${counts.strong}&nbsp;&nbsp;<b>Medium</b>: ${counts.medium}&nbsp;&nbsp;<b>Weak</b>: ${counts.weak}`;
+      `<b>Strong</b>: ${counts.strong}&nbsp;&nbsp;<b>Medium</b>: ${counts.medium}&nbsp;&nbsp;<b>Weak</b>: ${counts.weak}&nbsp;&nbsp;<b>Unsupported</b>: ${counts.unsupported || 0} (Total: ${df.length})`;
 
     if (!df.length){
       Plotly.newPlot('plot-leaderboard', [], {height:200, title:'No languages match these filters.'}, PLOTLY_CFG);
@@ -320,35 +280,36 @@ function renderLeaderboard(summary){
 
     const ascending = sortBy === 'name' || sortBy === 'region';
     const sorted = df.slice().sort((a,b) => {
-      const av = a[sortBy], bv = b[sortBy];
+      const av = a[sortBy] ?? 0, bv = b[sortBy] ?? 0;
       const cmp = typeof av === 'string' ? av.localeCompare(bv) : av - bv;
       return ascending ? cmp : -cmp;
     });
+
     const view = sorted.slice(0, topN);
-    const chartView = view.slice().sort((a,b) => a.pass - b.pass);
+    const chartView = view.slice().sort((a,b) => (a.score_core ?? 0) - (b.score_core ?? 0));
 
     Plotly.newPlot('plot-leaderboard', [{
       type:'bar', orientation:'h',
-      x: chartView.map(l => l.pass), y: chartView.map(l => l.name),
-      marker:{color: chartView.map(l => TIER_COLOR[l.tier])},
+      x: chartView.map(l => l.score_core ?? 0), y: chartView.map(l => l.name),
+      marker:{color: chartView.map(l => TIER_COLOR[l.tier] || '#999')},
       text: chartView.map(l => l.tier),
-      customdata: chartView.map(l => [l.iso639_3, l.family, l.region, l.close, l.screen_score, l.n]),
-      hovertemplate:'%{y}<br>pass=%{x:.1f}%<br>iso=%{customdata[0]} · %{customdata[1]} · %{customdata[2]}' +
-        '<br>close=%{customdata[3]:.1f}% · screen=%{customdata[4]} · n=%{customdata[5]}<extra></extra>',
+      customdata: chartView.map(l => [l.iso639_3, l.family, l.region, l.score ?? 0, l.screen ?? '-', l.n_scorable ?? 0]),
+      hovertemplate:'%{y}<br>core score=%{x:.1f}%<br>iso=%{customdata[0]} · %{customdata[1]} · %{customdata[2]}<br>raw=%{customdata[3]:.1f}% · gate=%{customdata[4]} · words=%{customdata[5]}<extra></extra>',
     }], {
-      height: Math.max(320, 22*view.length + 140), margin:{l:150,r:10,t:50,b:40},
-      title:`${df.length} languages match`, xaxis:{title:'Round-trip pass rate (%)'}, yaxis:{title:''},
+      height: Math.max(320, 22*view.length + 140), margin:{l:160,r:10,t:50,b:40},
+      title:`Top ${view.length} of ${df.length} languages (Standardized Common Core Score)`,
+      xaxis:{title:'Core Score (%)'}, yaxis:{title:''},
     }, PLOTLY_CFG);
 
-    const rows = view.slice().sort((a,b) => b.pass - a.pass);
+    const rows = view.slice().sort((a,b) => (b.score_core ?? 0) - (a.score_core ?? 0));
     const table = document.getElementById('l-table');
     table.innerHTML = `<thead><tr>
         <th>Language</th><th>ISO</th><th>Family</th><th>Region</th><th>Tier</th>
-        <th>Pass %</th><th>Close %</th><th>Screen</th><th>Words</th></tr></thead>
+        <th>Core Score %</th><th>Raw Hit %</th><th>Majority %</th><th>Gate</th><th>Scorable</th></tr></thead>
       <tbody>${rows.map(l => `<tr>
         <td>${l.name}</td><td>${l.iso639_3}</td><td>${l.family}</td><td>${l.region}</td>
-        <td>${tierPill(l.tier)}</td><td>${fmt(l.pass)}</td><td>${fmt(l.close)}</td>
-        <td>${l.screen_score}</td><td>${l.n}</td></tr>`).join('')}</tbody>`;
+        <td>${tierPill(l.tier)}</td><td><b>${fmt(l.score_core)}</b></td><td>${fmt(l.score)}</td>
+        <td>${fmt(l.score_majority)}</td><td>${l.screen}</td><td>${l.n_scorable}</td></tr>`).join('')}</tbody>`;
   }
 
   [regionSel, familySel, document.getElementById('f-tier'), document.getElementById('f-sort')]
@@ -357,78 +318,68 @@ function renderLeaderboard(summary){
   run();
 }
 
-function renderHeatmap(summary){
-  if (summary.__error__) return;
-  const cats = summary.categories;
-  const langs = summary.languages.slice().sort((a,b) => b.pass - a.pass).slice(0, 120);
-  const z = langs.map(l => cats.map(c => l.by_category[c] ?? null));
-  Plotly.newPlot('plot-heatmap', [{
-    type:'heatmap', z, x: cats, y: langs.map(l => l.name),
-    zmin:0, zmax:100, colorscale: SCALE, colorbar:{title:'pass %'},
-    hovertemplate:'%{y} · %{x}: %{z}%<extra></extra>',
+function renderBreakdown(summary){
+  const langs = (summary.languages || []).filter(l => !l.screened_out).slice(0, 80);
+  const tiers = ['noun', 'adjective', 'number'];
+  const z = langs.map(l => tiers.map(t => l.by_pos?.[t] ?? 0));
+  Plotly.newPlot('plot-breakdown', [{
+    type:'heatmap', z, x: tiers.map(t => t.toUpperCase()), y: langs.map(l => l.name),
+    zmin:0, zmax:100, colorscale: SCALE, colorbar:{title:'hit %'},
+    hovertemplate:'%{y} · %{x}: %{z:.1f}%<extra></extra>',
   }], {
-    height:900, title:'Top 120 languages x BU 200 Word category',
-    xaxis:{tickangle:-45, title:''}, yaxis:{tickfont:{size:8}, title:'', automargin:true},
-    margin:{l:160,r:20,t:40,b:100},
+    height:900, title:'Top 80 languages x Part-of-Speech Performance',
+    xaxis:{title:''}, yaxis:{tickfont:{size:8}, title:'', automargin:true},
+    margin:{l:160,r:20,t:40,b:60},
   }, PLOTLY_CFG);
 }
 
-function renderDetailHead(rec){
-  const ref = rec.bu_reference_agreement === null || rec.bu_reference_agreement === undefined
-    ? 'n/a' : fmt(rec.bu_reference_agreement) + '%';
-  let extra = '';
-  if (rec.n_excluded) extra = `<tr><td>excluded (prompt collision)</td><td><b>${rec.n_excluded}</b></td></tr>`;
-  return `
-    <h3>${rec.name} <code>${rec.iso639_3}</code></h3>
-    <p style="margin:0 0 6px;color:var(--muted);"><b>${rec.family}</b> · ${rec.region} · screened <b>${rec.screen_score}/3</b></p>
-    <table>
-      <tr><td>tier</td><td>${tierPill(rec.tier)}</td></tr>
-      <tr><td>round-trip pass</td><td><b>${fmt(rec.pass)}%</b> (${rec.n} words)</td></tr>
-      <tr><td>close match</td><td><b>${fmt(rec.close)}%</b></td></tr>
-      <tr><td>echoed English</td><td><b>${fmt(rec.echoed)}%</b></td></tr>
-      <tr><td>unreadable output</td><td><b>${fmt(rec.unreadable)}%</b></td></tr>
-      <tr><td>BU reference agreement</td><td><b>${ref}</b></td></tr>
-      ${extra}
-    </table>`;
-}
-
 async function renderDetail(summary){
-  if (summary.__error__) return;
-  const langs = summary.languages;
+  const langs = summary.languages || [];
   const pick = document.getElementById('d-pick');
   pick.innerHTML = langs.map(l =>
-    `<option value="${l.iso639_3}">${l.name} (${l.iso639_3}) - ${fmt(l.pass)}% [${l.tier}]</option>`).join('');
+    `<option value="${l.iso639_3}">${l.name} (${l.iso639_3}) - ${fmt(l.score_core)}% [${l.tier}]</option>`).join('');
 
-  let examples = null;
   async function show(iso){
     const rec = langs.find(l => l.iso639_3 === iso);
     if (!rec) return;
-    document.getElementById('d-info').innerHTML = renderDetailHead(rec);
 
-    const cats = Object.entries(rec.by_category);
-    Plotly.newPlot('plot-detail', [{
-      type:'bar', orientation:'h',
-      x: cats.map(c => c[1]), y: cats.map(c => c[0]),
-      marker:{color: cats.map(c => c[1]), colorscale: SCALE, cmin:0, cmax:100},
-      hovertemplate:'%{y}: %{x:.1f}%<extra></extra>',
-    }], {
-      height:440, margin:{l:140,r:20,t:40,b:40}, title:`${rec.name} by category`,
-      xaxis:{title:'Pass rate (%)'}, yaxis:{title:'', autorange:'reversed'},
-    }, PLOTLY_CFG);
+    document.getElementById('d-info').innerHTML =
+      `<h3>${rec.name} <code>${rec.iso639_3}</code></h3>
+       <p style="margin:0 0 6px;color:var(--muted);"><b>${rec.family}</b> · ${rec.region} · 5-numeral gate: <b>${rec.screen}</b> · Bible: <b>${rec.version_title || rec.version_id}</b> (${(rec.corpus_verses||0).toLocaleString()} verses)</p>
+       <table>
+         <tr><td>tier</td><td>${tierPill(rec.tier)}</td></tr>
+         <tr><td>common core standardized score</td><td><b>${fmt(rec.score_core)}%</b></td></tr>
+         <tr><td>raw hit rate</td><td><b>${fmt(rec.score)}%</b> (${rec.n_hits} / ${rec.n_scorable} words)</td></tr>
+         <tr><td>majority verse hit rate</td><td><b>${fmt(rec.score_majority)}%</b></td></tr>
+         <tr><td>script match rate</td><td><b>${fmt(rec.script_match_rate)}%</b> (corpus Latin share: ${rec.corpus_latin_share ?? '-'})</td></tr>
+         <tr><td>echoed English</td><td><b>${fmt(rec.echoed_rate)}%</b></td></tr>
+       </table>`;
 
-    if (!examples) examples = await load('examples');
-    const ex = (examples && !examples.__error__ && examples[iso]) || [];
-    const rows = ex.slice().sort((a,b) => (b.pass - a.pass) || a.category.localeCompare(b.category));
+    if (rec.by_pos){
+      const items = [...Object.entries(rec.by_pos), ...Object.entries(rec.by_band || {})];
+      Plotly.newPlot('plot-detail', [{
+        type:'bar', orientation:'h',
+        x: items.map(c => c[1]), y: items.map(c => c[0].toUpperCase()),
+        marker:{color: items.map(c => c[1]), colorscale: SCALE, cmin:0, cmax:100},
+        hovertemplate:'%{y}: %{x:.1f}%<extra></extra>',
+      }], {
+        height:280, margin:{l:100,r:20,t:30,b:40}, title:`${rec.name} Breakdown by Tier and Band`,
+        xaxis:{title:'Match rate (%)', range:[0,105]}, yaxis:{title:''},
+      }, PLOTLY_CFG);
+    }
+
+    const exData = await load('results/examples.json');
+    const ex = (exData && !exData.__error__ && exData[iso]) || [];
     const table = document.getElementById('d-table');
-    if (!rows.length){ table.innerHTML = ''; return; }
+    if (!ex.length){ table.innerHTML = '<p style="padding:12px;color:var(--muted);">No examples recorded.</p>'; return; }
+
     table.innerHTML = `<thead><tr>
-        <th>English</th><th>Category</th><th>${rec.name} (Gemini)</th><th>back-translation</th>
-        <th>pass</th><th>BU 200 reference</th><th>matches BU</th></tr></thead>
-      <tbody>${rows.map(r => `<tr>
-        <td>${r.word}</td><td>${r.category}</td><td>${r.gemini ?? ''}</td><td>${r.back ?? ''}</td>
-        <td class="${r.pass ? 'badge-true' : 'badge-false'}">${r.pass ? '✓' : '✗'}</td>
-        <td>${r.bu_reference ?? '-'}</td>
-        <td>${r.matches_reference === null || r.matches_reference === undefined ? '-' : (r.matches_reference ? '✓' : '✗')}</td>
+        <th>Word</th><th>POS</th><th>Band</th><th>Gemini Translation</th>
+        <th>Hit in Aligned Verse</th><th>Hits / Aligned</th><th>Example Aligned Verse</th></tr></thead>
+      <tbody>${ex.map(r => `<tr>
+        <td>${r.word}</td><td>${r.pos || '-'}</td><td>${r.band || '-'}</td><td><b>${r.term || ''}</b></td>
+        <td class="${r.hit ? 'badge-true' : 'badge-false'}">${r.hit ? '✓' : '✗'}</td>
+        <td>${r.n_hits} / ${r.n_aligned}</td><td><code>${r.example_verse || '-'}</code></td>
       </tr>`).join('')}</tbody>`;
   }
 
@@ -437,11 +388,15 @@ async function renderDetail(summary){
 }
 
 async function main(){
-  tabs();
-  const summary = await load('summary');
+  setupTabs();
+  const summary = await load('results/summary.json');
+  if (summary.__error__){
+    document.getElementById('stat-head').innerHTML = `<span class="error">${summary.__error__}</span>`;
+    return;
+  }
   renderOverview(summary);
   renderLeaderboard(summary);
-  renderHeatmap(summary);
+  renderBreakdown(summary);
   renderDetail(summary);
 }
 main();
