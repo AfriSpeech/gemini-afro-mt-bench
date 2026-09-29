@@ -4,7 +4,7 @@ How well does Google's **Gemini** translate vocabulary into African languages?
 
 This benchmark evaluates Gemini across **645 African languages** by checking whether its translations appear in verified target-language parallel Bible texts from the YouVersion corpus ([AfriSpeech/africa-corpus](https://huggingface.co/datasets/AfriSpeech/africa-corpus)).
 
-An interactive dashboard lives in [`space/`](space/) and is deployed as a static Hugging Face Space.
+An interactive dashboard lives in [`space/`](space/) and is deployed as a static Hugging Face Space at [AfriSpeech/gemini-afro-mt-bench](https://huggingface.co/spaces/AfriSpeech/gemini-afro-mt-bench).
 
 ---
 
